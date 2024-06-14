@@ -58,10 +58,10 @@ Route::get('/sign-up', [RegisterController::class, 'create'])
 Route::post('/sign-up', [RegisterController::class, 'store'])
     ->middleware('guest');
 
+// Tampilan sign-in untuk yang belum login
 Route::get('/sign-in', [LoginController::class, 'create'])
     ->middleware('guest')
     ->name('sign-in');
-
 Route::post('/sign-in', [LoginController::class, 'store'])
     ->middleware('guest');
 
