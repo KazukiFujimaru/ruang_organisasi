@@ -8,6 +8,9 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 
+
+
+use App\Http\Controllers\KeuanganController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +21,10 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/keuangan', [KeuanganController::class, 'index'])->middleware('auth');
+
+
 
 Route::get('/', function () {
     return redirect('/dashboard');
