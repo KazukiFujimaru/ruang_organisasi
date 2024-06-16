@@ -28,7 +28,14 @@ use App\Http\Controllers\SuratController;
 // Rute dengan middleware auth
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    #menampilkan keuangan
     Route::get('/keuangan', [KeuanganController::class, 'index'])->name('keuangan');
+    
+    #menampilkan form keuangan
+    Route::get('/keuangan/create', [KeuanganController::class, 'create'])->name('keuangan.create');
+    Route::post('/keuangan', [KeuanganController::class, 'store'])->name('keuangan.store');
+    
     Route::get('/program', [ProgramController::class, 'index'])->name('program');
     Route::get('/inventaris', [InventarisController::class, 'index'])->name('inventaris');
     Route::get('/surat', [SuratController::class, 'index'])->name('surat');
