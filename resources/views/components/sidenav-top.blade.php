@@ -12,6 +12,21 @@
                 </a>
             </li>
             <li class="nav-item px-3 py-3 border-radius-sm  d-flex align-items-center">
+                <a href="{{ route('dashboard') }}" class="nav-link text-white p-0">
+                    Dashboard
+                </a>
+            </li>
+            <li class="nav-item px-3 py-3 border-radius-sm  d-flex align-items-center">
+                <a href="{{ route('dashboard') }}" class="nav-link text-white p-0">
+                    Dashboard
+                </a>
+            </li>
+            <li class="nav-item px-3 py-3 border-radius-sm  d-flex align-items-center">
+                <a href="{{ route('dashboard') }}" class="nav-link text-white p-0">
+                    Dashboard
+                </a>
+            </li>
+            <li class="nav-item px-3 py-3 border-radius-sm  d-flex align-items-center">
                 <a href="{{ route('tables') }}" class="nav-link text-white p-0">
                     Tables
                 </a>

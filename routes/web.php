@@ -7,90 +7,62 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
-
-
-
+use App\Http\Controllers\OrganisasiController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KeuanganController;
+use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\InventarisController;
+use App\Http\Controllers\SuratController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
+| Di sini Anda dapat mendaftarkan rute web untuk aplikasi Anda. Rute-rute
+| ini dimuat oleh RouteServiceProvider dan semuanya akan diberi kelompok
+| middleware "web". Buat sesuatu yang hebat!
 |
 */
 
-Route::get('/keuangan', [KeuanganController::class, 'index'])->middleware('auth');
+// Rute dengan middleware auth
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/keuangan', [KeuanganController::class, 'index'])->name('keuangan');
+    Route::get('/program', [ProgramController::class, 'index'])->name('program');
+    Route::get('/inventaris', [InventarisController::class, 'index'])->name('inventaris');
+    Route::get('/surat', [SuratController::class, 'index'])->name('surat');
+    Route::view('/tables', 'tables')->name('tables');
+    Route::view('/wallet', 'wallet')->name('wallet');
+    Route::view('/RTL', 'RTL')->name('RTL');
+    Route::view('/profile', 'account-pages.profile')->name('profile');
 
+    Route::get('/laravel-examples/user-profile', [ProfileController::class, 'index'])->name('users.profile');
+    Route::put('/laravel-examples/user-profile/update', [ProfileController::class, 'update'])->name('users.update');
+    Route::get('/laravel-examples/users-management', [UserController::class, 'index'])->name('users-management');
 
+    Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
+    
+    // Rute untuk organisasi
+    Route::get('/organisasi/choose', [OrganisasiController::class, 'choose'])->name('organisasi.choose');
+    Route::get('/organisasi/create', [OrganisasiController::class, 'create'])->name('organisasi.create');
+    Route::post('/organisasi', [OrganisasiController::class, 'store'])->name('organisasi.store');
+    Route::get('/organisasi/join', [OrganisasiController::class, 'joinForm'])->name('organisasi.join');
+    Route::post('/organisasi/join', [OrganisasiController::class, 'join'])->name('organisasi.join.submit');
+});
 
-Route::get('/', function () {
-    return redirect('/dashboard');
-})->middleware('auth');
+// Rute dengan middleware guest
+Route::middleware('guest')->group(function () {
+    Route::view('/signin', 'account-pages.signin')->name('signin');
+    Route::view('/signup', 'account-pages.signup')->name('signup');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard')->middleware('auth');
+    Route::get('/sign-up', [RegisterController::class, 'create'])->name('sign-up');
+    Route::post('/sign-up', [RegisterController::class, 'store']);
+    Route::get('/sign-in', [LoginController::class, 'create'])->name('sign-in');
+    Route::post('/sign-in', [LoginController::class, 'store']);
 
-Route::get('/tables', function () {
-    return view('tables');
-})->name('tables')->middleware('auth');
-
-Route::get('/wallet', function () {
-    return view('wallet');
-})->name('wallet')->middleware('auth');
-
-Route::get('/RTL', function () {
-    return view('RTL');
-})->name('RTL')->middleware('auth');
-
-Route::get('/profile', function () {
-    return view('account-pages.profile');
-})->name('profile')->middleware('auth');
-
-Route::get('/signin', function () {
-    return view('account-pages.signin');
-})->name('signin');
-
-Route::get('/signup', function () {
-    return view('account-pages.signup');
-})->name('signup')->middleware('guest');
-
-Route::get('/sign-up', [RegisterController::class, 'create'])
-    ->middleware('guest')
-    ->name('sign-up');
-
-Route::post('/sign-up', [RegisterController::class, 'store'])
-    ->middleware('guest');
-
-Route::get('/sign-in', [LoginController::class, 'create'])
-    ->middleware('guest')
-    ->name('sign-in');
-
-Route::post('/sign-in', [LoginController::class, 'store'])
-    ->middleware('guest');
-
-Route::post('/logout', [LoginController::class, 'destroy'])
-    ->middleware('auth')
-    ->name('logout');
-
-Route::get('/forgot-password', [ForgotPasswordController::class, 'create'])
-    ->middleware('guest')
-    ->name('password.request');
-
-Route::post('/forgot-password', [ForgotPasswordController::class, 'store'])
-    ->middleware('guest')
-    ->name('password.email');
-
-Route::get('/reset-password/{token}', [ResetPasswordController::class, 'create'])
-    ->middleware('guest')
-    ->name('password.reset');
-
-Route::post('/reset-password', [ResetPasswordController::class, 'store'])
-    ->middleware('guest');
-
-Route::get('/laravel-examples/user-profile', [ProfileController::class, 'index'])->name('users.profile')->middleware('auth');
-Route::put('/laravel-examples/user-profile/update', [ProfileController::class, 'update'])->name('users.update')->middleware('auth');
-Route::get('/laravel-examples/users-management', [UserController::class, 'index'])->name('users-management')->middleware('auth');
+    Route::get('/forgot-password', [ForgotPasswordController::class, 'create'])->name('password.request');
+    Route::post('/forgot-password', [ForgotPasswordController::class, 'store'])->name('password.email');
+    Route::get('/reset-password/{token}', [ResetPasswordController::class, 'create'])->name('password.reset');
+    Route::post('/reset-password', [ResetPasswordController::class, 'store']);
+});

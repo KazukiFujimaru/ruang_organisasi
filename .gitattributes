@@ -1,11 +1,14 @@
-* text=auto eol=clrf
+# Mengatur Git untuk menangani konversi akhir baris secara otomatis dengan format CRLF
+* text=auto eol=crlf
 
+# Menentukan cara Git menampilkan perbedaan (diff) untuk file dengan ekstensi tertentu
 *.blade.php diff=html
 *.css diff=css
 *.html diff=html
 *.md diff=markdown
 *.php diff=php
 
+# Mengatur file dan folder yang tidak akan diekspor
 /.github export-ignore
 CHANGELOG.md export-ignore
 .styleci.yml export-ignore
