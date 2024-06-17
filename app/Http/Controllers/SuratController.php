@@ -73,4 +73,12 @@ class SuratController extends Controller
 
         return redirect()->route('surat')->with('success', 'Data surat berhasil ditambahkan.');
     }
+
+    public function destroy($id)
+    {
+        $surat = Surat::findOrFail($id);
+        $surat->delete();
+
+        return redirect()->route('surat')->with('success', 'Data surat berhasil dihapus.');
+    }
 }

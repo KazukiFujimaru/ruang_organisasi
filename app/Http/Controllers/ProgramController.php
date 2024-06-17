@@ -44,7 +44,7 @@ class ProgramController extends Controller
             'jenis' => 'required|in:harian,mingguan,bulanan,tahunan',
             'status' => 'required|in:terlaksana,tidak terlaksan',
             'tanggal' => 'required|date',
-            'dokumen' => 'nullable|mimes:image,pdf|max:2048',
+            'dokumen' => 'nullable|mimes:png,jpg,jpeg,pdf,docx|max:2048',
             
 
         ]);
@@ -73,5 +73,13 @@ class ProgramController extends Controller
 
         $program->save();
         return redirect()->route('program')->with('success', 'Data program berhasil ditambahkan.');
+    }
+
+    public function destroy($id)
+    {
+        $program = Program::findOrFail($id);
+        $program->delete();
+
+        return redirect()->route('program')->with('success', 'Data program berhasil dihapus.');
     }
 }

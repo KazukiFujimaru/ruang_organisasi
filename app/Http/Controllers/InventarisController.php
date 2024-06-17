@@ -71,4 +71,12 @@ class InventarisController extends Controller
 
         return redirect()->route('keuangan')->with('succes','data inventaris berhasil di tambah');
     }
+
+    public function destroy($id)
+    {
+        $inventaris = Inventaris::findOrFail($id);
+        $inventaris->delete();
+
+        return redirect()->route('inventaris')->with('success', 'Data inventaris berhasil dihapus.');
+    }
 }

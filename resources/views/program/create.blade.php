@@ -17,13 +17,13 @@
                                     <input type="text" class="form-control" id="nama" name="nama" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="deskripsi" class="form-label">deskripsi</label>
-                                    <textarea class="form-control" id="deskripsi" name="deskripsi"></textarea>
+                                    <label for="description" class="form-label">description</label>
+                                    <textarea class="form-control" id="description" name="description"></textarea>
                                 </div>
                                 <div class="mb-3">
                                     <label for="type" class="form-label">type</label>
                                     <select class="form-select" id="type" name="type" required>
-                                        <option value="program kerja">Program Kerjan</option>
+                                        <option value="program kerja">Program Kerja</option>
                                         <option value="kegiatan">Kegiatan</option>
                                     </select>
                                 </div>

@@ -108,6 +108,13 @@
                                                     </svg>
                                                 </a>
                                             </td>
+                                            <td class="align-middle">
+                                                <form action="{{ route('surat.destroy', $surat->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Anda yakin ingin menghapus data ini?')">Hapus</button>
+                                                </form>
+                                            </td>
                                         </tr>
                                         @endforeach
                                     </tbody>

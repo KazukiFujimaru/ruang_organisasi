@@ -42,14 +42,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/program', [ProgramController::class, 'index'])->name('program');
     Route::get('/program/create', [ProgramController::class, 'create'])->name('program.create');
     Route::post('/program', [ProgramController::class, 'store'])->name('program.store');
+    Route::delete('/program/{id}', [ProgramController::class, 'destroy'])->name('program.destroy');
     
     Route::get('/inventaris', [InventarisController::class, 'index'])->name('inventaris');
     Route::get('/inventaris/create', [InventarisController::class, 'create'])->name('inventaris.create');
     Route::post('/inventaris', [InventarisController::class, 'store'])->name('inventaris.store');
+    Route::delete('/inventaris/{id}', [InventarisController::class, 'destroy'])->name('inventaris.destroy');
     
     Route::get('/surat', [SuratController::class, 'index'])->name('surat');
     Route::get('/surat/create', [SuratController::class, 'create'])->name('surat.create');
     Route::post('/surat', [SuratController::class, 'store'])->name('surat.store');
+    Route::delete('/surat/{id}', [SuratController::class, 'destroy'])->name('surat.destroy');
     
     Route::view('/tables', 'tables')->name('tables');
     Route::view('/wallet', 'wallet')->name('wallet');
