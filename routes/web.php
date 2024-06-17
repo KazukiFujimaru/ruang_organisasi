@@ -35,10 +35,22 @@ Route::middleware('auth')->group(function () {
     #menampilkan form keuangan
     Route::get('/keuangan/create', [KeuanganController::class, 'create'])->name('keuangan.create');
     Route::post('/keuangan', [KeuanganController::class, 'store'])->name('keuangan.store');
-    
+    #menghapus keuangan
+    Route::delete('/keuangan/{id}',[KeuanganController::class,'destroy'])->name('keuangan.destroy');
+
+
     Route::get('/program', [ProgramController::class, 'index'])->name('program');
+    Route::get('/program/create', [ProgramController::class, 'create'])->name('program.create');
+    Route::post('/program', [ProgramController::class, 'store'])->name('program.store');
+    
     Route::get('/inventaris', [InventarisController::class, 'index'])->name('inventaris');
+    Route::get('/inventaris/create', [InventarisController::class, 'create'])->name('inventaris.create');
+    Route::post('/inventaris', [InventarisController::class, 'store'])->name('inventaris.store');
+    
     Route::get('/surat', [SuratController::class, 'index'])->name('surat');
+    Route::get('/surat/create', [SuratController::class, 'create'])->name('surat.create');
+    Route::post('/surat', [SuratController::class, 'store'])->name('surat.store');
+    
     Route::view('/tables', 'tables')->name('tables');
     Route::view('/wallet', 'wallet')->name('wallet');
     Route::view('/RTL', 'RTL')->name('RTL');
