@@ -3,14 +3,14 @@
         <nav aria-label="breadcrumb">
             <div class="d-flex align-items-center">
                 <span class="px-3 font-weight-bold text-lg text-white me-4">Ruang Organisasi</span>
+                <li class="nav-item px-3 py-3 border-radius-sm  d-flex align-items-center">
+                <a href="{{ route('dashboard') }}" class="nav-link text-white p-0">
+                    <i class="fas  fa-house"></i>
+                </a>
+            </li>            
             </div>
         </nav>
         <ul class="navbar-nav d-none d-lg-flex">
-            <li class="nav-item px-3 py-3 border-radius-sm  d-flex align-items-center">
-                <a href="{{ route('dashboard') }}" class="nav-link text-white p-0">
-                    <i class="fas fa-house"></i>
-                </a>
-            </li>
         </ul>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
             <ul class="navbar-nav ms-md-auto  justify-content-end">
