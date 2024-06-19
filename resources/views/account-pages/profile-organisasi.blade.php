@@ -60,65 +60,8 @@
                 <div class="col-12 col-xl-4 mb-4">
                     <div class="card border shadow-xs h-100">
                         <div class="card-header pb-0 p-3">
-                            <h6 class="mb-0 font-weight-semibold text-lg">Notifications settings</h6>
-                            <p class="text-sm mb-1">Here you can set preferences.</p>
-                        </div>
-                        <div class="card-body p-3">
-                            <h6 class="text-dark font-weight-semibold mb-1">Account</h6>
-                            <ul class="list-group">
-                                <li class="list-group-item border-0 px-0">
-                                    <div class="form-check form-switch ps-0">
-                                        <input class="form-check-input ms-auto" type="checkbox"
-                                            id="flexSwitchCheckDefault" checked>
-                                        <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0"
-                                            for="flexSwitchCheckDefault">Email me when someone follows me</label>
-                                    </div>
-                                </li>
-                                <li class="list-group-item border-0 px-0">
-                                    <div class="form-check form-switch ps-0">
-                                        <input class="form-check-input ms-auto" type="checkbox"
-                                            id="flexSwitchCheckDefault1">
-                                        <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0"
-                                            for="flexSwitchCheckDefault1">Email me when someone answers on my
-                                            post</label>
-                                    </div>
-                                </li>
-                                <li class="list-group-item border-0 px-0">
-                                    <div class="form-check form-switch ps-0">
-                                        <input class="form-check-input ms-auto" type="checkbox"
-                                            id="flexSwitchCheckDefault2" checked>
-                                        <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0"
-                                            for="flexSwitchCheckDefault2">Email me when someone mentions me</label>
-                                    </div>
-                                </li>
-                            </ul>
-                            <h6 class="text-dark font-weight-semibold mt-2 mb-1">Application</h6>
-                            <ul class="list-group">
-                                <li class="list-group-item border-0 px-0">
-                                    <div class="form-check form-switch ps-0">
-                                        <input class="form-check-input ms-auto" type="checkbox"
-                                            id="flexSwitchCheckDefault3">
-                                        <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0"
-                                            for="flexSwitchCheckDefault3">New launches and projects</label>
-                                    </div>
-                                </li>
-                                <li class="list-group-item border-0 px-0">
-                                    <div class="form-check form-switch ps-0">
-                                        <input class="form-check-input ms-auto" type="checkbox"
-                                            id="flexSwitchCheckDefault4" checked>
-                                        <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0"
-                                            for="flexSwitchCheckDefault4">Monthly product updates</label>
-                                    </div>
-                                </li>
-                                <li class="list-group-item border-0 px-0 pb-0">
-                                    <div class="form-check form-switch ps-0">
-                                        <input class="form-check-input ms-auto" type="checkbox"
-                                            id="flexSwitchCheckDefault5">
-                                        <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0"
-                                            for="flexSwitchCheckDefault5">Subscribe to newsletter</label>
-                                    </div>
-                                </li>
-                            </ul>
+                            <h6 class="mb-0 font-weight-semibold text-lg">Deskripsi</h6>
+                            <p class="text-sm mb-1">What, When, Where, Who, Why, How</p>
                         </div>
                     </div>
                 </div>
@@ -127,8 +70,8 @@
                         <div class="card-header pb-0 p-3">
                             <div class="row">
                                 <div class="col-md-8 col-9">
-                                    <h6 class="mb-0 font-weight-semibold text-lg">Profile information</h6>
-                                    <p class="text-sm mb-1">Edit the information about you.</p>
+                                    <h6 class="mb-0 font-weight-semibold text-lg">Sejarah Organisasi</h6>
+                                    <p class="text-sm mb-1">Lore about your Organization</p>
                                 </div>
                                 <div class="col-md-4 col-3 text-end">
                                     <button type="button" class="btn btn-white btn-icon px-2 py-2">
@@ -142,41 +85,7 @@
                             </div>
                         </div>
                         <div class="card-body p-3">
-                            <p class="text-sm mb-4">
-                                Hi, I’m Alec Thompson, Decisions: If you can’t decide, the answer is no. If two equally
-                                difficult paths, choose the one more painful in the short term (pain avoidance is
-                                creating an illusion of equality).
-                            </p>
-                            <ul class="list-group">
-                                <li
-                                    class="list-group-item border-0 ps-0 text-dark font-weight-semibold pt-0 pb-1 text-sm">
-                                    <span class="text-secondary">First Name:</span> &nbsp; Noah
-                                </li>
-                                <li class="list-group-item border-0 ps-0 text-dark font-weight-semibold pb-1 text-sm">
-                                    <span class="text-secondary">Last Name:</span> &nbsp; Mclaren
-                                </li>
-                                <li class="list-group-item border-0 ps-0 text-dark font-weight-semibold pb-1 text-sm">
-                                    <span class="text-secondary">Mobile:</span> &nbsp; +(44) 123 1234 123
-                                </li>
-                                <li class="list-group-item border-0 ps-0 text-dark font-weight-semibold pb-1 text-sm">
-                                    <span class="text-secondary">Function:</span> &nbsp; Manager - Organization
-                                </li>
-                                <li class="list-group-item border-0 ps-0 text-dark font-weight-semibold pb-1 text-sm">
-                                    <span class="text-secondary">Location:</span> &nbsp; USA
-                                </li>
-                                <li class="list-group-item border-0 ps-0 text-dark font-weight-semibold pb-1 text-sm">
-                                    <span class="text-secondary">Social:</span> &nbsp;
-                                    <a class="btn btn-link text-dark mb-0 ps-1 pe-1 py-0" href="javascript:;">
-                                        <i class="fab fa-linkedin fa-lg"></i>
-                                    </a>
-                                    <a class="btn btn-link text-dark mb-0 ps-1 pe-1 py-0" href="javascript:;">
-                                        <i class="fab fa-github fa-lg"></i>
-                                    </a>
-                                    <a class="btn btn-link text-dark mb-0 ps-1 pe-1 py-0" href="javascript:;">
-                                        <i class="fab fa-slack fa-lg"></i>
-                                    </a>
-                                </li>
-                            </ul>
+                            <!-- Placeholder -->
                         </div>
                     </div>
                 </div>
@@ -185,8 +94,8 @@
                         <div class="card-header pb-0 p-3">
                             <div class="row mb-sm-0 mb-2">
                                 <div class="col-md-8 col-9">
-                                    <h6 class="mb-0 font-weight-semibold text-lg">Internal chat</h6>
-                                    <p class="text-sm mb-0">/marketing channel</p>
+                                    <h6 class="mb-0 font-weight-semibold text-lg">Keterangan Instansi</h6>
+                                    <p class="text-sm mb-0">Logo Instansi</p>
                                 </div>
                                 <div class="col-md-4 col-3 text-end">
                                     <button type="button" class="btn btn-white btn-icon px-2 py-2">
@@ -201,81 +110,7 @@
                             </div>
                         </div>
                         <div class="card-body p-3 pt-0">
-                            <ul class="list-group">
-                                <li class="list-group-item border-0 d-flex align-items-center px-0 mb-1">
-                                    <div class="avatar avatar-sm rounded-circle me-2">
-                                        <img src="../assets/img/team-1.jpg" alt="kal" class="w-100">
-                                    </div>
-                                    <div class="d-flex align-items-start flex-column justify-content-center">
-                                        <h6 class="mb-0 text-sm font-weight-semibold">Sarah Lamalo</h6>
-                                        <p class="mb-0 text-sm text-secondary">Hi! I need more information about ...
-                                        </p>
-                                    </div>
-                                    <span class="p-1 bg-success rounded-circle ms-auto me-3">
-                                        <span class="visually-hidden">Online</span>
-                                    </span>
-                                </li>
-                                <li class="list-group-item border-0 d-flex align-items-center px-0 mb-1">
-                                    <div class="avatar avatar-sm rounded-circle me-2">
-                                        <img src="../assets/img/marie.jpg" alt="kal" class="w-100">
-                                    </div>
-                                    <div class="d-flex align-items-start flex-column justify-content-center">
-                                        <h6 class="mb-0 text-sm font-weight-semibold">Vicky Hladynets</h6>
-                                        <p class="mb-0 text-sm text-secondary">Hello, Noah!</p>
-                                    </div>
-                                    <span class="p-1 bg-success rounded-circle ms-auto me-3">
-                                        <span class="visually-hidden">Online</span>
-                                    </span>
-                                </li>
-                                <li class="list-group-item border-0 d-flex align-items-center px-0 mb-1">
-                                    <div class="avatar avatar-sm rounded-circle me-2">
-                                        <img src="../assets/img/team-5.jpg" alt="kal" class="w-100">
-                                    </div>
-                                    <div class="d-flex align-items-start flex-column justify-content-center">
-                                        <h6 class="mb-0 text-sm font-weight-semibold">Charles Deluvio</h6>
-                                        <p class="mb-0 text-sm text-secondary">Great, thank you!</p>
-                                    </div>
-                                    <span class="p-1 bg-success rounded-circle ms-auto me-3">
-                                        <span class="visually-hidden">Online</span>
-                                    </span>
-                                </li>
-                                <li class="list-group-item border-0 d-flex align-items-center px-0 mb-1">
-                                    <div class="avatar avatar-sm rounded-circle me-2">
-                                        <img src="../assets/img/team-4.jpg" alt="kal" class="w-100">
-                                    </div>
-                                    <div class="d-flex align-items-start flex-column justify-content-center">
-                                        <h6 class="mb-0 text-sm font-weight-semibold">Leio Mclaren</h6>
-                                        <p class="mb-0 text-sm text-secondary">Don't worry! 🙏🏻</p>
-                                    </div>
-                                    <span class="p-1 bg-success rounded-circle ms-auto me-3">
-                                        <span class="visually-hidden">Online</span>
-                                    </span>
-                                </li>
-                                <li class="list-group-item border-0 d-flex align-items-center px-0 mb-1">
-                                    <div class="avatar avatar-sm rounded-circle me-2">
-                                        <img src="../assets/img/team-3.jpg" alt="kal" class="w-100">
-                                    </div>
-                                    <div class="d-flex align-items-start flex-column justify-content-center">
-                                        <h6 class="mb-0 text-sm font-weight-semibold">Mateus Campos</h6>
-                                        <p class="mb-0 text-sm text-secondary">Call me, please.</p>
-                                    </div>
-                                    <span class="p-1 bg-success rounded-circle ms-auto me-3">
-                                        <span class="visually-hidden">Online</span>
-                                    </span>
-                                </li>
-                                <li class="list-group-item border-0 d-flex align-items-center px-0 mb-1">
-                                    <div class="avatar avatar-sm rounded-circle me-2">
-                                        <img src="../assets/img/team-2.jpg" alt="kal" class="w-100">
-                                    </div>
-                                    <div class="d-flex align-items-start flex-column justify-content-center">
-                                        <h6 class="mb-0 text-sm font-weight-semibold">Miriam Lore</h6>
-                                        <p class="mb-0 text-sm text-secondary">Well done!</p>
-                                    </div>
-                                    <span class="p-1 bg-success rounded-circle ms-auto me-3">
-                                        <span class="visually-hidden">Online</span>
-                                    </span>
-                                </li>
-                            </ul>
+                            <!-- Placeholder -->
                         </div>
                     </div>
                 </div>
@@ -283,7 +118,7 @@
                 <div class="card-header border-bottom pb-0">
                     <div class="d-sm-flex align-items-center">
                     <div>
-                        <h6 class="font-weight-semibold text-lg mb-0">Members list</h6>
+                        <h6 class="font-weight-semibold text-lg mb-0">(Ganti menggunakan tabel daftar anggota)</h6>
                         <p class="text-sm">See information about all members</p>
                     </div>
                     <div class="ms-auto d-flex">
