@@ -1,6 +1,6 @@
 <x-app-layout>
 
-    <div class="main-content position-relative bg-gray-100 max-height-vh-100 h-100">
+    <div class="main-content position-relative bg-gray-100 max-height-vh-90 h-100">
         <div class="pt-7 pb-6 bg-cover"
             style="background-image: url('../assets/img/header-orange-purple.jpg'); background-position: bottom;">
         </div>
@@ -16,7 +16,7 @@
                     <div class="col-auto my-auto">
                         <div class="h-100">
                             <h3 class="mb-0 font-weight-bold">
-                                Noah Mclaren
+                                Edit
                             </h3>
                             <p class="mb-0">
                                 noah_mclaren@mail.com

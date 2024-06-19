@@ -1,6 +1,6 @@
 <x-app-layout>
 
-    <div class="main-content position-relative bg-gray-100 max-height-vh-100 h-100">
+    <div class="main-content position-relative bg-gray-100 max-height-vh-90 h-100">
         <div class="pt-7 pb-6 bg-cover"
             style="background-image: url('../assets/img/header-orange-purple.jpg'); background-position: bottom;">
         </div>
@@ -281,8 +281,8 @@
                 <div class="col-12">
                     <div class="card shadow-xs border mb-4 pb-3">
                         <div class="card-header pb-0 p-3">
-                            <h6 class="mb-0 font-weight-semibold text-lg">Last articles</h6>
-                            <p class="text-sm mb-1">Here you will find the latest articles.</p>
+                            <h6 class="mb-0 font-weight-semibold text-lg">Manage Organisasi</h6>
+                            <p class="text-sm mb-1">Pilih Oranisasi yang ingin anda kelola</p>
                         </div>
                         <div class="card-body p-3">
                             <div class="row">
@@ -296,14 +296,10 @@
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div
-                                                        class="blur shadow d-flex align-items-center w-100 border-radius-md border border-white mt-8 p-3">
+                                                        class="w-100 mt-8 p-3">
                                                         <div class="w-50">
-                                                            <p class="text-dark text-sm font-weight-bold mb-1">Sara
-                                                                Lamalo</p>
-                                                            <p class="text-xs text-secondary mb-0">20 Jul 2022</p>
+                                                        <!-- Tambahan class : blur shadow d-flex align-items-center --->
                                                         </div>
-                                                        <p class="text-dark text-sm font-weight-bold ms-auto">Growth
-                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -311,15 +307,17 @@
                                     </div>
                                     <a href="javascript:;">
                                         <h4 class="font-weight-semibold">
-                                            Best strategy games
+                                            Nama Organisasi
                                         </h4>
                                     </a>
+                                    <!--
                                     <p class="mb-4">
-                                        As Uber works through a huge amount of internal management turmoil.
+                                        Deskripsi Organisasi
                                     </p>
+                                    -->
                                     <a href="javascript:;"
                                         class="text-dark font-weight-semibold icon-move-right mt-auto w-100 mb-5">
-                                        Read post
+                                        Login
                                         <i class="fas fa-arrow-right-long text-sm ms-1" aria-hidden="true"></i>
                                     </a>
                                 </div>
@@ -328,19 +326,15 @@
                                         class="card card-background border-radius-xl card-background-after-none align-items-start mb-4">
                                         <div class="full-background bg-cover"
                                             style="background-image: url('../assets/img/img-9.jpg')"></div>
-                                        <span class="mask bg-dark opacity-1 border-radius-sm"></span>
+                                            <span class="mask bg-dark opacity-1 border-radius-sm"></span>
                                         <div class="card-body text-start p-3 w-100">
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div
-                                                        class="blur shadow d-flex align-items-center w-100 border-radius-md border border-white mt-8 p-3">
+                                                        class="w-100 mt-8 p-3">
                                                         <div class="w-50">
-                                                            <p class="text-dark text-sm font-weight-bold mb-1">Charles
-                                                                Deluvio</p>
-                                                            <p class="text-xs text-secondary mb-0">17 Jul 2022</p>
+                                                        <!-- Tambahan class : blur shadow d-flex align-items-center --->
                                                         </div>
-                                                        <p class="text-dark text-sm font-weight-bold ms-auto">Education
-                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -348,15 +342,17 @@
                                     </div>
                                     <a href="javascript:;">
                                         <h4 class="font-weight-semibold">
-                                            Don't be afraid to be wrong
+                                            Nama Organisasi
                                         </h4>
                                     </a>
+                                    <!--
                                     <p class="mb-4">
-                                        As Uber works through a huge amount of internal management turmoil.
+                                        Deskripsi Organisasi
                                     </p>
+                                    -->
                                     <a href="javascript:;"
                                         class="text-dark font-weight-semibold icon-move-right mt-auto w-100 mb-5">
-                                        Read post
+                                        Login
                                         <i class="fas fa-arrow-right-long text-sm ms-1" aria-hidden="true"></i>
                                     </a>
                                 </div>
@@ -367,15 +363,15 @@
                                                 <div
                                                     class="icon icon-shape bg-dark text-center text-white rounded-circle mx-auto d-flex align-items-center justify-content-center mb-2">
                                                     <svg xmlns="http://www.w3.org/2000/svg" height="19"
-                                                        width="19" viewBox="0 0 24 24" fill="currentColor">
+                                                        width="19" viewBox="0 0 448 512" fill="currentColor">
                                                         <path fill-rule="evenodd"
-                                                            d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z"
+                                                            d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
                                                             clip-rule="evenodd" />
                                                     </svg>
                                                 </div>
-                                                <h5 class="text-dark text-lg"> Create new post </h5>
-                                                <p class="text-sm text-secondary mb-0">Drive into the editor and add
-                                                    your content.</p>
+                                                <h5 class="text-dark text-lg"> Tambah Organisasi </h5>
+                                                <p class="text-sm text-secondary mb-0">Buat data organisasi baru di Ruang Organisasi
+                                                </p>
                                             </a>
                                         </div>
                                     </div>
