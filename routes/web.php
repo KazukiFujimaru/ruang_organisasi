@@ -123,6 +123,16 @@ Route::get('/profile-user-edit', function () {
     return view('account-pages.user-edit');
 })->name('user-edit')->middleware('auth');
 
+//Route tampilan organisasi
+Route::get('/profile-organisasi', function () {
+    return view('account-pages.profile-organisasi');
+})->name('profile-organisasi')->middleware('auth');
+
+Route::get('/profile-organisasi-edit', function () {
+    return view('account-pages.organisasi-edit');
+})->name('organisasi-edit')->middleware('auth');
+
+//Route test
 Route::get('/a/a', function () {
     return view('test');
 })->name('test')->middleware('guest');

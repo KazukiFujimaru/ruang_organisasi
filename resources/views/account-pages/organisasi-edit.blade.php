@@ -16,41 +16,17 @@
                     <div class="col-auto my-auto">
                         <div class="h-100">
                             <h3 class="mb-0 font-weight-bold">
-                                Username
+                                Edit
                             </h3>
                             <p class="mb-0">
-                                User Email
+                                noah_mclaren@mail.com
                             </p>
                         </div>
                     </div>
-                        <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3 text-sm-end">
-                            <a class="btn btn-sm btn-white {{ is_current_route('user-edit') ? 'hidden' : '' }}" 
-                                href="{{ route('user-edit') }}">Edit</a>
-                            <button type="button" class="btn btn-sm bg-gradient-danger" data-bs-toggle="modal" data-bs-target="#modal-notification">Hapus</button>
-                            <div class="modal fade" id="modal-notification" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
-                                <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
-                                    <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h6 class="modal-title" id="modal-title-notification">Notifikasi Penghapusan Akun</h6>
-                                        <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">×</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="py-3 text-center">
-                                        <i class="ni ni-bell-55 ni-3x"></i>
-                                        <h4 class="text-gradient text-danger mt-4">Anda akan menghapus akun !</h4>
-                                        <p>Apakah anda yakin ingin menghapus <br>akun Ruang Organisasi ?</p>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-link btn-white" data-bs-dismiss="modal">Tidak</button>
-                                        <button type="button" class="btn btn-white">Ya</button>
-                                        <button type="button" class="btn btn-link text-white ml-auto" data-bs-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-                            </div>    
-                        </div>
+                    <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3 text-sm-end">
+                        <a class="btn btn-sm btn-white {{ is_current_route('profile-organisasi') ? 'hidden' : '' }}" 
+                            href="{{ route('profile-organisasi') }}">Batal</a>
+                        <a href="javascript:;" class="btn btn-sm btn-dark">Simpan</a>
                     </div>
                 </div>
             </div>
@@ -279,150 +255,47 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12">
-                    <div class="card shadow-xs border mb-4 pb-3">
-                        <div class="card-header pb-0 p-3">
-                            <h6 class="mb-0 font-weight-semibold text-lg">Manage Organisasi</h6>
-                            <p class="text-sm mb-1">Pilih Oranisasi yang ingin anda kelola</p>
+            </div>
+            <footer class="footer pt-3  ">
+            <div class="container-fluid">
+                <div class="row align-items-center justify-content-lg-between">
+                    <div class="col-lg-6 mb-lg-0 mb-4">
+                        <div class="copyright text-center text-xs text-muted text-lg-start">
+                            Copyright
+                            ©
+                            <script>
+                                document.write(new Date().getFullYear())
+                            </script>
+                            Corporate UI by
+                            <a href="https://www.creative-tim.com" class="text-secondary"
+                                target="_blank">Creative Tim</a>.
                         </div>
-                        <div class="card-body p-3">
-                            <div class="row">
-                                <div class="col-xl-4 col-md-6 mb-xl-0 mb-4">
-                                    <div
-                                        class="card card-background border-radius-xl card-background-after-none align-items-start mb-4">
-                                        <div class="full-background bg-cover"
-                                            style="background-image: url('../assets/img/img-8.jpg')"></div>
-                                        <span class="mask bg-dark opacity-1 border-radius-sm"></span>
-                                        <div class="card-body text-start p-3 w-100">
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <div
-                                                        class="w-100 mt-8 p-3">
-                                                        <div class="w-50">
-                                                        <!-- Tambahan class : blur shadow d-flex align-items-center --->
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <a class="{{ is_current_route('profile-organisasi') ? 'hidden' : '' }}" 
-                                        href="{{ route('profile-organisasi') }}">
-                                        <h4 class="font-weight-semibold">
-                                            Nama Organisasi
-                                        </h4>
-                                    </a>
-                                    <!--
-                                    <p class="mb-4">
-                                        Deskripsi Organisasi
-                                    </p>
-                                    -->
-                                    <a href="javascript:;"
-                                        class="text-dark font-weight-semibold icon-move-right mt-auto w-100 mb-5">
-                                        Login
-                                        <i class="fas fa-arrow-right-long text-sm ms-1" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                                <div class="col-xl-4 col-md-6 mb-xl-0 mb-4">
-                                    <div
-                                        class="card card-background border-radius-xl card-background-after-none align-items-start mb-4">
-                                        <div class="full-background bg-cover"
-                                            style="background-image: url('../assets/img/img-9.jpg')"></div>
-                                            <span class="mask bg-dark opacity-1 border-radius-sm"></span>
-                                        <div class="card-body text-start p-3 w-100">
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <div
-                                                        class="w-100 mt-8 p-3">
-                                                        <div class="w-50">
-                                                        <!-- Tambahan class : blur shadow d-flex align-items-center --->
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <a href="javascript:;">
-                                        <h4 class="font-weight-semibold">
-                                            Nama Organisasi
-                                        </h4>
-                                    </a>
-                                    <!--
-                                    <p class="mb-4">
-                                        Deskripsi Organisasi
-                                    </p>
-                                    -->
-                                    <a href="javascript:;"
-                                        class="text-dark font-weight-semibold icon-move-right mt-auto w-100 mb-5">
-                                        Login
-                                        <i class="fas fa-arrow-right-long text-sm ms-1" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                                <div class="col-xl-4 col-md-6 mb-xl-0 mb-4">
-                                    <div class="card h-100 card-plain border border-dashed px-5">
-                                        <div class="card-body d-flex flex-column justify-content-center text-center">
-                                            <a href="javascript:;">
-                                                <div
-                                                    class="icon icon-shape bg-dark text-center text-white rounded-circle mx-auto d-flex align-items-center justify-content-center mb-2">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" height="19"
-                                                        width="19" viewBox="0 0 448 512" fill="currentColor">
-                                                        <path fill-rule="evenodd"
-                                                            d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
-                                                            clip-rule="evenodd" />
-                                                    </svg>
-                                                </div>
-                                                <h5 class="text-dark text-lg"> Tambah Organisasi </h5>
-                                                <p class="text-sm text-secondary mb-0">Buat data organisasi baru di Ruang Organisasi
-                                                </p>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+                            <li class="nav-item">
+                                <a href="https://www.creative-tim.com" class="nav-link text-xs text-muted"
+                                    target="_blank">Creative Tim</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://www.creative-tim.com/presentation"
+                                    class="nav-link text-xs text-muted" target="_blank">About Us</a>
+                            </li>
+                        <li class="nav-item">
+                                <a href="https://www.creative-tim.com/blog" class="nav-link text-xs text-muted"
+                                    target="_blank">Blog</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://www.creative-tim.com/license"
+                                    class="nav-link text-xs pe-0 text-muted" target="_blank">License</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
-            <footer class="footer pt-3">
-                <div class="container-fluid pt-3">
-                    <div class="row align-items-center justify-content-lg-between">
-                        <div class="col-lg-6 mb-lg-0 mb-4">
-                            <div class="copyright text-center text-xs text-muted text-lg-start">
-                                Copyright
-                                ©
-                                <script>
-                                    document.write(new Date().getFullYear())
-                                </script>
-                                Corporate UI by
-                                <a href="https://www.creative-tim.com" class="text-secondary"
-                                    target="_blank">Creative Tim</a>.
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                                <li class="nav-item">
-                                    <a href="https://www.creative-tim.com" class="nav-link text-xs text-muted"
-                                        target="_blank">Creative Tim</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="https://www.creative-tim.com/presentation"
-                                        class="nav-link text-xs text-muted" target="_blank">About Us</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="https://www.creative-tim.com/blog" class="nav-link text-xs text-muted"
-                                        target="_blank">Blog</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="https://www.creative-tim.com/license"
-                                        class="nav-link text-xs pe-0 text-muted" target="_blank">License</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+        </footer>
         </div>
-    </div>  
+    </div>
     <div class="fixed-plugin">
         <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
             <i class="fa fa-cog py-2"></i>
