@@ -393,9 +393,9 @@
                                 <script>
                                     document.write(new Date().getFullYear())
                                 </script>
-                                Corporate UI by
+                                Ruang Organisasi by
                                 <a href="https://www.creative-tim.com" class="text-secondary"
-                                    target="_blank">Creative Tim</a>.
+                                    target="_blank">Ciboston Tech</a>.
                             </div>
                         </div>
                         <div class="col-lg-6">

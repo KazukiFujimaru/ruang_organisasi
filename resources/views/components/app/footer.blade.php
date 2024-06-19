@@ -8,9 +8,9 @@
                     document.write(new Date().getFullYear())
                 </script>
                 made with <i class="fa fa-heart"></i> by
-                <a href="https://www.creative-tim.com" class="text-secondary text-bold" target="_blank">Creative Tim</a> &
-                <a href="https://www.updivision.com" class="text-secondary text-bold" target="_blank">UPDIVISION</a>
-                for a better web.
+                <a href="https://www.creative-tim.com" class="text-secondary text-bold" target="_blank">Ruang Organisasi</a> &
+                <a href="https://www.updivision.com" class="text-secondary text-bold" target="_blank">Ciboston Project</a>
+                for a better future. 
             </div>
         </div>
         <div class="col-lg-6">
