@@ -2,28 +2,13 @@
     <div class="container py-2">
         <nav aria-label="breadcrumb">
             <div class="d-flex align-items-center">
-                <span class="px-3 font-weight-bold text-lg text-white me-4">Corporate UI</span>
+                <span class="px-3 font-weight-bold text-lg text-white me-4">Ruang Organisasi</span>
             </div>
         </nav>
         <ul class="navbar-nav d-none d-lg-flex">
             <li class="nav-item px-3 py-3 border-radius-sm  d-flex align-items-center">
                 <a href="{{ route('dashboard') }}" class="nav-link text-white p-0">
-                    Dashboard
-                </a>
-            </li>
-            <li class="nav-item px-3 py-3 border-radius-sm  d-flex align-items-center">
-                <a href="{{ route('tables') }}" class="nav-link text-white p-0">
-                    Tables
-                </a>
-            </li>
-            <li class="nav-item px-3 py-3 border-radius-sm bg-slate-800 d-flex align-items-center">
-                <a href="{{ route('wallet') }}" class="nav-link text-white p-0">
-                    Wallet
-                </a>
-            </li>
-            <li class="nav-item px-3 py-3 border-radius-sm  d-flex align-items-center">
-                <a href="{{ route('RTL') }}" class="nav-link text-white p-0">
-                    RTL
+                    <i class="fas fa-house"></i>
                 </a>
             </li>
         </ul>
@@ -146,39 +131,6 @@
                 </a>
                 </li>
             </ul>
-        </div>
-    </div>
-    <hr class="horizontal w-100 my-0 dark">
-    <div class="container pb-3 pt-3">
-        <ul class="navbar-nav d-none d-lg-flex">
-            <li class="nav-item border-radius-sm px-3 py-3 me-2  d-flex align-items-center">
-                <a href="{{ route('profile') }}" class="nav-link text-white p-0">
-                    Profile
-                </a>
-            </li>
-            <li class="nav-item border-radius-sm px-3 py-3 me-2  d-flex align-items-center">
-                <a href="{{ route('signin') }}" class="nav-link text-white p-0">
-                    Sign In
-                </a>
-            </li>
-            <li class="nav-item border-radius-sm px-3 py-3 me-2  d-flex align-items-center">
-                <a href="{{ route('signup') }}" class="nav-link text-white p-0">
-                    Sign Up
-                </a>
-            </li>
-        </ul>
-        <div class="ms-md-auto p-0 d-flex align-items-center w-sm-20">
-            <div class="input-group border-dark">
-                <span class="input-group-text border-dark bg-dark text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill="none"
-                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="opacity-8">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-                    </svg>
-                </span>
-                <input type="text" class="form-control border-dark bg-dark" placeholder="Search"
-                    onfocus="focused(this)" onfocusout="defocused(this)">
-            </div>
         </div>
     </div>
 </nav>

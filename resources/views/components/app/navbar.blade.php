@@ -142,7 +142,8 @@
                     </ul>
                 </li>
                 <li class="nav-item ps-2 d-flex align-items-center">
-                    <a href="javascript:;" class="nav-link text-body p-0">
+                    <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('profile-user') ? 'active' : '' }}"
+                        href="{{ route('profile-user') }}">
                         <img src="../assets/img/team-2.jpg" class="avatar avatar-sm" alt="avatar" />
                     </a>
                 </li>

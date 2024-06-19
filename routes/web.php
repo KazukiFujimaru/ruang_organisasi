@@ -113,3 +113,16 @@ Route::get('/inventaris', function () {
 Route::get('/lpj', function () {
     return view('view-layout.view-lpj');
 })->name('view-lpj')->middleware('auth');
+
+//Route tampilan user
+Route::get('/profile-user', function () {
+    return view('account-pages.profile-user');
+})->name('profile-user')->middleware('auth');
+
+Route::get('/profile-user-edit', function () {
+    return view('account-pages.user-edit');
+})->name('user-edit')->middleware('auth');
+
+Route::get('/a/a', function () {
+    return view('test');
+})->name('test')->middleware('guest');
