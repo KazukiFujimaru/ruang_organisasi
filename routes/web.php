@@ -19,6 +19,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 |
 */
 
+// Route bawaan template sebagai berikut :
 Route::get('/', function () {
     return redirect('/dashboard');
 })->middleware('auth');
@@ -87,3 +88,28 @@ Route::post('/reset-password', [ResetPasswordController::class, 'store'])
 Route::get('/laravel-examples/user-profile', [ProfileController::class, 'index'])->name('users.profile')->middleware('auth');
 Route::put('/laravel-examples/user-profile/update', [ProfileController::class, 'update'])->name('users.update')->middleware('auth');
 Route::get('/laravel-examples/users-management', [UserController::class, 'index'])->name('users-management')->middleware('auth');
+
+// Route tampilan data di view-layout
+Route::get('/program-kerja', function () {
+    return view('view-layout.view-proker');
+})->name('view-proker')->middleware('auth');
+
+Route::get('/keuangan', function () {
+    return view('view-layout.view-keuangan');
+})->name('view-keuangan')->middleware('auth');
+
+Route::get('/surat', function () {
+    return view('view-layout.view-surat');
+})->name('view-surat')->middleware('auth');
+
+Route::get('/arsip', function () {
+    return view('view-layout.view-arsip');
+})->name('view-arsip')->middleware('auth');
+
+Route::get('/inventaris', function () {
+    return view('view-layout.view-inventaris');
+})->name('view-inventaris')->middleware('auth');
+
+Route::get('/lpj', function () {
+    return view('view-layout.view-lpj');
+})->name('view-lpj')->middleware('auth');
