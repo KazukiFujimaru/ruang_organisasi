@@ -6,6 +6,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Keuangan;
 use Illuminate\Support\Facades\Auth;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+use DB;
+use Hash;
 
 class KeuanganController extends Controller
 {
@@ -28,6 +32,8 @@ class KeuanganController extends Controller
         ->orderBy('tanggal', 'asc')
         ->get();
 
+        
+
         return view('keuangan', compact('keuangans', 'saldo_terbaru'));
     }
 
@@ -36,40 +42,73 @@ class KeuanganController extends Controller
         return view('keuangan.create');
     }
 
+
     public function store(Request $request)
     {
-        $request->validate([
-            'nama' => 'required|string',
-            'jenis' => 'required|in:pemasukan,pengeluaran',
-            'tanggal' => 'required|date',
-            'keterangan' => 'nullable|string',
-            'jumlah' => 'required|numeric',
-            'bukti' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
-        ]);
-
-        $user = Auth::user();
-        if (!$user) {
-            return redirect()->route('login')->with('error', 'Please login first.');
+        $log = new Logger('debug');
+        $log->pushHandler(new StreamHandler(storage_path('logs/laravel.log'), Logger::DEBUG));
+    
+        $log->info('Store method called');
+    
+        try {
+            $request->validate([
+                'nama' => 'required|string',
+                'jenis' => 'required|in:pemasukan,pengeluaran',
+                'tanggal' => 'required|date',
+                'keterangan' => 'nullable|string',
+                'jumlah' => 'required|numeric',
+                'bukti' => 'nullable|mimes:png,jpg,jpeg,pdf|max:5120',
+            ]);
+    
+            $log->info('Validation passed');
+    
+            $user = Auth::user();
+            if (!$user) {
+                $log->error('User not authenticated');
+                return redirect()->route('login')->with('error', 'Please login first.');
+            }
+    
+            $log->info('User authenticated');
+    
+            if (is_null($user->organization_id)) {
+                $log->error('User does not belong to any organization');
+                return redirect()->route('home')->with('error', 'You do not belong to any organization.');
+            }
+    
+            $log->info('User belongs to organization ID: ' . $user->organization_id);
+    
+            $buktiPath = null;
+            if ($request->hasFile('bukti')) {
+                $file = $request->file('bukti');
+                $log->info('File found: ' . $file->getClientOriginalName());
+                $log->info('File MIME type: ' . $file->getClientMimeType());
+                $log->info('File extension: ' . $file->getClientOriginalExtension());
+    
+                $buktiPath = $file->store('bukti_keuangan');
+                $log->info('File stored at: ' . $buktiPath);
+            }
+    
+            $keuangan = new Keuangan([
+                'nama' => $request->nama,
+                'jenis' => $request->jenis,
+                'tanggal' => $request->tanggal,
+                'keterangan' => $request->keterangan,
+                'jumlah' => $request->jumlah,
+                'organisasi_id' => $user->organization_id,
+                'bukti' => $buktiPath,
+            ]);
+    
+            $keuangan->save();
+    
+            $log->info('Keuangan data saved');
+    
+            return redirect()->route('keuangan')->with('success', 'Data keuangan berhasil ditambahkan.');
+        } catch (\Exception $e) {
+            $log->error('Exception occurred: ' . $e->getMessage());
+            return redirect()->route('keuangan.create')->with('error', 'Terjadi kesalahan saat menyimpan data keuangan.');
         }
-
-        if (is_null($user->organization_id)) {
-            return redirect()->route('home')->with('error', 'You do not belong to any organization.');
-        }
-
-        $keuangan = new Keuangan([
-            'nama' => $request->nama,
-            'jenis' => $request->jenis,
-            'tanggal' => $request->tanggal,
-            'keterangan' => $request->keterangan,
-            'jumlah' => $request->jumlah,
-            'organisasi_id' => $user->organization_id,
-            'bukti' => $request->file('bukti') ? $request->file('bukti')->store('bukti_keuangan') : null,
-        ]);
-
-        $keuangan->save();
-
-        return redirect()->route('keuangan')->with('success', 'Data keuangan berhasil ditambahkan.');
     }
+
 
     public function destroy($id)
     {

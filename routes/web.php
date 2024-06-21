@@ -27,6 +27,14 @@ use App\Http\Controllers\SuratController;
 
 // Rute dengan middleware auth
 Route::middleware('auth')->group(function () {
+    
+    Route::get('/organisasi-profile', [OrganisasiController::class, 'index'])->name('organisasi-profile');
+    Route::get('/organisasi/{id}/edit', [OrganisasiController::class, 'edit'])->name('organisasi.edit');
+    Route::put('/organisasi/{id}/update', [OrganisasiController::class, 'update'])->name('organisasi.update');
+    Route::get('/organisasi', [OrganisasiController::class, 'index'])->name('organisasi.index');
+    Route::get('/organisasi/create', [OrganisasiController::class, 'create'])->name('organisasi.create');
+    Route::post('/organisasi', [OrganisasiController::class, 'store'])->name('organisasi.store');
+
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     #menampilkan keuangan
@@ -48,12 +56,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/inventaris/create', [InventarisController::class, 'create'])->name('inventaris.create');
     Route::post('/inventaris', [InventarisController::class, 'store'])->name('inventaris.store');
     Route::delete('/inventaris/{id}', [InventarisController::class, 'destroy'])->name('inventaris.destroy');
+    Route::get('/inventaris/{id}/edit', [InventarisController::class, 'edit'])->name('inventaris.edit');
+    Route::put('/inventaris/{id}', [InventarisController::class, 'update'])->name('inventaris.update');
     
+
     Route::get('/surat', [SuratController::class, 'index'])->name('surat');
     Route::get('/surat/create', [SuratController::class, 'create'])->name('surat.create');
     Route::post('/surat', [SuratController::class, 'store'])->name('surat.store');
+    Route::get('/surat/{id}/edit', [SuratController::class, 'edit'])->name('surat.edit');
+    Route::put('/surat/{id}', [SuratController::class, 'update'])->name('surat.update');
     Route::delete('/surat/{id}', [SuratController::class, 'destroy'])->name('surat.destroy');
-    
+
+
     Route::view('/tables', 'tables')->name('tables');
     Route::view('/wallet', 'wallet')->name('wallet');
     Route::view('/RTL', 'RTL')->name('RTL');

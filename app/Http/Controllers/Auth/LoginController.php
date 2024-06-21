@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Hash;
 
 class LoginController extends Controller
 {
@@ -28,6 +29,8 @@ class LoginController extends Controller
     {
         $credentials = $request->only('email', 'password');
         $rememberMe = $request->rememberMe ? true : false;
+
+        // dd(Auth::attempt($credentials, $rememberMe).'--'.Hash::make('password'));
 
         if (Auth::attempt($credentials, $rememberMe)) {
             $request->session()->regenerate();

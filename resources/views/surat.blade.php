@@ -98,8 +98,8 @@
                                                 <span class="text-secondary text-sm font-weight-normal">{{ $surat->perihal}}</span>
                                             </td>
                                             <td class="align-middle">
-                                                <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                                    data-bs-toggle="tooltip" data-bs-title="Edit user">
+                                                <a href="{{ route('surat.edit', $surat->id) }}" class="text-secondary font-weight-bold text-xs"
+                                                    data-bs-toggle="tooltip" data-bs-title="Edit surat">
                                                     <svg width="14" height="14" viewBox="0 0 15 16"
                                                         fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path
