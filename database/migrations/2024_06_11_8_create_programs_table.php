@@ -15,7 +15,7 @@ class CreateProgramsTable extends Migration
             $table->enum('jenis', ['harian', 'mingguan', 'bulanan', 'tahunan']);
             $table->enum('status', ['terlaksana', 'tidak terlaksana']);
             $table->date('tanggal');
-            $table->binary('dokumen')->nullable();
+            $table->string('dokumen')->nullable();
             $table->foreignId('organisasi_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

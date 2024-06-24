@@ -15,7 +15,7 @@ class CreateKeuangansTable extends Migration
             $table->text('keterangan')->nullable();
             $table->decimal('jumlah', 10, 2);
             $table->decimal('saldo', 10, 2);
-            $table->binary('bukti')->nullable();
+            $table->string('bukti')->nullable();
             $table->foreignId('organisasi_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

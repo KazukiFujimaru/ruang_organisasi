@@ -15,7 +15,7 @@ class CreateInventarissTable extends Migration
             $table->integer('digunakan');
             $table->integer('sisa');
             $table->text('keterangan')->nullable();
-            $table->binary('bukti')->nullable();
+            $table->string('bukti')->nullable();
             $table->foreignId('organisasi_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

@@ -51,7 +51,7 @@
 
 <body class="g-sidenav-show  bg-gray-100">
     @php
-        $topSidenavArray = ['wallet', 'profile'];
+        $topSidenavArray = ['wallet', 'profile','organisasi-profile','organisasi.create'];
         $topSidenavTransparent = ['signin', 'signup'];
         $topSidenavRTL = ['RTL'];
     @endphp

@@ -155,7 +155,7 @@
                     <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
                 <li class="nav-item dropdown pe-2 d-flex align-items-center">
                     <div class="avatar avatar-sm position-relative">
-                        <img src="{{ asset(img/team-2.jpg) }}" alt="profile_image" class="w-100 border-radius-md">
+                        <img src="{{ asset('asset/img/team-2.jpg') }}" alt="profile_image" class="w-100 border-radius-md">
                     </div>
                 </li>
                 </a>

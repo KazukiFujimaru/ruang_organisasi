@@ -48,8 +48,7 @@ class OrganisasiController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Lakukan validasi terlebih dahulu
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'nama' => 'required|string',
             'nama_instansi' => 'required|string',
             'nama_pembina' => 'required|string',
@@ -62,35 +61,50 @@ class OrganisasiController extends Controller
             'KODE' => 'required|string|unique:organisasis,KODE,' . $id,
         ]);
 
-        // Jika validasi gagal, kembalikan dengan pesan error dan data input sebelumnya
-        if ($validator->fails()) {
-            return redirect()->route('organisasi.edit')
-                ->withErrors($validator)
-                ->withInput()
-                ->with('error', 'Terdapat kesalahan dalam pengisian form. Silakan periksa kembali.');
-        }
-
-        // Jika validasi berhasil, lanjutkan proses update
         $user = Auth::user();
         $organisasi = Organisasi::find($id);
 
-        // Pastikan organisasi ditemukan
         if (!$organisasi) {
-            return redirect()->route('organisasi.edit')->with('error', 'Organisasi tidak ditemukan.');
+            return redirect()->route('organisasi-profile')->with('error', 'Organization not found.');
         }
 
-        // Periksa izin pengguna untuk mengupdate organisasi
         if ($organisasi->id != $user->organization_id) {
-            return redirect()->route('organisasi.edit')->with('error', 'Anda tidak memiliki izin untuk mengupdate organisasi ini.');
+            return redirect()->route('organisasi-profile')->with('error', 'You do not have permission to update this organization.');
         }
 
-        // Lakukan update data organisasi
-        if ($organisasi->update($request->all())) {
+        // Upload logo_organisasi
+        if ($request->hasFile('logo_organisasi')) {
+            $logoOrganisasiPath = $request->file('logo_organisasi')->store('logos_organisasi', 'public');
+            $organisasi->logo_organisasi = $logoOrganisasiPath;
+        }
+
+        // Upload logo_instansi
+        if ($request->hasFile('logo_instansi')) {
+            $logoInstansiPath = $request->file('logo_instansi')->store('logos_instansi', 'public');
+            $organisasi->logo_instansi = $logoInstansiPath;
+        }
+
+        // Upload ADART
+        if ($request->hasFile('ADART')) {
+            $adartPath = $request->file('ADART')->store('adarts', 'public');
+            $organisasi->ADART = $adartPath;
+        }
+
+        $organisasi->nama = $request->input('nama');
+        $organisasi->nama_instansi = $request->input('nama_instansi');
+        $organisasi->nama_pembina = $request->input('nama_pembina');
+        $organisasi->deskripsi = $request->input('deskripsi');
+        $organisasi->sejarah = $request->input('sejarah');
+        $organisasi->tanggal_disahkan = $request->input('tanggal_disahkan');
+        $organisasi->KODE = $request->input('KODE');
+
+        if ($organisasi->save()) {
             return redirect()->route('organisasi-profile')->with('success', 'Organisasi berhasil diperbarui.');
         } else {
-            return redirect()->route('organisasi.edit')->with('error', 'Gagal memperbarui organisasi. Silakan coba lagi.');
+            return redirect()->back()->with('error', 'Gagal memperbarui organisasi. Silakan coba lagi.');
         }
-    }
+}
+
 
     public function create()
     {
@@ -123,21 +137,23 @@ class OrganisasiController extends Controller
         ]);
 
         if ($request->hasFile('logo_organisasi')) {
-            $organisasi->logo_organisasi = $request->file('logo_organisasi')->store('logo_organisasi');
+            $organisasi->logo_organisasi = $request->file('logo_organisasi')->store('public/logo_organisasi');
         }
 
         if ($request->hasFile('logo_instansi')) {
-            $organisasi->logo_instansi = $request->file('logo_instansi')->store('logo_instansi');
+            $organisasi->logo_instansi = $request->file('logo_instansi')->store('public/logo_instansi');
         }
 
         if ($request->hasFile('ADART')) {
-            $organisasi->ADART = $request->file('ADART')->store('ADART');
+            $organisasi->ADART = $request->file('ADART')->store('public/ADART');
         }
 
         $organisasi->save();
 
         return redirect()->route('organisasi.index')->with('success', 'Data organisasi berhasil disimpan.');
     }
+
+
     
 
     public function choose()

@@ -15,9 +15,9 @@ class CreateOrganisasisTable extends Migration
             $table->text('deskripsi')->nullable();
             $table->text('sejarah')->nullable();
             $table->date('tanggal_disahkan')->nullable();
-            $table->binary('logo_organisasi')->nullable();
-            $table->binary('logo_instansi')->nullable();
-            $table->binary('ADART')->nullable();
+            $table->string('logo_organisasi')->nullable(); // Changed from binary to string
+            $table->string('logo_instansi')->nullable(); // Changed from binary to string
+            $table->string('ADART')->nullable(); // Changed from binary to string
             $table->string('KODE')->unique();
             $table->timestamps();
         });

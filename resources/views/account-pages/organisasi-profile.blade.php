@@ -8,14 +8,14 @@
             <div class="card card-body py-2 bg-transparent shadow-none">
                 <div class="row">
                 <div class="col-auto">
-                        <div class="avatar avatar-2xl rounded-circle position-relative mt-n7 border border-gray-100 border-4">
-                            @if($organisasi->logo)
-                                <img src="data:image/png;base64,{{ base64_encode($organisasi->logo) }}" alt="Logo Organisasi" class="w-100">
-                            @else
-                                <img src="{{ asset('path_to_default_image.png') }}" alt="Default Image" class="w-100">
-                            @endif
-                        </div>
+                    <div class="avatar avatar-2xl rounded-circle position-relative mt-n7 border border-gray-100 border-4">
+                        @if($organisasi->logo_organisasi)
+                            <img src="{{ asset('storage/' . str_replace('public/', '', $organisasi->logo_organisasi)) }}" alt="Logo Organisasi" class="w-100">
+                        @else
+                            <img src="{{ asset('images/default_image.png') }}" alt="Default Image" class="w-100">
+                        @endif
                     </div>
+                </div>
                     <div class="col-auto my-auto">
                         <div class="h-100">
                             <h3 class="mb-0 font-weight-bold">

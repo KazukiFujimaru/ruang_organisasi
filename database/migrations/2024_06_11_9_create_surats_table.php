@@ -14,7 +14,7 @@ class CreateSuratsTable extends Migration
             $table->enum('jenis', ['masuk', 'keluar']);
             $table->string('perihal');
             $table->string('asal_surat');
-            $table->binary('dokumen')->nullable();
+            $table->string('dokumen')->nullable();
             $table->foreignId('organisasi_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
