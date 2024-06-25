@@ -6,6 +6,19 @@ use Illuminate\Support\Facades\Schema;
 
 class AddOrganizationRoleAndDivisiRoleToUsersTable extends Migration
 {
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreignId('organization_id')->nullable()->constrained('organisasis');
+            $table->foreignId('role_id')->nullable()->constrained('roles');
+            $table->foreignId('divisi_role_id')->nullable()->constrained('divisi_roles');
+        });
+    }
 
     /**
      * Reverse the migrations.

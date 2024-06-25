@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -37,7 +38,7 @@ class SuratController extends Controller
             'jenis' => 'required|in:masuk,keluar',
             'perihal' => 'required|string',
             'asal_surat' => 'required|string',
-            'dokumen' => 'required|mimes:pdf,docx,png,jpg,jpeg|max:2048',
+            'dokumen' => 'required|mimes:pdf,docx,png,jpg,jpeg|max:5048',
         ]);
 
         $user = Auth::user();
@@ -49,6 +50,11 @@ class SuratController extends Controller
             return redirect()->route('home')->with('error','kamu belum memiliki organisasi');
         }
 
+        $dokumenPath = null;
+        if ($request->hasFile('dokumen')) {
+            $dokumenPath = $request->file('dokumen')->store('dokumen_surat', 'public');
+        }
+
         $surat = new Surat([
             'nomor_surat' => $request->nomor_surat,
             'tanggal' => $request->tanggal,
@@ -56,7 +62,7 @@ class SuratController extends Controller
             'perihal' => $request->perihal,
             'asal_surat' => $request->asal_surat,
             'organisasi_id' => $user->organization_id,
-            'dokumen' => $request->file('dokumen') ? $request->file('dokumen')->store('dokumen_surat') : null,
+            'dokumen' => $dokumenPath,
         ]);
 
         if ($surat->save()) {
@@ -86,7 +92,7 @@ class SuratController extends Controller
             'jenis' => 'required|in:masuk,keluar',
             'perihal' => 'required|string',
             'asal_surat' => 'required|string',
-            'dokumen' => 'mimes:pdf,docx,png,jpg,jpeg|max:2048',
+            'dokumen' => 'mimes:pdf,docx,png,jpg,jpeg|max:5048',
         ]);
 
         $user = Auth::user();
@@ -111,7 +117,7 @@ class SuratController extends Controller
         $surat->asal_surat = $request->asal_surat;
 
         if ($request->hasFile('dokumen')) {
-            $surat->dokumen = $request->file('dokumen')->store('dokumen_surat');
+            $surat->dokumen = $request->file('dokumen')->store('dokumen_surat', 'public');
         }
 
         if ($surat->save()) {

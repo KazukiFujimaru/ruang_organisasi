@@ -13,7 +13,7 @@
                                 </div>
                                 <div class="ms-auto d-flex">
                                     <button type="button" class="btn btn-sm btn-white me-2">
-                                        View all
+                                        Semua
                                     </button>
                                     <button type="button" onclick="window.location.href = '{{ route('program.create') }}'"
                                             class="btn btn-sm btn-dark btn-icon d-flex align-items-center me-2">
@@ -29,17 +29,68 @@
                         </div>
                         <div class="card-body px-0 py-0">
                             <div class="border-bottom py-3 px-3 d-sm-flex align-items-center">
-                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                                    <input type="radio" class="btn-check" name="btnradiotable" id="btnradiotable1"
-                                        autocomplete="off" checked>
-                                    <label class="btn btn-white px-3 mb-0" for="btnradiotable1">All</label>
-                                    <input type="radio" class="btn-check" name="btnradiotable" id="btnradiotable2"
-                                        autocomplete="off">
-                                    <label class="btn btn-white px-3 mb-0" for="btnradiotable2">Monitored</label>
-                                    <input type="radio" class="btn-check" name="btnradiotable" id="btnradiotable3"
-                                        autocomplete="off">
-                                    <label class="btn btn-white px-3 mb-0" for="btnradiotable3">Unmonitored</label>
+                            <div class="dropdown">
+                                <a href="javascript:;" class="btn bg-gradient-dark dropdown-toggle " data-bs-toggle="dropdown" id="navbarDropdownMenuLink2">
+                                    Type
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:;">
+                                            Program Kerja
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:;">
+                                            Kegiatan
+                                        </a>
+                                    </li>
+                                </ul>
                                 </div>
+                            <div class="dropdown">
+                                <a href="javascript:;" class="btn bg-gradient-dark dropdown-toggle " data-bs-toggle="dropdown" id="navbarDropdownMenuLink2">
+                                    Jenis
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:;">
+                                            Harian
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:;">
+                                            Mingguan
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:;">
+                                            Bulanan
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:;">
+                                            Tahunan
+                                        </a>
+                                    </li>
+                                </ul>
+                                </div>
+                            <div class="dropdown">
+                                <a href="javascript:;" class="btn bg-gradient-dark dropdown-toggle " data-bs-toggle="dropdown" id="navbarDropdownMenuLink2">
+                                    Status
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:;">
+                                            Terlaksana
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:;">
+                                            Tidak Terlaksana
+                                        </a>
+                                    </li>
+                                </ul>
+                                </div>
+                                
                                 <div class="input-group w-sm-25 ms-auto">
                                     <span class="input-group-text text-body">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px"
@@ -56,22 +107,25 @@
                                 <table class="table align-items-center mb-0">
                                     <thead class="bg-gray-100">
                                         <tr>
-                                            <th class="text-secondary text-xs font-weight-semibold opacity-7">Member
+                                            <th class="text-secondary text-xs font-weight-semibold opacity-7">Nama Program
                                             </th>
                                             <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">
-                                                Function</th>
+                                                Type</th>
+                                            <th
+                                                class="text-center text-secondary text-xs font-weight-semibold opacity-7">
+                                                Jenis</th>
                                             <th
                                                 class="text-center text-secondary text-xs font-weight-semibold opacity-7">
                                                 Status</th>
                                             <th
                                                 class="text-center text-secondary text-xs font-weight-semibold opacity-7">
-                                                Employed</th>
+                                                Tanggal</th>
                                             <th class="text-secondary opacity-7"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach($programs as $program)
-                                        <tr>
+                                        <tr data-jenis="{{ strtolower($program->status) }}">
                                             <td>
                                                 <div class="d-flex px-2 py-1">
                                                     <div class="d-flex align-items-center">
@@ -87,19 +141,34 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <p class="text-sm text-dark font-weight-semibold mb-0">{{ $program->jenis}}</p>
+                                                <p class="text-sm text-dark font-weight-semibold mb-0">{{ $program->type}}</p>
                                                 <p class="text-sm text-secondary mb-0">Organization</p>
                                             </td>
                                             <td class="align-middle text-center text-sm">
                                                 <span
-                                                    class="badge badge-sm border border-success text-success bg-success">{{ $program->type}}</span>
+                                                    class="badge badge-sm border border-success text-success bg-success">{{ $program->jenis}}</span>
+                                            </td>
+                                            <td>
+                                                @if($program->status == 'terlaksana')
+                                                    <span class="badge badge-sm border border-success text-success bg-success">
+                                                        <svg width="9" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" class="me-1">
+                                                            <path d="M1 4.42857L3.28571 6.71429L9 1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                        </svg> {{ ucfirst($program->status) }} 
+                                                    </span>
+                                                @else
+                                                    <span class="badge badge-sm border border-danger text-danger bg-danger">
+                                                        <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="me-1">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                                                        </svg> {{ ucfirst($program->status) }} 
+                                                    </span>
+                                                @endif
                                             </td>
                                             <td class="align-middle text-center">
                                                 <span class="text-secondary text-sm font-weight-normal">{{ $program->tanggal}}</span>
                                             </td>
                                             <td class="align-middle">
-                                                <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                                    data-bs-toggle="tooltip" data-bs-title="Edit user">
+                                                <a href="{{ route('program.edit', $program->id) }}" class="text-secondary font-weight-bold text-xs"
+                                                    data-bs-toggle="tooltip" data-bs-title="Edit Program">
                                                     <svg width="14" height="14" viewBox="0 0 15 16"
                                                         fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path

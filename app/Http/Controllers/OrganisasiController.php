@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Organisasi;
+use App\Models\Divisi;
+use App\Models\Role;
 use App\Models\Keanggotaan;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
-
 
 class OrganisasiController extends Controller
 {
+
     public function index()
     {
         // Pastikan pengguna sudah login
@@ -29,82 +30,6 @@ class OrganisasiController extends Controller
 
         return view('account-pages.organisasi-profile', compact('organisasi'));
     }
-
-    
-
-    
-    public function edit($id)
-    {
-        $user = Auth::user();
-        $organisasi = Organisasi::find($id);
-
-        // Pastikan pengguna hanya dapat mengedit organisasi yang mereka miliki
-        if ($organisasi->id != $user->organization_id) {
-            return redirect()->route('dashboard')->with('error', 'You do not have permission to edit this organization.');
-        }
-
-        return view('organisasi.edit', compact('organisasi'));
-    }
-
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'nama' => 'required|string',
-            'nama_instansi' => 'required|string',
-            'nama_pembina' => 'required|string',
-            'deskripsi' => 'nullable|string',
-            'sejarah' => 'nullable|string',
-            'tanggal_disahkan' => 'nullable|date',
-            'logo_organisasi' => 'nullable|mimes:png,jpg,jpeg|max:2048',
-            'logo_instansi' => 'nullable|mimes:png,jpg,jpeg|max:2048',
-            'ADART' => 'nullable|mimes:pdf,docx|max:2048',
-            'KODE' => 'required|string|unique:organisasis,KODE,' . $id,
-        ]);
-
-        $user = Auth::user();
-        $organisasi = Organisasi::find($id);
-
-        if (!$organisasi) {
-            return redirect()->route('organisasi-profile')->with('error', 'Organization not found.');
-        }
-
-        if ($organisasi->id != $user->organization_id) {
-            return redirect()->route('organisasi-profile')->with('error', 'You do not have permission to update this organization.');
-        }
-
-        // Upload logo_organisasi
-        if ($request->hasFile('logo_organisasi')) {
-            $logoOrganisasiPath = $request->file('logo_organisasi')->store('logos_organisasi', 'public');
-            $organisasi->logo_organisasi = $logoOrganisasiPath;
-        }
-
-        // Upload logo_instansi
-        if ($request->hasFile('logo_instansi')) {
-            $logoInstansiPath = $request->file('logo_instansi')->store('logos_instansi', 'public');
-            $organisasi->logo_instansi = $logoInstansiPath;
-        }
-
-        // Upload ADART
-        if ($request->hasFile('ADART')) {
-            $adartPath = $request->file('ADART')->store('adarts', 'public');
-            $organisasi->ADART = $adartPath;
-        }
-
-        $organisasi->nama = $request->input('nama');
-        $organisasi->nama_instansi = $request->input('nama_instansi');
-        $organisasi->nama_pembina = $request->input('nama_pembina');
-        $organisasi->deskripsi = $request->input('deskripsi');
-        $organisasi->sejarah = $request->input('sejarah');
-        $organisasi->tanggal_disahkan = $request->input('tanggal_disahkan');
-        $organisasi->KODE = $request->input('KODE');
-
-        if ($organisasi->save()) {
-            return redirect()->route('organisasi-profile')->with('success', 'Organisasi berhasil diperbarui.');
-        } else {
-            return redirect()->back()->with('error', 'Gagal memperbarui organisasi. Silakan coba lagi.');
-        }
-}
-
 
     public function create()
     {
@@ -150,30 +75,113 @@ class OrganisasiController extends Controller
 
         $organisasi->save();
 
-        return redirect()->route('organisasi.index')->with('success', 'Data organisasi berhasil disimpan.');
+        // Set the organization_id of the user who created the organization
+        $user = Auth::user();
+        $user->organization_id = $organisasi->id;
+        $user->save();
+
+        // Redirect to the form for creating divisions
+        return redirect()->route('organisasi.create-divisi', $organisasi->id);
     }
 
+    public function createDivisi($organisasiId)
+    {
+        $organisasi = Organisasi::findOrFail($organisasiId);
+        return view('organisasi.create-divisi', compact('organisasi'));
+    }
 
-    
+    public function storeDivisi(Request $request, $organisasiId)
+    {
+        $request->validate([
+            'divisi.*.nama' => 'required|string',
+            'divisi.*.keterangan' => 'required|string',
+        ]);
+
+        $organisasi = Organisasi::findOrFail($organisasiId);
+
+        foreach ($request->divisi as $divisiData) {
+            Divisi::create([
+                'nama' => $divisiData['nama'],
+                'keterangan' => $divisiData['keterangan'],
+                'organisasi_id' => $organisasi->id,
+            ]);
+        }
+
+        return redirect()->route('organisasi.choose-role', $organisasi->id);
+    }
+
+    public function chooseRole($organisasiId)
+    {
+        $organisasi = Organisasi::findOrFail($organisasiId);
+        $divisis = $organisasi->divisis;
+
+        return view('organisasi.choose-role', compact('organisasi', 'divisis'));
+    }
+
+    public function storeRole(Request $request, $organisasiId)
+    {
+        $request->validate([
+            'role' => 'required|in:Ketua,Wakil Ketua,Sekretaris,Bendahara,Anggota',
+            'divisi_role_id' => 'nullable|exists:divisis,id',
+        ]);
+
+        $user = Auth::user();
+
+        $role = Role::create([
+            'nama' => $request->role,
+            'organisasi_id' => $organisasiId,
+        ]);
+
+        if ($request->role === 'Anggota') {
+            $user->divisi_role_id = $request->divisi_role_id;
+        }
+
+        $user->role_id = $role->id;
+        $user->save();
+
+        // Tambahkan pengguna ke tabel keanggotaan
+        Keanggotaan::create([
+            'user_id' => $user->id,
+            'organisasi_id' => $organisasiId,
+            'role_id' => $role->id,
+            'joined_at' => now(),
+        ]);
+
+        return redirect()->route('dashboard')->with('success', 'Role dan Divisi berhasil disimpan.');
+    }
+
+    public function joinForm()
+    {
+        return view('organisasi.join');
+    }
+
+    public function join(Request $request)
+    {
+        $request->validate([
+            'kode_organisasi' => 'required|string|exists:organisasis,KODE',
+        ]);
+
+        $organisasi = Organisasi::where('KODE', $request->kode_organisasi)->first();
+
+        $user = Auth::user();
+        $user->organization_id = $organisasi->id;
+        $user->save();
+
+        Keanggotaan::create([
+            'user_id' => $user->id,
+            'organisasi_id' => $organisasi->id,
+            'role_id' => 5, // Default role_id untuk Anggota
+            'joined_at' => now(),
+        ]);
+
+        return redirect()->route('dashboard')->with('success', 'Anda berhasil bergabung dengan organisasi.');
+    }
 
     public function choose()
     {
         return view('organisasi.choose');
     }
 
-
-    public function joinForm()
-    {
-        $organisasis = Organisasi::all();
-        return view('organisasi.join', compact('organisasis'));
-    }
-
-    public function join(Request $request)
-    {
-        $user = Auth::user();
-        $user->organization_id = $request->organization_id;
-        $user->save();
-
-        return redirect()->route('dashboard');
-    }
 }
+
+

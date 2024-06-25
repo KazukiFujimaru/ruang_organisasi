@@ -8,7 +8,7 @@ class Inventaris extends Model
 {
     use HasFactory;
 
-    // protected $table = 'inventariss  '; // Menentukan nama tabel secara eksplisit
+    protected $table = 'inventariss'; // Menentukan nama tabel secara eksplisit
 
     protected $fillable = [
         'nama',

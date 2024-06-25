@@ -14,52 +14,57 @@ use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\InventarisController;
 use App\Http\Controllers\SuratController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Di sini Anda dapat mendaftarkan rute web untuk aplikasi Anda. Rute-rute
-| ini dimuat oleh RouteServiceProvider dan semuanya akan diberi kelompok
-| middleware "web". Buat sesuatu yang hebat!
-|
-*/
-
-// Rute dengan middleware auth
 Route::middleware('auth')->group(function () {
+    // Rute untuk organisasi
+    Route::get('/organisasi/choose', [OrganisasiController::class, 'choose'])->name('organisasi.choose');
     
+    // Organisasi
     Route::get('/organisasi-profile', [OrganisasiController::class, 'index'])->name('organisasi-profile');
     Route::get('/organisasi/{id}/edit', [OrganisasiController::class, 'edit'])->name('organisasi.edit');
     Route::put('/organisasi/{id}/update', [OrganisasiController::class, 'update'])->name('organisasi.update');
-    Route::get('/organisasi', [OrganisasiController::class, 'index'])->name('organisasi.index');
+    
+    // Membuat Organisasi
     Route::get('/organisasi/create', [OrganisasiController::class, 'create'])->name('organisasi.create');
     Route::post('/organisasi', [OrganisasiController::class, 'store'])->name('organisasi.store');
 
+    // Mengisi Divisi setelah Membuat Organisasi
+    Route::get('/organisasi/{organisasi}/create-divisi', [OrganisasiController::class, 'createDivisi'])->name('organisasi.create-divisi');
+    Route::post('/organisasi/{organisasi}/store-divisi', [OrganisasiController::class, 'storeDivisi'])->name('organisasi.store-divisi');
+
+    // Memilih Role dan Divisi Role
+    Route::get('/organisasi/{organisasi}/choose-role', [OrganisasiController::class, 'chooseRole'])->name('organisasi.choose-role');
+    Route::post('/organisasi/{organisasi}/store-role', [OrganisasiController::class, 'storeRole'])->name('organisasi.store-role');
+
+    // Join Organisasi menggunakan Kode
+    Route::get('/organisasi/join', [OrganisasiController::class, 'joinForm'])->name('organisasi.joinForm');
+    Route::post('/organisasi/join', [OrganisasiController::class, 'join'])->name('organisasi.join');
+    
+    // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    #menampilkan keuangan
+    // Keuangan
     Route::get('/keuangan', [KeuanganController::class, 'index'])->name('keuangan');
-    
-    #menampilkan form keuangan
     Route::get('/keuangan/create', [KeuanganController::class, 'create'])->name('keuangan.create');
     Route::post('/keuangan', [KeuanganController::class, 'store'])->name('keuangan.store');
-    #menghapus keuangan
-    Route::delete('/keuangan/{id}',[KeuanganController::class,'destroy'])->name('keuangan.destroy');
+    Route::delete('/keuangan/{id}', [KeuanganController::class, 'destroy'])->name('keuangan.destroy');
 
-
+    // Program
     Route::get('/program', [ProgramController::class, 'index'])->name('program');
     Route::get('/program/create', [ProgramController::class, 'create'])->name('program.create');
     Route::post('/program', [ProgramController::class, 'store'])->name('program.store');
+    Route::get('/program/{id}/edit', [ProgramController::class, 'edit'])->name('program.edit');
+    Route::put('/program/{id}', [ProgramController::class, 'update'])->name('program.update');
     Route::delete('/program/{id}', [ProgramController::class, 'destroy'])->name('program.destroy');
-    
+
+    // Inventaris
     Route::get('/inventaris', [InventarisController::class, 'index'])->name('inventaris');
     Route::get('/inventaris/create', [InventarisController::class, 'create'])->name('inventaris.create');
     Route::post('/inventaris', [InventarisController::class, 'store'])->name('inventaris.store');
-    Route::delete('/inventaris/{id}', [InventarisController::class, 'destroy'])->name('inventaris.destroy');
     Route::get('/inventaris/{id}/edit', [InventarisController::class, 'edit'])->name('inventaris.edit');
     Route::put('/inventaris/{id}', [InventarisController::class, 'update'])->name('inventaris.update');
-    
+    Route::delete('/inventaris/{id}', [InventarisController::class, 'destroy'])->name('inventaris.destroy');
 
+    // Surat
     Route::get('/surat', [SuratController::class, 'index'])->name('surat');
     Route::get('/surat/create', [SuratController::class, 'create'])->name('surat.create');
     Route::post('/surat', [SuratController::class, 'store'])->name('surat.store');
@@ -67,7 +72,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/surat/{id}', [SuratController::class, 'update'])->name('surat.update');
     Route::delete('/surat/{id}', [SuratController::class, 'destroy'])->name('surat.destroy');
 
-
+    // Routes lainnya
     Route::view('/tables', 'tables')->name('tables');
     Route::view('/wallet', 'wallet')->name('wallet');
     Route::view('/RTL', 'RTL')->name('RTL');
@@ -78,16 +83,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/laravel-examples/users-management', [UserController::class, 'index'])->name('users-management');
 
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
-    
-    // Rute untuk organisasi
-    Route::get('/organisasi/choose', [OrganisasiController::class, 'choose'])->name('organisasi.choose');
-    Route::get('/organisasi/create', [OrganisasiController::class, 'create'])->name('organisasi.create');
-    Route::post('/organisasi', [OrganisasiController::class, 'store'])->name('organisasi.store');
-    Route::get('/organisasi/join', [OrganisasiController::class, 'joinForm'])->name('organisasi.join');
-    Route::post('/organisasi/join', [OrganisasiController::class, 'join'])->name('organisasi.join.submit');
 });
 
-// Rute dengan middleware guest
 Route::middleware('guest')->group(function () {
     Route::view('/signin', 'account-pages.signin')->name('signin');
     Route::view('/signup', 'account-pages.signup')->name('signup');

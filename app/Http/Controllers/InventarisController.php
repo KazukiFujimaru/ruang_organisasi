@@ -22,8 +22,6 @@ class InventarisController extends Controller
 
         $organisasi_id = $user->organization_id;
 
-        
-
         // Mendapatkan semua data inventaris
         $inventariss = Inventaris::where('organisasi_id', $organisasi_id)->get();
 
@@ -44,7 +42,7 @@ class InventarisController extends Controller
             'digunakan' => 'required|numeric',
             'sisa' => 'required|numeric',
             'keterangan' => 'nullable|string',
-            'bukti' => 'nullable|mimes:png,jpg,jpeg,pdf,docx|max:2048',
+            'bukti' => 'nullable|mimes:png,jpg,jpeg,pdf,docx|max:5048',
         ]);
 
         $user = Auth::user();
@@ -64,12 +62,16 @@ class InventarisController extends Controller
             'sisa' => $request->sisa,
             'keterangan' => $request->keterangan,
             'organisasi_id' => $user->organization_id,  
-            'bukti' => $request->file('bukti') ? $request->file('bukti')->store('bukti_inventaris') : null,  
         ]);
+
+        if ($request->hasFile('bukti')) {
+            $buktiPath = $request->file('bukti')->store('bukti_inventaris', 'public');
+            $inventaris->bukti = $buktiPath;
+        }
 
         $inventaris->save();
 
-        return redirect()->route('inventaris')->with('succes','data inventaris berhasil di tambah');
+        return redirect()->route('inventaris')->with('success','data inventaris berhasil di tambah');
     }
 
     public function edit($id)
@@ -93,7 +95,7 @@ class InventarisController extends Controller
             'digunakan' => 'required|numeric',
             'sisa' => 'required|numeric',
             'keterangan' => 'nullable|string',
-            'bukti' => 'nullable|mimes:png,jpg,jpeg,pdf,docx|max:2048',
+            'bukti' => 'nullable|mimes:png,jpg,jpeg,pdf,docx|max:5048',
         ]);
 
         $user = Auth::user();
@@ -117,10 +119,10 @@ class InventarisController extends Controller
         $inventaris->digunakan = $request->digunakan;
         $inventaris->sisa = $request->sisa;
         $inventaris->keterangan = $request->keterangan;
-        
 
         if ($request->hasFile('bukti')) {
-            $inventaris->bukti = $request->file('bukti')->store('bukti_inventaris');
+            $buktiPath = $request->file('bukti')->store('bukti_inventaris', 'public');
+            $inventaris->bukti = $buktiPath;
         }
 
         if ($inventaris->save()) {
@@ -154,5 +156,4 @@ class InventarisController extends Controller
             return redirect()->route('inventaris')->with('error', 'Terjadi kesalahan saat menghapus data inventaris.');
         }
     }
-
 }
