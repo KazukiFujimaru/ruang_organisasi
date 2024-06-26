@@ -1,6 +1,7 @@
 <x-app-layout>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <x-app.navbar />
+        @if($organisasi)
         <div class="container-fluid py-4 px-5">
             <div class="col-md-12">
                     <div class="d-md-flex align-items-center mb-3 mx-2">
@@ -27,7 +28,7 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="w-100">
-                                        <p class="text-sm text-secondary mb-1">Revenue</p>
+                                        <p class="text-sm text-secondary mb-1">Jumlah anggota</p>
                                         <h4 class="mb-2 font-weight-bold">$99,118.5</h4>
                                         <div class="d-flex align-items-center">
                                             <span class="text-sm text-success font-weight-bolder">
@@ -131,7 +132,9 @@
                     </div>
                 </div>
             </div>
-            <x-app.footer />
         </div>
+        @else
+        <h3 class="font-weight-bold mb-0">tidak ada data organisasi</h3>
+        @endif
     </main>
 </x-app-layout>

@@ -6,7 +6,7 @@
         </div>
         <x-app.navbar />
         <div class="px-5 py-4 container-fluid ">
-            <form action={{ route('users.update') }} method="POST">
+            <form action="{{ route('users.update') }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="mt-5 mb-5 mt-lg-9 row justify-content-center">

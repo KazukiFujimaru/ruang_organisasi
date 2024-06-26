@@ -24,8 +24,8 @@
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3 text-sm-end">
-                        <a class="btn btn-sm btn-white {{ is_current_route('profile-organisasi') ? 'hidden' : '' }}" 
-                            href="{{ route('profile-organisasi') }}">Batal</a>
+                        <a class="btn btn-sm btn-white {{ is_current_route('organisasi-profile') ? 'hidden' : '' }}" 
+                            href="{{ route('organisasi-profile') }}">Batal</a>
                         <a href="javascript:;" class="btn btn-sm btn-dark">Simpan</a>
                     </div>
                 </div>
@@ -376,5 +376,4 @@
             </div>
         </div>
     </div>
-
 </x-app-layout>
