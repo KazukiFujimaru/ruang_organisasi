@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-guest-layout>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <div class="container-fluid py-4 px-5">
             <div class="row">
@@ -73,4 +73,4 @@
             <x-app.footer />
         </div>
     </main>
-</x-app-layout>
+</x-guest-layout>
