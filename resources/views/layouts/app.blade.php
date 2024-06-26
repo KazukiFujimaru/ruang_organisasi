@@ -50,8 +50,8 @@
 
 <body class="g-sidenav-show  bg-gray-100">
     @php
-        $topSidenavArray = ['wallet','profile','organisasi-profile','organisasi.create', 'profile-user', 'user-edit', 'profile-organisasi', 'organisasi-edit'];
-        $topSidenavTransparent = ['signin', 'signup', 'organisasi.choose'];
+        $topSidenavArray = ['wallet','profile','organisasi-profile', 'profile-user', 'user-edit', 'profile-organisasi', 'organisasi-edit'];
+        $topSidenavTransparent = ['signin', 'signup', 'organisasi.choose', 'organisasi.create'];
         $topSidenavRTL = ['RTL'];
     @endphp
     @if (in_array(request()->route()->getName(),
