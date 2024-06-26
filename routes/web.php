@@ -113,7 +113,7 @@ Route::middleware('guest')->group(function () {
 
 // Route bawaan template sebagai berikut :
 Route::get('/', function () {
-    return redirect('/dashboarda');
+    return redirect('/dashboard');
 })->middleware('auth');
 
 Route::get('/dashboarda', function () {
