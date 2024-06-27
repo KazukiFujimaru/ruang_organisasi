@@ -85,9 +85,10 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 
-    Route::get('laporan/pdf/{id}', [LaporanController::class, 'generatePdf']);
-    Route::get('laporan', [LaporanController::class, 'show'])->name('laporan.show');
-    Route::get('laporan/docx', [LaporanController::class, 'generateDocx'])->name('laporan.generateDocx');
+    Route::get('/laporan/show', [LaporanController::class, 'show'])->name('laporan.show');
+    Route::get('/laporan/generate-pdf', [LaporanController::class, 'generatePdf'])->name('laporan.generatePdf');
+    Route::get('/laporan/generate-docx', [LaporanController::class, 'generateDocx'])->name('laporan.generateDocx');
+
 
 
 });

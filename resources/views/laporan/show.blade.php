@@ -10,7 +10,7 @@
             <p><strong>Tanggal Disahkan:</strong> {{ $organisasi->tanggal_disahkan }}</p>
             <!-- Tambahkan data lainnya sesuai kebutuhan -->
 
-            <a href="{{ route('laporan.generateDocx', ['id' => $organisasi->id]) }}" class="btn btn-primary">Download DOCX</a>
+            <a href="{{ route('laporan.generatePdf', ['id' => $organisasi->id]) }}" class="btn btn-primary">Download DOCX</a>
         </div>
     </main>
 </x-app-layout>

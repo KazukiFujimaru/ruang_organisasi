@@ -1,16 +1,15 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
 use App\Models\Organisasi;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use PDF;
-use PhpOffice\PhpWord\PhpWord;
-use PhpOffice\PhpWord\IOFactory;
-use PhpOffice\PhpWord\Shared\Html;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use PhpOffice\PhpWord\PhpWord;
+use PhpOffice\PhpWord\Shared\Html;
 
 class LaporanController extends Controller
 {
@@ -21,18 +20,28 @@ class LaporanController extends Controller
         return view('laporan.show', compact('organisasi'));
     }
 
-    public function generatePdf($id)
+    public function generatePdf()
     {
-        $organisasi = Organisasi::with(['keanggotaan', 'roles', 'divisis', 'keuangans', 'programs', 'surats', 'inventaris'])
-            ->findOrFail($id);
+        // Mendapatkan user yang sedang login
+        $user = Auth::user();
+        
+        // Mendapatkan organisasi yang terkait dengan user
+        $organisasi = $user->organisasi;
 
         $data = [
             'organisasi' => $organisasi,
         ];
 
-        $pdf = PDF::loadView('laporanorganisasi', $data);
+        // Menggunakan Dompdf untuk membuat PDF
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $dompdf = new Dompdf($options);
+        $dompdf->loadHtml(view('laporan', $data)->render());
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
 
-        return $pdf->download('laporan_pertanggungjawaban.pdf');
+        // Unduh PDF
+        return $dompdf->stream('laporan_pertanggungjawaban.pdf');
     }
 
     public function generateDocx()
@@ -47,29 +56,24 @@ class LaporanController extends Controller
             // Render view Blade ke dalam bentuk HTML
             $html = view('laporan', compact('organisasi'))->render();
 
-            // Konversi HTML ke PDF menggunakan Dompdf
+            // Membuat instance dari Dompdf
             $options = new Options();
-            $options->set('isHtml5ParserEnabled', true); // Enable HTML5 parsing
+            $options->set('isHtml5ParserEnabled', true);
             $dompdf = new Dompdf($options);
             $dompdf->loadHtml($html);
-            $dompdf->setPaper('A4', 'portrait'); // Paper size and orientation
+            $dompdf->setPaper('A4', 'portrait');
             $dompdf->render();
 
             // Simpan PDF sementara
             $pdfPath = storage_path('app/public/temp.pdf');
             file_put_contents($pdfPath, $dompdf->output());
 
-            // Mengambil teks dari PDF
-            $canvas = $dompdf->getCanvas();
-            $pdfText = $canvas->get_cpdf()->output();
-
             // Membuat instance dari PhpWord
             $phpWord = new PhpWord();
             $section = $phpWord->addSection();
-            $section->addText('Laporan Pertanggungjawaban Organisasi');
 
-            // Tambahkan teks dari PDF ke dalam dokumen DOCX
-            $section->addText($pdfText);
+            // Menambahkan konten HTML ke dalam dokumen DOCX
+            Html::addHtml($section, $html, false, false);
 
             // Menyimpan dokumen sebagai file DOCX
             $fileName = 'Laporan_' . $organisasi->nama . '.docx';
@@ -83,9 +87,8 @@ class LaporanController extends Controller
             return response()->download($filePath)->deleteFileAfterSend(true);
 
         } catch (\Exception $e) {
-            // Handle any exceptions thrown during DOCX generation
+            // Tangani pengecualian yang terjadi selama pembuatan DOCX
             return back()->withError('Error generating DOCX: ' . $e->getMessage());
         }
     }
-
 }
