@@ -32,14 +32,18 @@ class SuratController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'nomor_surat' => 'required|string',
-            'tanggal' => 'required|date',
-            'jenis' => 'required|in:masuk,keluar',
-            'perihal' => 'required|string',
-            'asal_surat' => 'required|string',
-            'dokumen' => 'required|mimes:pdf,docx,png,jpg,jpeg|max:5048',
-        ]);
+    $request->validate([
+        'nomor_surat' => 'required|string',
+        'tanggal' => 'required|date',
+        'jenis' => 'required|in:masuk,keluar',
+        'perihal' => 'required|string',
+        'asal_surat' => 'required|string',
+        'dokumen' => 'required|mimes:pdf,docx,png,jpg,jpeg|max:5048',
+    ], [
+        'dokumen.required' => 'Dokumen surat harus dilampirkan.',
+        'dokumen.mimes' => 'Bukti harus berupa file dengan tipe: pdf, docx, png, jpg, atau jpeg.',
+        'dokumen.max' => 'Ukuran bukti tidak boleh lebih dari 5048 kilobyte.',
+    ]);
 
         $user = Auth::user();
         if (!$user){

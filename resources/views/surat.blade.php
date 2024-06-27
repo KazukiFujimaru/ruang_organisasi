@@ -9,14 +9,14 @@
                             <div class="d-sm-flex align-items-center">
                                 <div>
                                     <h6 class="font-weight-semibold text-lg mb-0">Daftar Surat</h6>
-                                    <p class="text-sm">melihat lebih banyak data Surat</p>
+                                    <p class="text-sm">Berikut adalah data dokumentasi surat anda</p>
                                 </div>
                                 <div class="ms-auto d-flex">
                                     <button type="button" onclick="window.location.href = '{{ route('surat.create') }}'"
                                             class="btn btn-sm btn-dark btn-icon d-flex align-items-center me-2">
                                         <span class="btn-inner--icon">
-                                            <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="d-block me-2">
-                                                <path d="M6.25 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM3.25 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM19.75 7.5a.75.75 0 00-1.5 0v2.25H16a.75.75 0 000 1.5h2.25v2.25a.75.75 0 001.5 0v-2.25H22a.75.75 0 000-1.5h-2.25V7.5z" />
+                                            <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" class="d-block me-2">
+                                                <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
                                             </svg>
                                         </span>
                                         <span class="btn-inner--text">Tambah Surat</span>
@@ -26,17 +26,13 @@
                         </div>
                         <div class="card-body px-0 py-0">
                             <div class="border-bottom py-3 px-3 d-sm-flex align-items-center">
-                                
-                                <div class="input-group w-sm-25 ms-auto">
-                                    <span class="input-group-text text-body">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px"
-                                            fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z">
-                                            </path>
-                                        </svg>
-                                    </span>
-                                    <input type="text" class="form-control" placeholder="Search">
+                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                    <input type="radio" class="btn-check" name="btnradiotable" id="btnradiotable1" value="Semua" autocomplete="off" checked>
+                                    <label class="btn btn-white px-3 mb-0" for="btnradiotable1">Semua</label>
+                                    <input type="radio" class="btn-check" name="btnradiotable" id="btnradiotable2" value="masuk" autocomplete="off">
+                                    <label class="btn btn-white px-3 mb-0" for="btnradiotable2">Masuk</label>
+                                    <input type="radio" class="btn-check" name="btnradiotable" id="btnradiotable3" value="keluar" autocomplete="off">
+                                    <label class="btn btn-white px-3 mb-0" for="btnradiotable3">Keluar</label>
                                 </div>
                             </div>
                             <div class="table-responsive p-0">
@@ -45,7 +41,7 @@
                                         <tr>
                                             <th class="text-secondary text-xs font-weight-semibold opacity-7">Nomor Surat
                                             </th>
-                                            <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">
+                                            <th class="text-center text-secondary text-xs font-weight-semibold opacity-7 ps-2">
                                                 Tanggal</th>
                                             <th
                                                 class="text-center text-secondary text-xs font-weight-semibold opacity-7">
@@ -54,39 +50,31 @@
                                                 class="text-center text-secondary text-xs font-weight-semibold opacity-7">
                                                 Perihal</th>
                                             <th class="text-secondary opacity-7"></th>
+                                            <th class="text-secondary opacity-7"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach($surats as $surat)
-                                        <tr>
+                                        <tr data-jenis="{{ strtolower($surat->jenis) }}">
                                             <td>
-                                                <div class="d-flex px-2 py-1">
-                                                    <div class="d-flex align-items-center">
-                                                        <img src="../assets/img/team-2.jpg"
-                                                            class="avatar avatar-sm rounded-circle me-2"
-                                                            alt="user1">
-                                                    </div>
                                                     <div class="d-flex flex-column justify-content-center ms-1">
                                                         <h6 class="mb-0 text-sm font-weight-semibold">{{ $surat->nomor_surat}}</h6>
-                                                        <p class="text-sm text-secondary mb-0">john@creative-tim.com
-                                                        </p>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td>
-                                                <p class="text-sm text-dark font-weight-semibold mb-0">{{ $surat->tanggal}}</p>
-                                                <p class="text-sm text-secondary mb-0">Organization</p>
+                                                <p class="text-center text-sm text-dark font-weight-semibold mb-0">{{ $surat->tanggal}}</p>
                                             </td>
-                                            <td class="align-middle text-center text-sm">
+                                            <td class="align-middle text-center">
                                                 <span
-                                                    class="badge badge-sm border border-success text-success bg-success">{{ $surat->jenis}}</span>
+                                                    class="badge badge-sm border border-info text-info bg-info">{{ ucfirst($surat->jenis)}}</span>
                                             </td>
                                             <td class="align-middle text-center">
                                                 <span class="text-secondary text-sm font-weight-normal">{{ $surat->perihal}}</span>
                                             </td>
                                             <td class="align-middle">
                                                 <a href="{{ route('surat.edit', $surat->id) }}" class="text-secondary font-weight-bold text-xs"
-                                                    data-bs-toggle="tooltip" data-bs-title="Edit surat">
+                                                    data-bs-toggle="tooltip" data-bs-title="Edit Data Surat">
                                                     <svg width="14" height="14" viewBox="0 0 15 16"
                                                         fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path
@@ -94,24 +82,14 @@
                                                             fill="#64748B" />
                                                     </svg>
                                                 </a>
-                                                <a href="{{ route('surat.edit', $surat->id) }}" class="text-secondary font-weight-bold text-xs"
-                                                    data-bs-toggle="tooltip" data-bs-title="Delete surat">
-                                                    <svg width="14" height="14" viewBox="0 0 22 22"
-                                                        fill="none" xmlns="http://www.w3.org/2000/svg"
-                                                        stroke="currentColor" stroke-width="2">
-                                                        <path
-                                                            stroke-linecap="round" stroke-linejoin="round"
-                                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                                                            fill="#64748B" />
-                                                    </svg>
-                                                </a>
                                             </td>
                                             <td class="align-middle">
-                                                <form action="{{ route('surat.destroy', $surat->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Anda yakin ingin menghapus data ini?')">Hapus</button>
-                                                </form>
+                                            <form action="{{ route('surat.destroy', $surat->id) }}" method="POST" id="delete-form-{{ $surat->id }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <i class="fas fa-trash-alt text-danger" style="cursor: pointer; margin-top: 10px;" 
+                                                data-bs-toggle="tooltip" data-bs-title="Hapus Data Surat" onclick="return confirm('Anda yakin ingin menghapus data ini?') && document.getElementById('delete-form-{{ $surat->id }}').submit();"></i>
+                                            </form>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -132,5 +110,31 @@
             <x-app.footer />
         </div>
     </main>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Ambil elemen-elemen radio button
+        var radioButtons = document.querySelectorAll('input[name="btnradiotable"]');
+        
+        // Tambahkan event listener ke setiap radio button
+        radioButtons.forEach(function(radioButton) {
+            radioButton.addEventListener('change', function() {
+                // Dapatkan nilai jenis yang dipilih
+                var selectedType = this.value;
 
+                // Dapatkan semua baris tabel
+                var rows = document.querySelectorAll('tbody tr');
+                
+                // Tampilkan atau sembunyikan baris berdasarkan jenis yang dipilih
+                rows.forEach(function(row) {
+                    var jenis = row.dataset.jenis;
+                    if (selectedType === 'Semua' || jenis === selectedType.toLowerCase()) {
+                        row.style.display = 'table-row';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+        });
+    });
+    </script>
 </x-app-layout>
