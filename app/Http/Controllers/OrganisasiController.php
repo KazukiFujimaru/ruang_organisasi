@@ -45,7 +45,7 @@ class OrganisasiController extends Controller
             'logo_instansi.max' => 'Ukuran maksimal Logo Instansi adalah 2048 kilobytes.',
             'ADART.mimes' => 'AD/ART  harus file dengan tipe pdf, atau docx.',
             'ADART.max' => 'Ukuran maksimal AD/ART adalah 2048 kilobytes.',
-            'KODE.unique' => 'Kode yang anda ingin gunakan sudah ada, silahkan gunakan kode lain',
+            'KODE.unique' => 'Kode yang anda ingin gunakan sudah ada, silahkan gunakan kode lain.',
         ];
     
         $request->validate([

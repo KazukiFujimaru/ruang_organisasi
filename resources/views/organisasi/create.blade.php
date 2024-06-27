@@ -57,7 +57,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="ADART" class="form-label">AD/ART</label>
-                                    <span class="text-muted text-sm">(file: png, jpg, jpeg | max: 2048kb)</span>
+                                    <span class="text-muted text-sm">(file: pdf,docx | max: 2048kb)</span>
                                     <input type="file" class="form-control" id="ADART" name="ADART">
                                 </div>
                                 <div class="mb-3">

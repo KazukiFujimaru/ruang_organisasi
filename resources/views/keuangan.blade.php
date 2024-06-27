@@ -13,7 +13,7 @@
                                 </div>
                                 <div class="ms-auto d-flex">
                                     <button type="button" class="btn btn-sm btn-white me-2">
-                                        SALDO : {{ $saldo_terbaru }}
+                                        SALDO : Rp{{ number_format($saldo_terbaru, 0, ',', '.') }}
                                     </button>
                                     <button type="button" onclick="window.location.href = '{{ route('keuangan.create') }}'"
                                             class="btn btn-sm btn-dark btn-icon d-flex align-items-center me-2">
@@ -42,10 +42,10 @@
                                 <table class="table align-items-center mb-0">
                                     <thead class="bg-gray-100">
                                         <tr>
-                                            <th class="text-secondary text-xs font-weight-semibold opacity-7">Transaction</th>
+                                            <th class="text-secondary text-xs font-weight-semibold opacity-7">Transaksi</th>
                                             <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Jumlah</th>
-                                            <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Tanggal</th>
-                                            <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Jenis</th>
+                                            <th class="text-center text-secondary text-xs font-weight-semibold opacity-7 ps-2">Tanggal</th>
+                                            <th class="text-center text-secondary text-xs font-weight-semibold opacity-7 ps-2">Jenis</th>
                                             <th class="text-center text-secondary text-xs font-weight-semibold opacity-7"></th>
                                         </tr>
                                     </thead>
@@ -54,41 +54,37 @@
                                         <tr data-jenis="{{ strtolower($keuangan->jenis) }}">
                                             <td>
                                                 <div class="d-flex px-2">
-                                                    <div class="avatar avatar-sm rounded-circle bg-gray-100 me-2 my-2">
-                                                        <img src="https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/small-logos/logo-spotify.svg" class="w-80" alt="spotify">
-                                                    </div>
                                                     <div class="my-auto">
                                                         <h6 class="mb-0 text-sm">{{ $keuangan->nama }}</h6>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td>
-                                                <p class="text-sm font-weight-normal mb-0">{{ $keuangan->jumlah }}</p>
+                                                <p class="text-sm font-weight-normal mb-0">Rp{{ number_format($keuangan->jumlah, 0, ',', '.') }}</p>
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 <span class="text-sm font-weight-normal">{{ $keuangan->tanggal }}</span>
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 @if($keuangan->jenis == 'pemasukan')
                                                     <span class="badge badge-sm border border-success text-success bg-success">
-                                                        <svg width="9" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" class="me-1">
-                                                            <path d="M1 4.42857L3.28571 6.71429L9 1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                        </svg> {{ ucfirst($keuangan->jenis) }} 
+                                                         {{ ucfirst($keuangan->jenis) }} 
                                                     </span>
                                                 @else
                                                     <span class="badge badge-sm border border-danger text-danger bg-danger">
-                                                        <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="me-1">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
-                                                        </svg> {{ ucfirst($keuangan->jenis) }} 
+                                                        {{ ucfirst($keuangan->jenis) }} 
                                                     </span>
                                                 @endif
                                             </td>
                                             <td class="align-middle">
-                                                <form action="{{ route('keuangan.destroy', $keuangan->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Anda yakin ingin menghapus data ini?')">Hapus</button>
-                                                </form>
+                                            <form action="{{ route('keuangan.destroy', $keuangan->id) }}" method="POST" id="delete-form-{{ $keuangan->id }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <i class="fas fa-trash-alt text-danger" style="cursor: pointer; margin-top: 10px;" 
+                                                data-bs-toggle="tooltip" data-bs-title="Hapus Data Keuangan" 
+                                                onclick="return confirm('Anda yakin ingin menghapus data ini?') && document.getElementById('delete-form-{{ $keuangan->id }}').submit();">
+                                                </i>
+                                            </form>
                                             </td>
                                         </tr>
                                         @endforeach

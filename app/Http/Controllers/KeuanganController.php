@@ -35,14 +35,13 @@ class KeuanganController extends Controller
         return view('keuangan.create');
     }
 
-    public function store(Request $request)
+    public function store(Request $request, \Psr\Log\LoggerInterface $log)
     {
         $log = new Logger('debug');
         $log->pushHandler(new StreamHandler(storage_path('logs/laravel.log'), Logger::DEBUG));
 
         $log->info('Store method called');
 
-        try {
             $request->validate([
                 'nama' => 'required|string',
                 'jenis' => 'required|in:pemasukan,pengeluaran',
@@ -50,36 +49,39 @@ class KeuanganController extends Controller
                 'keterangan' => 'nullable|string',
                 'jumlah' => 'required|numeric',
                 'bukti' => 'nullable|mimes:png,jpg,jpeg,pdf|max:5120',
+            ], [
+                'bukti.mimes' => 'Bukti harus berupa file dengan tipe: png, jpg, jpeg, atau pdf.',
+                'bukti.max' => 'Ukuran Bukti tidak boleh lebih dari 5120 kilobyte.',
             ]);
-
             $log->info('Validation passed');
 
+            try {
             $user = Auth::user();
             if (!$user) {
                 $log->error('User not authenticated');
                 return redirect()->route('login')->with('error', 'Please login first.');
             }
-
+        
             $log->info('User authenticated');
-
+        
             if (is_null($user->organization_id)) {
                 $log->error('User does not belong to any organization');
                 return redirect()->route('home')->with('error', 'You do not belong to any organization.');
             }
-
+        
             $log->info('User belongs to organization ID: ' . $user->organization_id);
-
+        
             $buktiPath = null;
             if ($request->hasFile('bukti')) {
                 $file = $request->file('bukti');
                 $log->info('File found: ' . $file->getClientOriginalName());
                 $log->info('File MIME type: ' . $file->getClientMimeType());
                 $log->info('File extension: ' . $file->getClientOriginalExtension());
-
+        
                 $buktiPath = $file->store('bukti_keuangan', 'public');
                 $log->info('File stored at: ' . $buktiPath);
             }
-
+        
             $keuangan = new Keuangan([
                 'nama' => $request->nama,
                 'jenis' => $request->jenis,
@@ -89,11 +91,11 @@ class KeuanganController extends Controller
                 'organisasi_id' => $user->organization_id,
                 'bukti' => $buktiPath,
             ]);
-
+        
             $keuangan->save();
-
+        
             $log->info('Keuangan data saved');
-
+        
             return redirect()->route('keuangan')->with('success', 'Data keuangan berhasil ditambahkan.');
         } catch (\Exception $e) {
             $log->error('Exception occurred: ' . $e->getMessage());

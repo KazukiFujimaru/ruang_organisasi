@@ -173,7 +173,7 @@
                                             <form action="{{ route('program.destroy', $program->id) }}" method="POST" id="delete-form-{{ $program->id }}">
                                                 @csrf
                                                 @method('DELETE')
-                                                <i class="fas fa-trash-alt text-danger" style="cursor: pointer;" 
+                                                <i class="fas fa-trash-alt text-danger" style="cursor: pointer; margin-top: 10px;" 
                                                 data-bs-toggle="tooltip" data-bs-title="Hapus Program" onclick="return confirm('Anda yakin ingin menghapus data ini?') && document.getElementById('delete-form-{{ $program->id }}').submit();"></i>
                                             </form>
                                             </td>
