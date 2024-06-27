@@ -45,6 +45,16 @@ class OrganisasiController extends Controller
 
     public function store(Request $request)
     {
+        $messages = [
+            'logo_organisasi.mimes' => 'Logo Organisasi harus file dengan tipe png, jpg, atau jpeg.',
+            'logo_organisasi.max' => 'Ukuran maksimal Logo Organisasi adalah 2048 kilobytes.',
+            'logo_instansi.mimes' => 'Logo Instansi harus file dengan tipe png, jpg, atau jpeg.',
+            'logo_instansi.max' => 'Ukuran maksimal Logo Instansi adalah 2048 kilobytes.',
+            'ADART.mimes' => 'AD/ART  harus file dengan tipe pdf, atau docx.',
+            'ADART.max' => 'Ukuran maksimal AD/ART adalah 2048 kilobytes.',
+            'KODE.unique' => 'Kode yang anda ingin gunakan sudah ada, silahkan gunakan kode lain.',
+        ];
+    
         $request->validate([
             'nama' => 'required|string',
             'nama_instansi' => 'required|string',
@@ -56,8 +66,8 @@ class OrganisasiController extends Controller
             'logo_instansi' => 'nullable|mimes:png,jpg,jpeg|max:2048',
             'ADART' => 'nullable|mimes:pdf,docx|max:2048',
             'KODE' => 'required|string|unique:organisasis,KODE',
-        ]);
-
+        ], $messages);
+    
         $organisasi = new Organisasi([
             'nama' => $request->nama,
             'nama_instansi' => $request->nama_instansi,
@@ -67,29 +77,35 @@ class OrganisasiController extends Controller
             'tanggal_disahkan' => $request->tanggal_disahkan,
             'KODE' => $request->KODE,
         ]);
+    
+        try {
+            if ($request->hasFile('logo_organisasi')) {
+                $organisasi->logo_organisasi = $request->file('logo_organisasi')->store('public/logo_organisasi');
+            }
+    
+            if ($request->hasFile('logo_instansi')) {
+                $organisasi->logo_instansi = $request->file('logo_instansi')->store('public/logo_instansi');
+            }
+    
+            if ($request->hasFile('ADART')) {
+                $organisasi->ADART = $request->file('ADART')->store('public/ADART');
+            }
+    
+            $organisasi->save();
+    
+            // Set the organization_id of the user who created the organization
+            $user = Auth::user();
+            $user->organization_id = $organisasi->id;
+            $user->save();
+    
+            // Redirect to the form for creating divisions
+            return redirect()->route('organisasi.create-divisi', $organisasi->id)->with('success', 'Organisasi created successfully.');
 
-        if ($request->hasFile('logo_organisasi')) {
-            $organisasi->logo_organisasi = $request->file('logo_organisasi')->store('public/logo_organisasi');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['message' => $e->getMessage()]);
         }
-
-        if ($request->hasFile('logo_instansi')) {
-            $organisasi->logo_instansi = $request->file('logo_instansi')->store('public/logo_instansi');
-        }
-
-        if ($request->hasFile('ADART')) {
-            $organisasi->ADART = $request->file('ADART')->store('public/ADART');
-        }
-
-        $organisasi->save();
-
-        // Set the organization_id of the user who created the organization
-        $user = Auth::user();
-        $user->organization_id = $organisasi->id;
-        $user->save();
-
-        // Redirect to the form for creating divisions
-        return redirect()->route('organisasi.create-divisi', $organisasi->id);
     }
+    
 
     public function createDivisi($organisasiId)
     {
@@ -198,7 +214,6 @@ class OrganisasiController extends Controller
         if ($organisasi->id != $user->organization_id) {
             return redirect()->route('dashboard')->with('error', 'You do not have permission to edit this organization.');
         }
-
         return view('organisasi.edit', compact('organisasi'));
     }
 

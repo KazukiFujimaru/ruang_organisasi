@@ -51,6 +51,6 @@ class RegisterController extends Controller
         // Log the user in
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect('/organisasi/choose');
     }
 }

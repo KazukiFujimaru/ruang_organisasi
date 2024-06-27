@@ -1,6 +1,5 @@
-<x-app-layout>
+<x-guest-layout>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-        <x-app.navbar />
         <div class="container-fluid py-4 px-5">
             <div class="row">
                 <div class="col-12">
@@ -9,6 +8,16 @@
                             <h6 class="font-weight-semibold text-lg mb-0">Tambah Organisasi</h6>
                             <p class="text-sm">Silakan isi form di bawah untuk menambahkan organisasi baru.</p>
                         </div>
+                        <div class="card-body px-0 py-0">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                         <div class="card-body px-0 py-0">
                             <form method="POST" action="{{ route('organisasi.store') }}" enctype="multipart/form-data" class="p-3">
                                 @csrf
@@ -38,14 +47,17 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="logo_organisasi" class="form-label">Logo Organisasi</label>
+                                    <span class="text-muted text-sm">(file: png, jpg, jpeg | max: 2048kb)</span>
                                     <input type="file" class="form-control" id="logo_organisasi" name="logo_organisasi">
                                 </div>
                                 <div class="mb-3">
                                     <label for="logo_instansi" class="form-label">Logo Instansi</label>
+                                    <span class="text-muted text-sm">(file: png, jpg, jpeg | max: 2048kb)</span>
                                     <input type="file" class="form-control" id="logo_instansi" name="logo_instansi">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="ADART" class="form-label">ADART</label>
+                                    <label for="ADART" class="form-label">AD/ART</label>
+                                    <span class="text-muted text-sm">(file: pdf,docx | max: 2048kb)</span>
                                     <input type="file" class="form-control" id="ADART" name="ADART">
                                 </div>
                                 <div class="mb-3">
@@ -61,4 +73,4 @@
             <x-app.footer />
         </div>
     </main>
-</x-app-layout>
+</x-guest-layout>

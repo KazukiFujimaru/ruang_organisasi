@@ -1,11 +1,6 @@
 <x-app-layout>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <x-app.navbar />
-        @if(session('error'))
-            <div class="alert alert-danger">
-                {{ session('error') }}
-            </div>
-        @endif
         <div class="container-fluid py-4 px-5">
             <div class="row">
                 <div class="col-12">
@@ -14,6 +9,15 @@
                             <h6 class="font-weight-semibold text-lg mb-0">Tambah Data Keuangan</h6>
                             <p class="text-sm">Silakan isi form di bawah untuk menambahkan data keuangan.</p>
                         </div>
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                         <div class="card-body px-0 py-0">
                             <form method="POST" action="{{ route('keuangan.store') }}" enctype="multipart/form-data" class="p-3">
                                 @csrf

@@ -36,6 +36,11 @@ class ProgramController extends Controller
 
     public function store(Request $request)
     {
+        $messages = [
+            'dokumen.mimes' => 'Dokumen unggahan harus file dengan tipe png, jpg, jpeg, pdf, atau docx.',
+            'dokumen.max' => 'Ukuran maksimal dokumen unggahan adalah 5048 kilobytes.',
+        ];
+
         $request->validate([
             'nama' => 'required|string',
             'description' => 'nullable|string',
@@ -44,7 +49,7 @@ class ProgramController extends Controller
             'status' => 'required|in:terlaksana,tidak terlaksana',
             'tanggal' => 'required|date',
             'dokumen' => 'nullable|mimes:png,jpg,jpeg,pdf,docx|max:5048',
-        ]);
+        ], $messages);
 
         $user = Auth::user();
         if (!$user){
