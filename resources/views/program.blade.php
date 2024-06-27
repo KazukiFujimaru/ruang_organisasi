@@ -9,7 +9,7 @@
                             <div class="d-sm-flex align-items-center">
                                 <div>
                                     <h6 class="font-weight-semibold text-lg mb-0">Daftar Program</h6>
-                                    <p class="text-sm">melihat lebih banyak data Program Kerja</p>
+                                    <p class="text-sm">Berikut adalah program kerja organisasi anda</p>
                                 </div>
                                 <div class="ms-auto d-flex">
                                     <button type="button" class="btn btn-sm btn-white me-2">
@@ -31,7 +31,7 @@
                             <div class="border-bottom py-3 px-3 d-sm-flex align-items-center">
                             <div class="dropdown">
                                 <a href="javascript:;" class="btn bg-gradient-dark dropdown-toggle " data-bs-toggle="dropdown" id="navbarDropdownMenuLink2">
-                                    Type
+                                    Tipe
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
                                     <li>
@@ -121,6 +121,7 @@
                                                 class="text-center text-secondary text-xs font-weight-semibold opacity-7">
                                                 Tanggal</th>
                                             <th class="text-secondary opacity-7"></th>
+                                            <th class="text-secondary text-xs font-weight-semibold opacity-7 text-left"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -136,10 +137,10 @@
                                             <td>
                                                 <p class="text-sm text-dark font-weight-semibold mb-0">{{ ucwords($program->type) }}</p>
                                             </td>
-                                            <td class="align-middle text-center text">
+                                            <td class="align-middle text-center">
                                                 <span class="badge badge-sm border border-info text-info bg-info">{{ ucwords($program->jenis)}}</span>
                                             </td>
-                                            <td>
+                                            <td class="align-middle text-center">
                                                 @if($program->status == 'terlaksana')
                                                     <span class="badge badge-sm border border-success text-success bg-success">
                                                         <svg width="9" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" class="me-1">
@@ -169,11 +170,12 @@
                                                 </a>
                                             </td>
                                             <td class="align-middle">
-                                                <form action="{{ route('program.destroy', $program->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Anda yakin ingin menghapus data ini?')">Hapus</button>
-                                                </form>
+                                            <form action="{{ route('program.destroy', $program->id) }}" method="POST" id="delete-form-{{ $program->id }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <i class="fas fa-trash-alt text-danger" style="cursor: pointer;" 
+                                                data-bs-toggle="tooltip" data-bs-title="Hapus Program" onclick="return confirm('Anda yakin ingin menghapus data ini?') && document.getElementById('delete-form-{{ $program->id }}').submit();"></i>
+                                            </form>
                                             </td>
                                         </tr>
                                         @endforeach

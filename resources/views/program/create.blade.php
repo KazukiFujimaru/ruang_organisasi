@@ -6,9 +6,18 @@
                 <div class="col-12">
                     <div class="card border shadow-xs mb-4">
                         <div class="card-header border-bottom pb-0">
-                            <h6 class="font-weight-semibold text-lg mb-0">Tambah Data Program</h6>
+                            <h6 class="font-weight-semibold text-lg mb-0">Tambah Data Program Organisasi</h6>
                             <p class="text-sm">Silakan isi form di bawah untuk menambahkan data Program atau Kegiatan.</p>
                         </div>
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <div class="card-body px-0 py-0">
                             <form method="POST" action="{{ route('program.store') }}" enctype="multipart/form-data" class="p-3">
                                 @csrf
@@ -17,11 +26,11 @@
                                     <input type="text" class="form-control" id="nama" name="nama" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="description" class="form-label">description</label>
+                                    <label for="description" class="form-label">Deskripsi</label>
                                     <textarea class="form-control" id="description" name="description"></textarea>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="type" class="form-label">type</label>
+                                    <label for="type" class="form-label">Tipe</label>
                                     <select class="form-select" id="type" name="type" required>
                                         <option value="program kerja">Program Kerja</option>
                                         <option value="kegiatan">Kegiatan</option>
@@ -49,6 +58,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="dokumen" class="form-label">Dokumen</label>
+                                    <span class="text-muted text-sm">(file: png, jpg, jpeg, pdf, docx | max: 5048kb)</span>
                                     <input type="file" class="form-control" id="dokumen" name="dokumen">
                                 </div>
                                 <button type="submit" class="btn btn-primary">Simpan</button>
