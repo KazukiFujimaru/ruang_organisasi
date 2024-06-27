@@ -106,30 +106,30 @@
         </div>
     </main>
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Ambil elemen-elemen radio button
-        var radioButtons = document.querySelectorAll('input[name="btnradiotable"]');
-        
-        // Tambahkan event listener ke setiap radio button
-        radioButtons.forEach(function(radioButton) {
-            radioButton.addEventListener('change', function() {
-                // Dapatkan nilai jenis yang dipilih
-                var selectedType = this.value;
+        document.addEventListener("DOMContentLoaded", function() {
+            // Ambil elemen-elemen radio button
+            var radioButtons = document.querySelectorAll('input[name="btnradiotable"]');
+            
+            // Tambahkan event listener ke setiap radio button
+            radioButtons.forEach(function(radioButton) {
+                radioButton.addEventListener('change', function() {
+                    // Dapatkan nilai jenis yang dipilih
+                    var selectedType = this.value;
 
-                // Dapatkan semua baris tabel
-                var rows = document.querySelectorAll('tbody tr');
-                
-                // Tampilkan atau sembunyikan baris berdasarkan jenis yang dipilih
-                rows.forEach(function(row) {
-                    var jenis = row.dataset.jenis;
-                    if (selectedType === 'Semua' || jenis === selectedType.toLowerCase()) {
-                        row.style.display = 'table-row';
-                    } else {
-                        row.style.display = 'none';
-                    }
+                    // Dapatkan semua baris tabel
+                    var rows = document.querySelectorAll('tbody tr');
+                    
+                    // Tampilkan atau sembunyikan baris berdasarkan jenis yang dipilih
+                    rows.forEach(function(row) {
+                        var jenis = row.dataset.jenis;
+                        if (selectedType === 'Semua' || jenis === selectedType.toLowerCase()) {
+                            row.style.display = 'table-row';
+                        } else {
+                            row.style.display = 'none';
+                        }
+                    });
                 });
             });
         });
-    });
     </script>
 </x-app-layout>

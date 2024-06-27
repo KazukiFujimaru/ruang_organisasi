@@ -198,6 +198,67 @@ class OrganisasiController extends Controller
         return view('organisasi.choose');
     }
 
+    public function edit()
+    {
+            // Pastikan pengguna sudah login
+            $user = Auth::user();
+            if (!$user) {
+                return redirect()->route('login')->with('error', 'Please login first.');
+            }
+    
+            // Pastikan pengguna memiliki organization_id
+            if (is_null($user->organization_id)) {
+                return redirect()->route('inventaris')->with('error', 'You do not belong to any organization.');
+            }
+    
+            // Ambil organisasi berdasarkan organization_id dari pengguna
+            $organisasi = $user->organisasi;
+
+        return view('organisasi.edit', compact('organisasi'));
+    }
+
+    public function update(Request $request)
+    {
+        $user = auth()->user();
+        $organisasi = $user->organisasi;
+    
+        $messages = [
+            'logo_organisasi.mimes' => 'Logo Organisasi harus file dengan tipe png, jpg, atau jpeg.',
+            'logo_organisasi.max' => 'Ukuran maksimal Logo Organisasi adalah 2048 kilobytes.',
+            'logo_instansi.mimes' => 'Logo Instansi harus file dengan tipe png, jpg, atau jpeg.',
+            'logo_instansi.max' => 'Ukuran maksimal Logo Instansi adalah 2048 kilobytes.',
+            'ADART.mimes' => 'AD/ART harus file dengan tipe pdf, atau docx.',
+            'ADART.max' => 'Ukuran maksimal AD/ART adalah 2048 kilobytes.',
+            'KODE.unique' => 'Kode yang anda ingin gunakan sudah ada, silahkan gunakan kode lain.',
+        ];
+    
+        $rules = [
+            'nama' => 'required|string',
+            'nama_instansi' => 'required|string',
+            'nama_pembina' => 'required|string',
+            'deskripsi' => 'nullable|string',
+            'sejarah' => 'nullable|string',
+            'tanggal_disahkan' => 'nullable|date',
+            'logo_organisasi' => 'nullable|mimes:png,jpg,jpeg|max:2048',
+            'logo_instansi' => 'nullable|mimes:png,jpg,jpeg|max:2048',
+            'ADART' => 'nullable|mimes:pdf,docx|max:2048',
+        ];
+    
+        // Add unique validation rule for KODE if it's different from the current KODE
+        if ($request->KODE !== $organisasi->KODE) {
+            $rules['KODE'] = 'required|string|unique:organisasis,KODE';
+        } else {
+            $rules['KODE'] = 'required|string';
+        }
+    
+        $request->validate($rules, $messages);
+    
+        // Update the organization with the validated data
+        $organisasi->update($request->all());
+    
+        return redirect()->route('organisasi-profile')->with('success', 'Profile updated successfully.');
+    }
+
 }
 
 
