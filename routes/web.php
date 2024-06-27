@@ -13,6 +13,7 @@ use App\Http\Controllers\KeuanganController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\InventarisController;
 use App\Http\Controllers\SuratController;
+use App\Http\Controllers\LaporanController;
 
 Route::middleware('auth')->group(function () {
     // Rute untuk organisasi
@@ -83,6 +84,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/laravel-examples/users-management', [UserController::class, 'index'])->name('users-management');
 
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
+
+    Route::get('laporan/pdf/{id}', [LaporanController::class, 'generatePdf']);
+    Route::get('laporan', [LaporanController::class, 'show'])->name('laporan.show');
+    Route::get('laporan/docx', [LaporanController::class, 'generateDocx'])->name('laporan.generateDocx');
+
+
 });
 
 Route::middleware('guest')->group(function () {

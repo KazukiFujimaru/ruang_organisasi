@@ -27,9 +27,18 @@ class OrganisasiController extends Controller
 
         // Ambil organisasi berdasarkan organization_id dari pengguna
         $organisasi = $user->organisasi;
+        if (!$organisasi) {
+            return redirect()->route('inventaris')->with('error', 'Organization not found.');
+        }
 
-        return view('account-pages.organisasi-profile', compact('organisasi'));
+        // Ambil keanggotaan berdasarkan organization_id
+        $keanggotaans = Keanggotaan::where('organisasi_id', $user->organization_id)
+        ->with('user')
+        ->get();
+
+        return view('account-pages.organisasi-profile', compact('organisasi', 'keanggotaans'));
     }
+
 
     public function create()
     {
