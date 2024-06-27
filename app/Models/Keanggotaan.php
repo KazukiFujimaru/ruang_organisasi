@@ -10,6 +10,7 @@ class Keanggotaan extends Model
         'user_id', 
         'organisasi_id', 
         'joined_at', 
+        'divisi_role_id',
         'role_id'
     ];
 
@@ -26,5 +27,10 @@ class Keanggotaan extends Model
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function divisiRole()
+    {
+        return $this->belongsTo(DivisiRole::class);
     }
 }

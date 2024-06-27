@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Auth;
 
 class OrganisasiController extends Controller
 {
-
     public function index()
     {
         // Pastikan pengguna sudah login
@@ -27,8 +26,16 @@ class OrganisasiController extends Controller
 
         // Ambil organisasi berdasarkan organization_id dari pengguna
         $organisasi = $user->organisasi;
+        if (!$organisasi) {
+            return redirect()->route('inventaris')->with('error', 'Organization not found.');
+        }
 
-        return view('account-pages.organisasi-profile', compact('organisasi'));
+        // Ambil keanggotaan berdasarkan organization_id
+        $keanggotaans = Keanggotaan::where('organisasi_id', $user->organization_id)
+        ->with('user')
+        ->get();
+
+        return view('account-pages.organisasi-profile', compact('organisasi', 'keanggotaans'));
     }
 
     public function create()
@@ -198,41 +205,53 @@ class OrganisasiController extends Controller
         return view('organisasi.choose');
     }
 
-    public function edit()
+    public function edit($id)
     {
-            // Pastikan pengguna sudah login
-            $user = Auth::user();
-            if (!$user) {
-                return redirect()->route('login')->with('error', 'Please login first.');
-            }
-    
-            // Pastikan pengguna memiliki organization_id
-            if (is_null($user->organization_id)) {
-                return redirect()->route('inventaris')->with('error', 'You do not belong to any organization.');
-            }
-    
-            // Ambil organisasi berdasarkan organization_id dari pengguna
-            $organisasi = $user->organisasi;
+        $user = Auth::user();
+        $organisasi = Organisasi::find($id);
 
+        // Pastikan pengguna hanya dapat mengedit organisasi yang mereka miliki
+        if ($organisasi->id != $user->organization_id) {
+            return redirect()->route('dashboard')->with('error', 'You do not have permission to edit this organization.');
+        }
         return view('organisasi.edit', compact('organisasi'));
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        $user = auth()->user();
-        $organisasi = $user->organisasi;
-    
-        $messages = [
-            'logo_organisasi.mimes' => 'Logo Organisasi harus file dengan tipe png, jpg, atau jpeg.',
-            'logo_organisasi.max' => 'Ukuran maksimal Logo Organisasi adalah 2048 kilobytes.',
-            'logo_instansi.mimes' => 'Logo Instansi harus file dengan tipe png, jpg, atau jpeg.',
-            'logo_instansi.max' => 'Ukuran maksimal Logo Instansi adalah 2048 kilobytes.',
-            'ADART.mimes' => 'AD/ART harus file dengan tipe pdf, atau docx.',
-            'ADART.max' => 'Ukuran maksimal AD/ART adalah 2048 kilobytes.',
-            'KODE.unique' => 'Kode yang anda ingin gunakan sudah ada, silahkan gunakan kode lain.',
-        ];
-    
-        $rules = [
+        $this->validateRequest($request);
+
+        $user = Auth::user();
+        $organisasi = Organisasi::find($id);
+
+        if (!$organisasi) {
+            return redirect()->route('organisasi-profile')->with('error', 'Organisasi tidak ditemukan.');
+        }
+
+        if ($organisasi->id != $user->organization_id) {
+            return redirect()->route('organisasi-profile')->with('error', 'Anda tidak memiliki izin untuk memperbarui organisasi ini.');
+        }
+
+        $this->handleFileUploads($request, $organisasi);
+
+        $organisasi->nama = $request->input('nama');
+        $organisasi->nama_instansi = $request->input('nama_instansi');
+        $organisasi->nama_pembina = $request->input('nama_pembina');
+        $organisasi->deskripsi = $request->input('deskripsi');
+        $organisasi->sejarah = $request->input('sejarah');
+        $organisasi->tanggal_disahkan = $request->input('tanggal_disahkan');
+        $organisasi->KODE = $request->input('KODE');
+
+        if ($organisasi->save()) {
+            return redirect()->route('organisasi-profile')->with('success', 'Organisasi berhasil diperbarui.');
+        } else {
+            return redirect()->back()->with('error', 'Gagal memperbarui organisasi. Silakan coba lagi.');
+        }
+    }
+
+    private function validateRequest(Request $request)
+    {
+        $request->validate([
             'nama' => 'required|string',
             'nama_instansi' => 'required|string',
             'nama_pembina' => 'required|string',
@@ -242,23 +261,22 @@ class OrganisasiController extends Controller
             'logo_organisasi' => 'nullable|mimes:png,jpg,jpeg|max:2048',
             'logo_instansi' => 'nullable|mimes:png,jpg,jpeg|max:2048',
             'ADART' => 'nullable|mimes:pdf,docx|max:2048',
-        ];
-    
-        // Add unique validation rule for KODE if it's different from the current KODE
-        if ($request->KODE !== $organisasi->KODE) {
-            $rules['KODE'] = 'required|string|unique:organisasis,KODE';
-        } else {
-            $rules['KODE'] = 'required|string';
-        }
-    
-        $request->validate($rules, $messages);
-    
-        // Update the organization with the validated data
-        $organisasi->update($request->all());
-    
-        return redirect()->route('organisasi-profile')->with('success', 'Profile updated successfully.');
+            'KODE' => 'required|string|unique:organisasis,KODE,' . $request->route('id'),
+        ]);
     }
 
+    private function handleFileUploads(Request $request, Organisasi $organisasi)
+    {
+        if ($request->hasFile('logo_organisasi')) {
+            $organisasi->logo_organisasi = $request->file('logo_organisasi')->store('public/logo_organisasi');
+        }
+
+        if ($request->hasFile('logo_instansi')) {
+            $organisasi->logo_instansi = $request->file('logo_instansi')->store('public/logo_instansi');
+        }
+
+        if ($request->hasFile('ADART')) {
+            $organisasi->ADART = $request->file('ADART')->store('public/ADART');
+        }
+    }
 }
-
-
