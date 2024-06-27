@@ -110,7 +110,7 @@
                                             <th class="text-secondary text-xs font-weight-semibold opacity-7">Nama Program
                                             </th>
                                             <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">
-                                                Type</th>
+                                                Tipe</th>
                                             <th
                                                 class="text-center text-secondary text-xs font-weight-semibold opacity-7">
                                                 Jenis</th>
@@ -128,25 +128,16 @@
                                         <tr data-jenis="{{ strtolower($program->status) }}">
                                             <td>
                                                 <div class="d-flex px-2 py-1">
-                                                    <div class="d-flex align-items-center">
-                                                        <img src="../assets/img/team-2.jpg"
-                                                            class="avatar avatar-sm rounded-circle me-2"
-                                                            alt="user1">
-                                                    </div>
                                                     <div class="d-flex flex-column justify-content-center ms-1">
-                                                        <h6 class="mb-0 text-sm font-weight-semibold">{{ $program->nama}}</h6>
-                                                        <p class="text-sm text-secondary mb-0">john@creative-tim.com
-                                                        </p>
+                                                        <h5 class="mb-0 text-sm font-weight-semibold">{{ $program->nama}}</h5>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td>
-                                                <p class="text-sm text-dark font-weight-semibold mb-0">{{ $program->type}}</p>
-                                                <p class="text-sm text-secondary mb-0">Organization</p>
+                                                <p class="text-sm text-dark font-weight-semibold mb-0">{{ ucwords($program->type) }}</p>
                                             </td>
-                                            <td class="align-middle text-center text-sm">
-                                                <span
-                                                    class="badge badge-sm border border-success text-success bg-success">{{ $program->jenis}}</span>
+                                            <td class="align-middle text-center text">
+                                                <span class="badge badge-sm border border-info text-info bg-info">{{ ucwords($program->jenis)}}</span>
                                             </td>
                                             <td>
                                                 @if($program->status == 'terlaksana')
