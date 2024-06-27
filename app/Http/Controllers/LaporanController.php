@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
 use App\Models\Organisasi;
@@ -9,33 +8,23 @@ use Illuminate\Http\Request;
 use PDF;
 use PhpOffice\PhpWord\PhpWord;
 use PhpOffice\PhpWord\IOFactory;
-use PhpOffice\PhpWord\Shared\ZipArchive;
-use Barryvdh\Snappy\Facades\SnappyPdf as SnappyPDF;
-
-
-
-
-
+use PhpOffice\PhpWord\Shared\Html;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class LaporanController extends Controller
 {
-
     public function show()
     {
-        // Mendapatkan user yang sedang login
         $user = Auth::user();
-        
-        // Mendapatkan organisasi yang terkait dengan user
         $organisasi = $user->organisasi;
-        
-        // Tampilkan view dengan data organisasi
         return view('laporan.show', compact('organisasi'));
     }
 
-
     public function generatePdf($id)
     {
-        $organisasi = Organisasi::with(['keanggotaan', 'roles', 'divisis', 'keuangans', 'programs', 'surats', 'inventaris'])->findOrFail($id);
+        $organisasi = Organisasi::with(['keanggotaan', 'roles', 'divisis', 'keuangans', 'programs', 'surats', 'inventaris'])
+            ->findOrFail($id);
 
         $data = [
             'organisasi' => $organisasi,
@@ -48,31 +37,55 @@ class LaporanController extends Controller
 
     public function generateDocx()
     {
-        // Mendapatkan user yang sedang login
-        $user = Auth::user();
-        
-        // Mendapatkan organisasi yang terkait dengan user
-        $organisasi = $user->organisasi;
+        try {
+            // Mendapatkan user yang sedang login
+            $user = Auth::user();
+            
+            // Mendapatkan organisasi yang terkait dengan user
+            $organisasi = $user->organisasi;
 
-        // Membuat instance dari PhpWord
-        $phpWord = new PhpWord();
+            // Render view Blade ke dalam bentuk HTML
+            $html = view('laporan', compact('organisasi'))->render();
 
-        // Menambahkan section
-        $section = $phpWord->addSection();
+            // Konversi HTML ke PDF menggunakan Dompdf
+            $options = new Options();
+            $options->set('isHtml5ParserEnabled', true); // Enable HTML5 parsing
+            $dompdf = new Dompdf($options);
+            $dompdf->loadHtml($html);
+            $dompdf->setPaper('A4', 'portrait'); // Paper size and orientation
+            $dompdf->render();
 
-        // Menambahkan konten ke dalam dokumen
-        $section->addText('Laporan Pertanggungjawaban Organisasi');
-        $section->addText('Nama Organisasi: ' . $organisasi->nama);
-        $section->addText('Nama Instansi: ' . $organisasi->nama_instansi);
-        // Tambahkan konten lainnya sesuai kebutuhan
+            // Simpan PDF sementara
+            $pdfPath = storage_path('app/public/temp.pdf');
+            file_put_contents($pdfPath, $dompdf->output());
 
-        // Menyimpan dokumen sebagai file DOCX
-        $fileName = 'Laporan_' . $organisasi->nama . '.docx';
-        $filePath = storage_path('app/public/' . $fileName);
+            // Mengambil teks dari PDF
+            $canvas = $dompdf->getCanvas();
+            $pdfText = $canvas->get_cpdf()->output();
 
-        $phpWord->save($filePath, 'Word2007');
+            // Membuat instance dari PhpWord
+            $phpWord = new PhpWord();
+            $section = $phpWord->addSection();
+            $section->addText('Laporan Pertanggungjawaban Organisasi');
 
-        // Mengunduh file
-        return response()->download($filePath)->deleteFileAfterSend(true);
+            // Tambahkan teks dari PDF ke dalam dokumen DOCX
+            $section->addText($pdfText);
+
+            // Menyimpan dokumen sebagai file DOCX
+            $fileName = 'Laporan_' . $organisasi->nama . '.docx';
+            $filePath = storage_path('app/public/' . $fileName);
+            $phpWord->save($filePath, 'Word2007');
+
+            // Hapus file sementara PDF setelah konversi selesai
+            unlink($pdfPath);
+
+            // Mengunduh file
+            return response()->download($filePath)->deleteFileAfterSend(true);
+
+        } catch (\Exception $e) {
+            // Handle any exceptions thrown during DOCX generation
+            return back()->withError('Error generating DOCX: ' . $e->getMessage());
+        }
     }
+
 }

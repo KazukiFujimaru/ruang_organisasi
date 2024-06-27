@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Auth;
 
 class OrganisasiController extends Controller
 {
-
     public function index()
     {
         // Pastikan pengguna sudah login
@@ -38,7 +37,6 @@ class OrganisasiController extends Controller
 
         return view('account-pages.organisasi-profile', compact('organisasi', 'keanggotaans'));
     }
-
 
     public function create()
     {
@@ -191,6 +189,79 @@ class OrganisasiController extends Controller
         return view('organisasi.choose');
     }
 
+    public function edit($id)
+    {
+        $user = Auth::user();
+        $organisasi = Organisasi::find($id);
+
+        // Pastikan pengguna hanya dapat mengedit organisasi yang mereka miliki
+        if ($organisasi->id != $user->organization_id) {
+            return redirect()->route('dashboard')->with('error', 'You do not have permission to edit this organization.');
+        }
+
+        return view('organisasi.edit', compact('organisasi'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->validateRequest($request);
+
+        $user = Auth::user();
+        $organisasi = Organisasi::find($id);
+
+        if (!$organisasi) {
+            return redirect()->route('organisasi-profile')->with('error', 'Organisasi tidak ditemukan.');
+        }
+
+        if ($organisasi->id != $user->organization_id) {
+            return redirect()->route('organisasi-profile')->with('error', 'Anda tidak memiliki izin untuk memperbarui organisasi ini.');
+        }
+
+        $this->handleFileUploads($request, $organisasi);
+
+        $organisasi->nama = $request->input('nama');
+        $organisasi->nama_instansi = $request->input('nama_instansi');
+        $organisasi->nama_pembina = $request->input('nama_pembina');
+        $organisasi->deskripsi = $request->input('deskripsi');
+        $organisasi->sejarah = $request->input('sejarah');
+        $organisasi->tanggal_disahkan = $request->input('tanggal_disahkan');
+        $organisasi->KODE = $request->input('KODE');
+
+        if ($organisasi->save()) {
+            return redirect()->route('organisasi-profile')->with('success', 'Organisasi berhasil diperbarui.');
+        } else {
+            return redirect()->back()->with('error', 'Gagal memperbarui organisasi. Silakan coba lagi.');
+        }
+    }
+
+    private function validateRequest(Request $request)
+    {
+        $request->validate([
+            'nama' => 'required|string',
+            'nama_instansi' => 'required|string',
+            'nama_pembina' => 'required|string',
+            'deskripsi' => 'nullable|string',
+            'sejarah' => 'nullable|string',
+            'tanggal_disahkan' => 'nullable|date',
+            'logo_organisasi' => 'nullable|mimes:png,jpg,jpeg|max:2048',
+            'logo_instansi' => 'nullable|mimes:png,jpg,jpeg|max:2048',
+            'ADART' => 'nullable|mimes:pdf,docx|max:2048',
+            'KODE' => 'required|string|unique:organisasis,KODE,' . $request->route('id'),
+        ]);
+    }
+
+    private function handleFileUploads(Request $request, Organisasi $organisasi)
+    {
+        if ($request->hasFile('logo_organisasi')) {
+            $organisasi->logo_organisasi = $request->file('logo_organisasi')->store('public/logo_organisasi');
+        }
+
+        if ($request->hasFile('logo_instansi')) {
+            $organisasi->logo_instansi = $request->file('logo_instansi')->store('public/logo_instansi');
+        }
+
+        if ($request->hasFile('ADART')) {
+            $organisasi->ADART = $request->file('ADART')->store('public/ADART');
+        }
+    }
 }
-
-

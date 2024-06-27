@@ -123,9 +123,9 @@ Route::get('/', function () {
     return redirect('/dashboard');
 })->middleware('auth');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard')->middleware('auth');
+Route::get('/dashboarda', function () {
+    return view('dashboarda');
+})->name('dashboarda')->middleware('auth');
 
 Route::get('/tables', function () {
     return view('tables');
@@ -193,11 +193,11 @@ Route::get('/program-kerja', function () {
     return view('view-layout.view-proker');
 })->name('view-proker')->middleware('auth');
 
-Route::get('/keuangan', function () {
+Route::get('/keuangana', function () {
     return view('view-layout.view-keuangan');
 })->name('view-keuangan')->middleware('auth');
 
-Route::get('/surat', function () {
+Route::get('/surata', function () {
     return view('view-layout.view-surat');
 })->name('view-surat')->middleware('auth');
 
@@ -205,7 +205,7 @@ Route::get('/arsip', function () {
     return view('view-layout.view-arsip');
 })->name('view-arsip')->middleware('auth');
 
-Route::get('/inventaris', function () {
+Route::get('/inventarisa', function () {
     return view('view-layout.view-inventaris');
 })->name('view-inventaris')->middleware('auth');
 
