@@ -7,6 +7,8 @@
             </ol>
             <h6 class="font-weight-bold mb-0">Dashboard</h6>
         </nav>
+    </div>
+
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                 <div class="input-group">
@@ -141,12 +143,12 @@
                     </ul>
                 </li>
                 <li class="nav-item ps-2 d-flex align-items-center">
-                    <a href="javascript:;" class="nav-link text-body p-0">
+                    <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('profile-user') ? 'active' : '' }}"
+                        href="{{ route('profile-user') }}">
                         <img src="../assets/img/team-2.jpg" class="avatar avatar-sm" alt="avatar" />
                     </a>
                 </li>
             </ul>
         </div>
-    </div>
 </nav>
 <!-- End Navbar -->
