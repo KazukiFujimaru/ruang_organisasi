@@ -15,8 +15,8 @@
                                     <button type="button" onclick="window.location.href = '{{ route('inventaris.create') }}'"
                                             class="btn btn-sm btn-dark btn-icon d-flex align-items-center me-2">
                                         <span class="btn-inner--icon">
-                                            <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="d-block me-2">
-                                                <path d="M6.25 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM3.25 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM19.75 7.5a.75.75 0 00-1.5 0v2.25H16a.75.75 0 000 1.5h2.25v2.25a.75.75 0 001.5 0v-2.25H22a.75.75 0 000-1.5h-2.25V7.5z" />
+                                            <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" class="d-block me-2">
+                                                <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
                                             </svg>
                                         </span>
                                         <span class="btn-inner--text">Tambah Inventaris</span>
@@ -85,12 +85,8 @@
                                 </tbody>
                             </table>
                             </div>
-                            <div class="border-top py-3 px-3 d-flex align-items-center">
-                                <p class="font-weight-semibold mb-0 text-dark text-sm">Page 1 of 10</p>
-                                <div class="ms-auto">
-                                    <button class="btn btn-sm btn-white mb-0">Previous</button>
-                                    <button class="btn btn-sm btn-white mb-0">Next</button>
-                                </div>
+                            <div class="border-top py-3 px-3 d-flex">
+                                <p class="font-weight-semibold mb-0 text-dark text-sm ms-auto">Jumlah Data Keuangan : {{ $inventariss->count() }}</p>
                             </div>
                         </div>
                     </div>
