@@ -24,7 +24,7 @@ class User extends Authenticatable
         'role_id',
         'divisi_role_id',
         'foto_profile',
-        'tentang_saya',
+        'tentang_saya', 
     ];
 
     /**
