@@ -34,6 +34,10 @@ Sweet Alerts - Plugin JavaScript untuk meningkatkan kualitas popup.
 three.js - Library JavaScript 3D.
 Wizard - Animated Multi-step form untuk Bootstrap.
 
+Selain itu kami menggunakkan plugin lain diantaranya :
+DomPDF - Mengubah data menjadi pdf
+PHPWord - Mengubah pdf menjadi docx
+
 ---
 
 Penjelasan singkat dari lisensi-lisensi tersebut diantaranya :
@@ -211,3 +215,11 @@ Wizard (Bootstrap form wizard) didistribusikan di bawah Lisensi MIT.
 ---
 
 Selain itu untuk tambahan kami memakai libarary berikut :
+
+## DomPDF (Lisensi MIT)
+DomPDF didistribusikan di bawah Lisensi MIT.
+- **Lisensi:** [Lisensi MIT](https://opensource.org/licenses/MIT)
+
+## PHPWord (Lisensi GPLv3)
+PHPWord didistribusikan di bawah Lisensi GNU General Public License v3.
+- **Lisensi:** [Lisensi GPLv2](https://www.gnu.org/licenses/gpl-3.0.html)
