@@ -12,9 +12,6 @@
                                     <p class="text-sm">Berikut adalah program kerja organisasi anda</p>
                                 </div>
                                 <div class="ms-auto d-flex">
-                                    <button type="button" class="btn btn-sm btn-white me-2">
-                                        Semua
-                                    </button>
                                     <button type="button" onclick="window.location.href = '{{ route('program.create') }}'"
                                             class="btn btn-sm btn-dark btn-icon d-flex align-items-center me-2">
                                         <span class="btn-inner--icon">
@@ -29,78 +26,51 @@
                         </div>
                         <div class="card-body px-0 py-0">
                             <div class="border-bottom py-3 px-3 d-sm-flex align-items-center">
-                            <div class="dropdown">
-                                <a href="javascript:;" class="btn bg-gradient-dark dropdown-toggle " data-bs-toggle="dropdown" id="navbarDropdownMenuLink2">
-                                    Tipe
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
-                                    <li>
-                                        <a class="dropdown-item" href="javascript:;">
-                                            Program Kerja
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="javascript:;">
-                                            Kegiatan
-                                        </a>
-                                    </li>
-                                </ul>
+                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                    <input type="radio" class="btn-check" name="btnradiotable" id="btnradiotable1" value="Semua" autocomplete="off" checked="">
+                                    <label class="btn btn-white px-3 mb-0" for="btnradiotable1">Semua</label>
+                                    <input type="radio" class="btn-check" name="btnradiotable" id="btnradiotable2" value="terlaksana" autocomplete="off">
+                                    <label class="btn btn-white px-3 mb-0" for="btnradiotable2">Terlaksana</label>
+                                    <input type="radio" class="btn-check" name="btnradiotable" id="btnradiotable3" value="tidak terlaksana" autocomplete="off">
+                                    <label class="btn btn-white px-3 mb-0" for="btnradiotable3">Tidak Terlaksana</label>
                                 </div>
-                            <div class="dropdown">
-                                <a href="javascript:;" class="btn bg-gradient-dark dropdown-toggle " data-bs-toggle="dropdown" id="navbarDropdownMenuLink2">
-                                    Jenis
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
-                                    <li>
-                                        <a class="dropdown-item" href="javascript:;">
-                                            Harian
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="javascript:;">
-                                            Mingguan
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="javascript:;">
-                                            Bulanan
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="javascript:;">
-                                            Tahunan
-                                        </a>
-                                    </li>
-                                </ul>
-                                </div>
-                            <div class="dropdown">
-                                <a href="javascript:;" class="btn bg-gradient-dark dropdown-toggle " data-bs-toggle="dropdown" id="navbarDropdownMenuLink2">
-                                    Status
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
-                                    <li>
-                                        <a class="dropdown-item" href="javascript:;">
-                                            Terlaksana
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="javascript:;">
-                                            Tidak Terlaksana
-                                        </a>
-                                    </li>
-                                </ul>
-                                </div>
-                                
-                                <div class="input-group w-sm-25 ms-auto">
-                                    <span class="input-group-text text-body">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px"
-                                            fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z">
-                                            </path>
-                                        </svg>
-                                    </span>
-                                    <input type="text" class="form-control" placeholder="Search">
+                                <div class="dropdown ms-auto">
+                                    <a data-bs-toggle="dropdown" id="navbarDropdownMenuLink2">
+                                        <i class="fa-solid fa-filter"></i>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
+                                        <li>
+                                            <span>Filter Tipe</span>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <input type="checkbox" id="programKerja" name="filter" value="Program Kerja">
+                                            <label for="programKerja">Program Kerja</label>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <input type="checkbox" id="kegiatan" name="filter" value="Kegiatan">
+                                            <label for="kegiatan">Kegiatan</label>
+                                        </li>
+                                        <hr class="dropdown-divider">
+                                        <li class="dropdown-item">
+                                            <span>Filter Jenis</span>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <input type="checkbox" id="harian" name="filter" value="Harian">
+                                            <label for="harian">Harian</label>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <input type="checkbox" id="mingguan" name="filter" value="Mingguan">
+                                            <label for="mingguan">Mingguan</label>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <input type="checkbox" id="bulanan" name="filter" value="Bulanan">
+                                            <label for="bulanan">Bulanan</label>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <input type="checkbox" id="tahunan" name="filter" value="Tahunan">
+                                            <label for="tahunan">Tahunan</label>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                             <div class="table-responsive p-0">
@@ -119,7 +89,7 @@
                                                 Status</th>
                                             <th
                                                 class="text-center text-secondary text-xs font-weight-semibold opacity-7">
-                                                Tanggal</th>
+                                                Tanggal Pelaksanaan</th>
                                             <th class="text-secondary opacity-7"></th>
                                             <th class="text-secondary text-xs font-weight-semibold opacity-7 text-left"></th>
                                         </tr>
@@ -183,10 +153,8 @@
                                 </table>
                             </div>
                             <div class="border-top py-3 px-3 d-flex align-items-center">
-                                <p class="font-weight-semibold mb-0 text-dark text-sm">Page 1 of 10</p>
                                 <div class="ms-auto">
-                                    <button class="btn btn-sm btn-white mb-0">Previous</button>
-                                    <button class="btn btn-sm btn-white mb-0">Next</button>
+                                    <p class="font-weight-semibold mb-0 text-dark text-sm">Total Data Program : {{ $programs->count() }}</p>
                                 </div>
                             </div>
                         </div>
@@ -196,5 +164,32 @@
             <x-app.footer />
         </div>
     </main>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Ambil elemen-elemen radio button
+        var radioButtons = document.querySelectorAll('input[name="btnradiotable"]');
+        
+        // Tambahkan event listener ke setiap radio button
+        radioButtons.forEach(function(radioButton) {
+            radioButton.addEventListener('change', function() {
+                // Dapatkan nilai jenis yang dipilih
+                var selectedType = this.value;
+
+                // Dapatkan semua baris tabel
+                var rows = document.querySelectorAll('tbody tr');
+                
+                // Tampilkan atau sembunyikan baris berdasarkan jenis yang dipilih
+                rows.forEach(function(row) {
+                    var jenis = row.dataset.jenis;
+                    if (selectedType === 'Semua' || jenis === selectedType.toLowerCase()) {
+                        row.style.display = 'table-row';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+        });
+    });
+    </script>
 
 </x-app-layout>
