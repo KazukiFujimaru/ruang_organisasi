@@ -41,7 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/organisasi/join', [OrganisasiController::class, 'join'])->name('organisasi.join');
 
     // Route Fungsi User
-    Route::get('/user/{organisasiId}', [UserController::class, 'view'])->name('user');
+    Route::get('/user', [UserController::class, 'view'])->name('user');
 
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

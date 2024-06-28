@@ -8,6 +8,27 @@
         </a>
         <div class="collapse navbar-collapse px-4  w-auto " id="sidenav-collapse-main">
             <ul class="navbar-nav">
+                <li class="nav-item"> <!-- Profil User -->
+                    <a class="nav-link  {{ is_current_route('user') ? 'active' : '' }}"
+                        href="{{ route('user') }}">
+                        <div
+                            class="icon icon-shape icon-sm px-0 text-center d-flex align-items-center justify-content-center">
+                            <svg width="30px" height="30px" viewBox="-250 -200 900 900" version="1.1"
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <title>profil-user</title>
+                                <g id="profil-user" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <g id="template" transform="translate(12.000000, 12.000000)" fill="#FFFFFF"
+                                        fill-rule="nonzero">
+                                        <path class="color-foreground"
+                                            d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"
+                                            id="Path"></path>
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                        <span class="nav-link-text ms-1">Profil User</span>
+                    </a>
+                </li>
                 <li class="nav-item"> <!-- Profil Organisasi -->
                     <a class="nav-link  {{ is_current_route('organisasi-profile') ? 'active' : '' }}"
                         href="{{ route('organisasi-profile') }}">
@@ -140,6 +161,10 @@
                         <span class="nav-link-text ms-1">Inventaris</span>
                     </a>
                 </li>
+            </ul>
+        </div>
+        <div class="sidenav-footer mx-4">
+            <ul class="navbar-nav" style="margin-top: -18px;">
                 <li class="nav-item"> <!-- Arsip -->
                     <a class="nav-link  {{ is_current_route('view-arsip') ? 'active' : '' }}" href="{{ route('view-arsip') }}">
                         <div
@@ -160,11 +185,7 @@
                         <span class="nav-link-text ms-1">Arsip</span>
                     </a>
                 </li>
-            </ul>
-        </div>
-        <div class="sidenav-footer mx-4">
-            <ul class="navbar-nav">
-                <li class="nav-item" style="margin-top: -10px;"> <!-- LPJ -->
+                <li class="nav-item"> <!-- LPJ -->
                     <a class="nav-link {{ request()->routeIs('laporan.show') ? 'active' : '' }}"
                     href="{{ route('laporan.show') }}">
                         <div

@@ -74,10 +74,15 @@ class UserController extends Controller
         ])->withInput($request->only('email'));
     }
 
-    public function view($organisasiId)
+    public function view()
     {
-        // Mengambil data organisasi berdasarkan ID
-        $organisasi = Organisasi::findOrFail($organisasiId);
+        // Assuming the authenticated user is associated with an Organisasi
+        $user = auth()->user();
+        $organisasi = $user->organisasi;
+    
+        // If you need to access the ID specifically
+        $organisasiId = $organisasi->id;
+    
         $divisis = $organisasi->divisis;
     
         return view('user', compact('organisasi', 'divisis'));
