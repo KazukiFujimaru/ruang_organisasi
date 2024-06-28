@@ -1,6 +1,39 @@
-# PENJELALSAN LISENSI RUANG ORGANISASI
+# PENJELALSAN LIBRARY beserta LISENSI RUANG ORGANISASI
 
 Ruang Organisasi menggunakan beragam library, plugin, dan software.
+
+Kami menggunakan beberapa software diantaranya :
+PHP - bahasa pemrograman yang digunakan.
+Composer - digunakan untuk manajemen dependensi PHP yang mendukung Laravel.
+Laravel - framework PHP yang digunakan dalam Ruang Organisasi.
+MySQL - digunakan untuk database.
+HTML - digunakan untuk tampilan dasar.
+CSS - digunakan untuk desain tampilan.
+JavaScript - digunakan untuk interaktivitas tampilan dan metode filterisasi.
+VSCode - adalah text editor yang multifungsi dengan ekstensi yang luas.
+GitHub - digunakan untuk membantu pembangunan terutama dengan rekan tim.
+Laragon - digunakan sebagai lingkungan pengembangan yang menghubungkan ke database MySQL.
+SQLyog - digunakan untuk manajemen dan pemeriksaan database.
+
+Kami menggunakan template tampilan Corporate UI by Creative Tim dari laravel yang memiliki plugin sebagai berikut :
+Bootstrap 5 - Open source front end framework.
+noUISlider - JavaScript Range Slider.
+Popper.js - Library untuk mengelola popper pada Javascript.
+Flatpickr - Library untuk memilih tanggal.
+Choices JS - Plugin JavaScript untuk memilih elemen, mencari elemen, dan mengelola tag.
+CountUp.js - Plugin JavaScript yang berdiri sendiri dan gratis untuk membuat animasi yang menampilkan data numerik sebagai infografis.
+Chart.js - Plugin JavaScript untuk membuat chart.
+FullCalendar - Event calendar yang bisa di drag & drop.
+Dropzone - Library open source untuk upload file secara drag & drop dengan tampilan gambar.
+Datatables - DataTables untuk Vanilla ES2018 JS.
+jKanban - Plugin JavaScript untuk papan jenis kanban.
+PhotoSwipe - Galeri gambar untuk JavaScript.
+Quill - Editor open source untuk HTML WYSIWYG.
+Sweet Alerts - Plugin JavaScript untuk meningkatkan kualitas popup.
+three.js - Library JavaScript 3D.
+Wizard - Animated Multi-step form untuk Bootstrap.
+
+---
 
 Penjelasan singkat dari lisensi-lisensi tersebut diantaranya :
 1. PHP License
@@ -173,3 +206,7 @@ three.js didistribusikan di bawah Lisensi MIT.
 ## Wizard (Bootstrap form wizard) (Lisensi MIT)
 Wizard (Bootstrap form wizard) didistribusikan di bawah Lisensi MIT.
 - **Lisensi:** [Lisensi MIT](https://opensource.org/licenses/MIT)
+
+---
+
+Selain itu untuk tambahan kami memakai libarary berikut :
