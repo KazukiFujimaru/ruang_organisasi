@@ -34,7 +34,7 @@
                                     <input type="radio" class="btn-check" name="btnradiotable" id="btnradiotable3" value="tidak terlaksana" autocomplete="off">
                                     <label class="btn btn-white px-3 mb-0" for="btnradiotable3">Tidak Terlaksana</label>
                                 </div>
-                                <div class="dropdown ms-auto">
+                                <div class="dropdown" style = "margin-left : 20px;">
                                     <a data-bs-toggle="dropdown" id="navbarDropdownMenuLink2">
                                         <i class="fa-solid fa-filter"></i>
                                     </a>
@@ -151,10 +151,8 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                            </div>
-                            <div class="border-top py-3 px-3 d-flex align-items-center">
-                                <div class="ms-auto">
-                                    <p class="font-weight-semibold mb-0 text-dark text-sm">Total Data Program : {{ $programs->count() }}</p>
+                                <div class="border-top py-3 px-3 d-flex">
+                                    <p class="font-weight-semibold mb-0 text-dark text-sm ms-auto">Jumlah Data Program Kerja : {{ $programs->count() }}</p>
                                 </div>
                             </div>
                         </div>
@@ -164,6 +162,7 @@
             <x-app.footer />
         </div>
     </main>
+
     <script>
     document.addEventListener("DOMContentLoaded", function() {
         // Ambil elemen-elemen radio button
