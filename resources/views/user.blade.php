@@ -115,9 +115,8 @@
                                 <div class="row mb-3">
                                     <div class="col-md-6">
                                         <label for="logo_organisasi" class="form-label">Logo Organisasi</label>
-                                        <input type="file" class="form-control" id="logo_organisasi" name="logo_organisasi">
                                         @if($organisasi->logo_organisasi)
-                                            <p>Logo saat ini: <img src="{{ Storage::url($organisasi->logo_organisasi) }}" width="100" alt="Logo Organisasi"></p>
+                                            <p><img src="{{ Storage::url($organisasi->logo_organisasi) }}" width="100" alt="Logo Organisasi"></p>
                                         @endif
                                     </div>
                                     <div class="col-md-6">
