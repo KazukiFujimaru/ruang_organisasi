@@ -31,7 +31,7 @@
                             <div class="border-bottom py-3 px-3 d-sm-flex align-items-center">
                                 <div class="dropdown">
                                     <a href="javascript:;" class="btn bg-gradient-dark dropdown-toggle " data-bs-toggle="dropdown" id="typeDropdown">
-                                        Type
+                                        Tipe
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="typeDropdown">
                                         <li>
@@ -74,44 +74,6 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="dropdown" style = "margin-left : 20px;">
-                                    <a data-bs-toggle="dropdown" id="navbarDropdownMenuLink2">
-                                        <i class="fa-solid fa-filter"></i>
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
-                                        <li>
-                                            <span>Filter Tipe</span>
-                                        </li>
-                                        <li class="dropdown-item">
-                                            <input type="checkbox" id="programKerja" name="filter" value="Program Kerja">
-                                            <label for="programKerja">Program Kerja</label>
-                                        </li>
-                                        <li class="dropdown-item">
-                                            <input type="checkbox" id="kegiatan" name="filter" value="Kegiatan">
-                                            <label for="kegiatan">Kegiatan</label>
-                                        </li>
-                                        <hr class="dropdown-divider">
-                                        <li class="dropdown-item">
-                                            <span>Filter Jenis</span>
-                                        </li>
-                                        <li class="dropdown-item">
-                                            <input type="checkbox" id="harian" name="filter" value="Harian">
-                                            <label for="harian">Harian</label>
-                                        </li>
-                                        <li class="dropdown-item">
-                                            <input type="checkbox" id="mingguan" name="filter" value="Mingguan">
-                                            <label for="mingguan">Mingguan</label>
-                                        </li>
-                                        <li class="dropdown-item">
-                                            <input type="checkbox" id="bulanan" name="filter" value="Bulanan">
-                                            <label for="bulanan">Bulanan</label>
-                                        </li>
-                                        <li class="dropdown-item">
-                                            <input type="checkbox" id="tahunan" name="filter" value="Tahunan">
-                                            <label for="tahunan">Tahunan</label>
-                                        </li>
-                                    </ul>
-                                </div>
                             </div>
                             <div class="table-responsive p-0">
                                 <table class="table align-items-center mb-0">
@@ -119,7 +81,7 @@
                                         <tr>
                                             <th class="text-secondary text-xs font-weight-semibold opacity-7">Nama Program
                                             </th>
-                                            <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">
+                                            <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">
                                                 Tipe</th>
                                             <th
                                                 class="text-center text-secondary text-xs font-weight-semibold opacity-7">
@@ -139,22 +101,16 @@
                                         <tr data-type="{{ strtolower($program->type) }}" data-jenis="{{ strtolower($program->jenis) }}" data-status="{{ strtolower($program->status) }}">
                                             <td>
                                                 <div class="d-flex px-2 py-1">
-                                                    <div class="d-flex align-items-center">
-                                                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm rounded-circle me-2" alt="user1">
-                                                    </div>
                                                     <div class="d-flex flex-column justify-content-center ms-1">
                                                         <h5 class="mb-0 text-sm font-weight-semibold">{{ $program->nama}}</h5>
-                                                        <h6 class="mb-0 text-sm font-weight-semibold">{{ $program->nama }}</h6>
-                                                        <p class="text-sm text-secondary mb-0">john@creative-tim.com</p>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td>
-                                                <p class="text-sm text-dark font-weight-semibold mb-0">{{ $program->type }}</p>
-                                                <p class="text-sm text-secondary mb-0">Organization</p>
+                                                <p class="text-sm text-dark font-weight-semibold mb-0 text-center">{{ ucfirst($program->type) }}</p>
                                             </td>
-                                            <td class="align-middle text-center text-sm">
-                                                <span class="badge badge-sm border border-success text-success bg-success">{{ $program->jenis }}</span>
+                                            <td class="align-middle text-center">
+                                                <span class="badge badge-sm border border-info text-info bg-info">{{ ucfirst($program->jenis) }}</span>
                                             </td>
                                             <td class="align-middle text-center">
                                                 @if($program->status == 'terlaksana')
