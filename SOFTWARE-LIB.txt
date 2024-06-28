@@ -3,6 +3,7 @@
 Ruang Organisasi menggunakan beragam library, plugin, dan software.
 Ruang Organisais terlisensi dengan lisensi Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License.
 
+
 Kami menggunakan beberapa software diantaranya :
 PHP - bahasa pemrograman yang digunakan.
 Composer - digunakan untuk manajemen dependensi PHP yang mendukung Laravel.
