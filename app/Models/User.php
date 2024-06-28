@@ -22,7 +22,9 @@ class User extends Authenticatable
         'password',
         'organization_id',
         'role_id',
-        'divisi_role_id'
+        'divisi_role_id',
+        'foto_profile',
+        'tentang_saya',
     ];
 
     /**
