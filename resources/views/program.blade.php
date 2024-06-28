@@ -74,28 +74,62 @@
                                         </li>
                                     </ul>
                                 </div>
-                                
-                                <div class="input-group w-sm-25 ms-auto">
-                                    <span class="input-group-text text-body">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px"
-                                            fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z">
-                                            </path>
-                                        </svg>
-                                    </span>
-                                    <input type="text" class="form-control" placeholder="Search">
+                                <div class="dropdown" style = "margin-left : 20px;">
+                                    <a data-bs-toggle="dropdown" id="navbarDropdownMenuLink2">
+                                        <i class="fa-solid fa-filter"></i>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
+                                        <li>
+                                            <span>Filter Tipe</span>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <input type="checkbox" id="programKerja" name="filter" value="Program Kerja">
+                                            <label for="programKerja">Program Kerja</label>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <input type="checkbox" id="kegiatan" name="filter" value="Kegiatan">
+                                            <label for="kegiatan">Kegiatan</label>
+                                        </li>
+                                        <hr class="dropdown-divider">
+                                        <li class="dropdown-item">
+                                            <span>Filter Jenis</span>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <input type="checkbox" id="harian" name="filter" value="Harian">
+                                            <label for="harian">Harian</label>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <input type="checkbox" id="mingguan" name="filter" value="Mingguan">
+                                            <label for="mingguan">Mingguan</label>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <input type="checkbox" id="bulanan" name="filter" value="Bulanan">
+                                            <label for="bulanan">Bulanan</label>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <input type="checkbox" id="tahunan" name="filter" value="Tahunan">
+                                            <label for="tahunan">Tahunan</label>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                             <div class="table-responsive p-0">
                                 <table class="table align-items-center mb-0">
                                     <thead class="bg-gray-100">
                                         <tr>
-                                            <th class="text-secondary text-xs font-weight-semibold opacity-7">Nama Program</th>
-                                            <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Type</th>
-                                            <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">Jenis</th>
-                                            <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">Status</th>
-                                            <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">Tanggal</th>
+                                            <th class="text-secondary text-xs font-weight-semibold opacity-7">Nama Program
+                                            </th>
+                                            <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">
+                                                Tipe</th>
+                                            <th
+                                                class="text-center text-secondary text-xs font-weight-semibold opacity-7">
+                                                Jenis</th>
+                                            <th
+                                                class="text-center text-secondary text-xs font-weight-semibold opacity-7">
+                                                Status</th>
+                                            <th
+                                                class="text-center text-secondary text-xs font-weight-semibold opacity-7">
+                                                Tanggal Pelaksanaan</th>
                                             <th class="text-secondary opacity-7"></th>
                                             <th class="text-secondary text-xs font-weight-semibold opacity-7 text-left"></th>
                                         </tr>
@@ -159,12 +193,8 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                            </div>
-                            <div class="border-top py-3 px-3 d-flex align-items-center">
-                                <p class="font-weight-semibold mb-0 text-dark text-sm">Page 1 of 10</p>
-                                <div class="ms-auto">
-                                    <button class="btn btn-sm btn-white mb-0">Previous</button>
-                                    <button class="btn btn-sm btn-white mb-0">Next</button>
+                                <div class="border-top py-3 px-3 d-flex">
+                                    <p class="font-weight-semibold mb-0 text-dark text-sm ms-auto">Jumlah Data Program Kerja : {{ $programs->count() }}</p>
                                 </div>
                             </div>
                         </div>
