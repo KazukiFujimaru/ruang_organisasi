@@ -51,7 +51,7 @@ class KeuanganController extends Controller
                 'bukti' => 'nullable|mimes:png,jpg,jpeg,pdf|max:5120',
             ], [
                 'bukti.mimes' => 'Bukti harus berupa file dengan tipe: png, jpg, jpeg, atau pdf.',
-                'bukti.max' => 'Ukuran Bukti tidak boleh lebih dari 5120 kilobyte.',
+                'bukti.max' => 'Ukuran Bukti tidak boleh lebih dari 5MB.',
             ]);
             $log->info('Validation passed');
 

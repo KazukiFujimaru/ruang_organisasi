@@ -9,6 +9,15 @@
                             <h6 class="font-weight-semibold text-lg mb-0">Edit Data Inventaris</h6>
                             <p class="text-sm">Silakan isi form di bawah untuk mengedit data inventaris.</p>
                         </div>
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <div class="card-body px-0 py-0">
                             <form method="POST" action="{{ route('inventaris.update', $inventaris->id) }}" enctype="multipart/form-data" class="p-3">
                                 @csrf
@@ -39,6 +48,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="bukti" class="form-label">Bukti</label>
+                                    <span class="text-muted text-sm">(file: png, jpg, jpeg, pdf, docx | max: 5MB)</span>
                                     <input type="file" class="form-control" id="bukti" name="bukti">
                                     @if($inventaris->bukti)
                                         <p>Bukti saat ini: <a href="{{ Storage::url($inventaris->bukti) }}" target="_blank">Lihat Bukti</a></p>

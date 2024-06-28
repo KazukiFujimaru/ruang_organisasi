@@ -9,6 +9,15 @@
                             <h6 class="font-weight-semibold text-lg mb-0">Edit Data Program</h6>
                             <p class="text-sm">Silakan ubah form di bawah untuk mengedit data Program atau Kegiatan.</p>
                         </div>
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <div class="card-body px-0 py-0">
                             <form method="POST" action="{{ route('program.update', $program->id) }}" enctype="multipart/form-data" class="p-3">
                                 @csrf
@@ -50,6 +59,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="dokumen" class="form-label">Dokumen</label>
+                                    <span class="text-muted text-sm">(file: png, jpg, jpeg, pdf, docx | max: 5MB)</span>
                                     <input type="file" class="form-control" id="dokumen" name="dokumen">
                                     @if($program->dokumen)
                                         <p class="mt-2">Dokumen saat ini: <a href="{{ Storage::url($program->dokumen) }}" target="_blank">Lihat Dokumen</a></p>

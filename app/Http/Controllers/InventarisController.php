@@ -42,10 +42,10 @@ class InventarisController extends Controller
             'digunakan' => 'required|numeric',
             'sisa' => 'required|numeric',
             'keterangan' => 'nullable|string',
-            'bukti' => 'nullable|mimes:png,jpg,jpeg,pdf,docx|max:5048',
+            'bukti' => 'nullable|mimes:png,jpg,jpeg,pdf,docx|max:5120',
         ], [
             'bukti.mimes' => 'Bukti harus berupa file dengan tipe: png, jpg, jpeg, docx, atau pdf.',
-            'bukti.max' => 'Ukuran Bukti tidak boleh lebih dari 5048 kilobyte.',
+            'bukti.max' => 'Ukuran Bukti tidak boleh lebih dari 5MB.',
         ]);
 
         $user = Auth::user();
@@ -98,7 +98,10 @@ class InventarisController extends Controller
             'digunakan' => 'required|numeric',
             'sisa' => 'required|numeric',
             'keterangan' => 'nullable|string',
-            'bukti' => 'nullable|mimes:png,jpg,jpeg,pdf,docx|max:5048',
+            'bukti' => 'nullable|mimes:png,jpg,jpeg,pdf,docx|max:5120',
+        ], [
+            'bukti.mimes' => 'Bukti harus berupa file dengan tipe: png, jpg, jpeg, docx, atau pdf.',
+            'bukti.max' => 'Ukuran Bukti tidak boleh lebih dari 5MB.',
         ]);
 
         $user = Auth::user();
