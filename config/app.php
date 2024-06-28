@@ -163,6 +163,10 @@ return [
          * Package Service Providers...
          */
 
+         Barryvdh\Snappy\ServiceProvider::class,
+         Barryvdh\DomPDF\ServiceProvider::class,
+         
+
         /*
          * Application Service Providers...
          */
@@ -185,6 +189,10 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
+        'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
+        'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
+        'SnappyPdf' => Barryvdh\Snappy\Facades\SnappyPdf::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
