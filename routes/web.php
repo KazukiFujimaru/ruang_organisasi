@@ -18,7 +18,7 @@ use App\Http\Controllers\LaporanController;
 Route::middleware('auth')->group(function () {
     // Rute untuk organisasi
     Route::get('/organisasi/choose', [OrganisasiController::class, 'choose'])->name('organisasi.choose');
-    
+
     // Organisasi
     Route::get('/organisasi-profile', [OrganisasiController::class, 'index'])->name('organisasi-profile');
     Route::get('/organisasi/{id}/edit', [OrganisasiController::class, 'edit'])->name('organisasi.edit');
@@ -39,7 +39,10 @@ Route::middleware('auth')->group(function () {
     // Join Organisasi menggunakan Kode
     Route::get('/organisasi/join', [OrganisasiController::class, 'joinForm'])->name('organisasi.joinForm');
     Route::post('/organisasi/join', [OrganisasiController::class, 'join'])->name('organisasi.join');
-    
+
+    // Route Fungsi User
+    Route::get('/user/{organisasiId}', [UserController::class, 'view'])->name('user');
+
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 

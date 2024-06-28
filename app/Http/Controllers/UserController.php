@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\Organisasi;
+use App\Models\Divisi;
+use App\Models\Role;
+use App\Models\Keanggotaan;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -68,5 +72,14 @@ class UserController extends Controller
         return back()->withErrors([
             'message' => 'The provided credentials do not match our records.',
         ])->withInput($request->only('email'));
+    }
+
+    public function view($organisasiId)
+    {
+        // Mengambil data organisasi berdasarkan ID
+        $organisasi = Organisasi::findOrFail($organisasiId);
+        $divisis = $organisasi->divisis;
+    
+        return view('user', compact('organisasi', 'divisis'));
     }
 }
