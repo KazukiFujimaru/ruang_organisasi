@@ -55,10 +55,12 @@
                 </li>
                 <li class="nav-item d-flex align-items-center ps-2">
                     <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
-                <li class="nav-item dropdown pe-2 d-flex align-items-center">
-                    <div class="avatar avatar-sm position-relative">
-                        <img src="" class="w-100 border-radius-md">
-                    </div>
+                </li>
+                <li class="nav-item ps-2 d-flex align-items-center">
+                    {{ auth()->user()->name }}
+                    <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('profile-user') ? 'active' : '' }}" href="{{ route('user') }}">
+                        <img src="../assets/img/default-avatar.png" class="avatar avatar-sm" alt="avatar" />
+                    </a>
                 </li>
                 </a>
                 </li>

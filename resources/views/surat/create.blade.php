@@ -46,6 +46,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="dokumen" class="form-label">Dokumen</label>
+                                    <span class="text-muted text-sm">(file: png, jpg, jpeg, pdf, docx | max: 5MB)</span>
                                     <input type="file" class="form-control" id="dokumen" name="dokumen">
                                 </div>
                                 <button type="submit" class="btn btn-primary">Simpan</button>

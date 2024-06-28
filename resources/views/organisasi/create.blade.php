@@ -47,17 +47,17 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="logo_organisasi" class="form-label">Logo Organisasi</label>
-                                    <span class="text-muted text-sm">(file: png, jpg, jpeg | max: 2048kb)</span>
+                                    <span class="text-muted text-sm">(file: png, jpg, jpeg | max: 2MB)</span>
                                     <input type="file" class="form-control" id="logo_organisasi" name="logo_organisasi">
                                 </div>
                                 <div class="mb-3">
                                     <label for="logo_instansi" class="form-label">Logo Instansi</label>
-                                    <span class="text-muted text-sm">(file: png, jpg, jpeg | max: 2048kb)</span>
+                                    <span class="text-muted text-sm">(file: png, jpg, jpeg | max: 2MB)</span>
                                     <input type="file" class="form-control" id="logo_instansi" name="logo_instansi">
                                 </div>
                                 <div class="mb-3">
                                     <label for="ADART" class="form-label">AD/ART</label>
-                                    <span class="text-muted text-sm">(file: pdf,docx | max: 2048kb)</span>
+                                    <span class="text-muted text-sm">(file: pdf,docx | max: 2MB)</span>
                                     <input type="file" class="form-control" id="ADART" name="ADART">
                                 </div>
                                 <div class="mb-3">

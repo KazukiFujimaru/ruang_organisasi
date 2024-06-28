@@ -36,10 +36,6 @@ class ProgramController extends Controller
 
     public function store(Request $request)
     {
-        $messages = [
-            'dokumen.mimes' => 'Dokumen unggahan harus file dengan tipe png, jpg, jpeg, pdf, atau docx.',
-            'dokumen.max' => 'Ukuran maksimal dokumen unggahan adalah 5048 kilobytes.',
-        ];
 
         $request->validate([
             'nama' => 'required|string',
@@ -48,8 +44,11 @@ class ProgramController extends Controller
             'jenis' => 'required|in:harian,mingguan,bulanan,tahunan',
             'status' => 'required|in:terlaksana,tidak terlaksana',
             'tanggal' => 'required|date',
-            'dokumen' => 'nullable|mimes:png,jpg,jpeg,pdf,docx|max:5048',
-        ], $messages);
+            'dokumen' => 'nullable|mimes:png,jpg,jpeg,pdf,docx|max:5120',
+        ], [
+            'dokumen.mimes' => 'Dokumen unggahan harus file dengan tipe png, jpg, jpeg, pdf, atau docx.',
+            'dokumen.max' => 'Ukuran maksimal dokumen unggahan adalah 5MB.',
+        ]);
 
         $user = Auth::user();
         if (!$user){
@@ -108,8 +107,10 @@ class ProgramController extends Controller
             'status' => 'required|in:terlaksana,tidak terlaksana',
             'tanggal' => 'required|date',
             'dokumen' => 'nullable|mimes:png,jpg,jpeg,pdf,docx|max:5048',
+        ], [
+            'dokumen.mimes' => 'Dokumen unggahan harus file dengan tipe png, jpg, jpeg, pdf, atau docx.',
+            'dokumen.max' => 'Ukuran maksimal dokumen unggahan adalah 5MB.',
         ]);
-
         $user = Auth::user();
         if (!$user){
             return redirect()->route('login')->with('error','silahkan login terlebih dahulu');

@@ -38,11 +38,11 @@ class SuratController extends Controller
         'jenis' => 'required|in:masuk,keluar',
         'perihal' => 'required|string',
         'asal_surat' => 'required|string',
-        'dokumen' => 'required|mimes:pdf,docx,png,jpg,jpeg|max:5048',
+        'dokumen' => 'required|mimes:pdf,docx,png,jpg,jpeg|max:5120',
     ], [
         'dokumen.required' => 'Dokumen surat harus dilampirkan.',
         'dokumen.mimes' => 'Bukti harus berupa file dengan tipe: pdf, docx, png, jpg, atau jpeg.',
-        'dokumen.max' => 'Ukuran bukti tidak boleh lebih dari 5048 kilobyte.',
+        'dokumen.max' => 'Ukuran bukti tidak boleh lebih dari 5MB.',
     ]);
 
         $user = Auth::user();
@@ -97,6 +97,10 @@ class SuratController extends Controller
             'perihal' => 'required|string',
             'asal_surat' => 'required|string',
             'dokumen' => 'mimes:pdf,docx,png,jpg,jpeg|max:5048',
+        ], [
+            'dokumen.required' => 'Dokumen surat harus dilampirkan.',
+            'dokumen.mimes' => 'Bukti harus berupa file dengan tipe: png, jpg, jpeg, pdf, atau docx.',
+            'dokumen.max' => 'Ukuran bukti tidak boleh lebih dari 5MB.',
         ]);
 
         $user = Auth::user();
