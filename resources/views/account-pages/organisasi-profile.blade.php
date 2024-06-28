@@ -172,8 +172,8 @@
                             </div>
                             </td>
                             <td>
-                            <p class="text-sm text-dark font-weight-semibold mb-0">{{$keanggotaan->role->nama}}</p>
-                            <p class="text-sm text-secondary mb-0">{{$keanggotaan->divisirole->nama}}</p>
+                            <p class="text-sm text-dark font-weight-semibold mb-0">{{$keanggotaan->role?->nama}}</p>
+                            <p class="text-sm text-secondary mb-0">{{$keanggotaan->divisirole?->nama}}</p>
                             </td>
                             <td class="align-middle text-center text-sm">
                             <span class="badge badge-sm border border-success text-success bg-success">Aktif</span>
