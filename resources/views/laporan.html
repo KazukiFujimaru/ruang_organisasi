@@ -19,66 +19,146 @@
         <p>Jl. Panawuan No. 3A Telp. (0262) 2248936 TarogongKidul – Garut</p>
     </div>
     
-    <h2 class="ukuran14bold">KATA PENGANTAR</h2>
-    <p>Bismillahirrahmanirrahim</p>
-    <p>Assalamualaikum Wr. Wb.</p>
-    <p>Puji syukur kita panjatkan kehadirat Allah SWT. Berkat rahmat dan karunia-Nya kita diberi kesehatan dan kekuatan guna menjalankan aktivitas sehari-hari. Shalawat serta salam semoga tercurah limpahkan kepada junjungan kita Nabi Muhammad SAW.</p>
-    <p>Pada kesempatan penghujung hari dan saat yang Allah muliakan kami sampai pada akhir tugas kami dalam kepengurusan ini sebagai anggota OSIS SMAN 15 Garut. Kami menyadari bahwa kepercayaan serta segala kebijakan dalam perjalanan roda kepengurusan organisasi merupakan suatu amanah yang memerlukan pertanggung jawaban baik secara moral kepada Allah, kepada rekan-rekan sekalian, pihak sekolah, serta siswa dan siswi yang telah memberikan amanah yang istimewa ini. Kami selaku insan biasa menyadari dengan sepenuhnya bahwa selama masa bakti kepengurusan kami banyak melakukan kesalahan baik yang disengaja maupun yang tidak disengaja.</p>
-    <p>Pahit manis, suka dan duka telah kami rasakan selama menjadi pengurus OSIS SMAN 15 Garut. Kami selaku pengurus memohon maaf yang sebesar-besarnya atas keterbatasan kami dalam mengurus roda organisasi ini serta dalam mencapai visi misi kami. Selain itu kami mengucapkan banyak terima kasih atas kesempatan dan amanah yang telah rekan-rekan berikan kepada kami dalam mencapai visi misi kami dan membantu sekolah serta rekan-rekan yang ada di dalamnya.</p>
-    
-    <h2 class="daftarisi">DAFTAR ISI</h2>
-    <ul>
-        <li>KATA PENGANTAR</li>
-        <li>DAFTAR ISI</li>
-        <li>PENDAHULUAN</li>
-        <li>Kegiatan Ketua</li>
-        <li>Pertanggung Jawaban Sekretaris</li>
-        <li>Pertanggung Jawaban Bendahara</li>
-        <li>Pertanggung Jawaban Divisi</li>
-        <li>Daftar Kegiatan Eksternal yang Sudah Dilakukan</li>
-        <li>PENUTUP</li>
-    </ul>
-    
-    <h2>PENDAHULUAN</h2>
-    <p>Puji syukur kita panjatkan kehadirat Allah SWT berkat rahmat dan karunia-Nya kita diberikan kesehatan dan kekuatan dalam menjalankan segala aktivitas. Shalawat serta salam semoga tercurah limpahkan kepada junjungan kita Nabi Muhammad SAW.</p>
-    <p>Dalam menjalankan roda kepengurusan suatu Organisasi Siswa Intra Sekolah (OSIS) SMA Negeri 15 Garut selama masa jabatan periode 2021-2022 melalui Laporan Pertanggung Jawaban ini kami selaku pengurus OSIS SMA Negeri 15 Garut akan mempertanggungjawabkan seluruh kinerja yang telah kami jalani selama satu periode.</p>
-    <p>Semoga Laporan Pertanggung Jawaban ini dapat menjadi acuan untuk kepengurusan yang selanjutnya. Mudah-mudahan amanat yang selama ini kami jalankan mendapat ridha dan magfirah Allah SWT. Kami berharap Laporan Pertanggung Jawaban yang telah kami susun bisa dipertanggungjawabkan dengan sebaik-baiknya.</p>
-    <p>Kami selaku OSIS SMA Negeri 15 Garut Periode 2021-2022 mengucapkan terima kasih kepada semua pihak yang telah terlibat dalam penyusunan Laporan Pertanggung Jawaban ini. Untuk itu melalui musyawarah ini kami serahkan segala kebijakan untuk mengkaji, membandingkan, serta mengkoreksinya apabila terdapat ketidaksesuaian dalam program kerja yang ada.</p>
-    <p>Besar harapan dan keikhlasan atas segala perjuangan yang merupakan kemampuan maksimal yang dapat kami sumbangkan dapat dijadikan acuan untuk angkatan berikutnya agar lebih baik lagi kepengurusan sebelumnya.</p>
-    <p>Kepengurusan Laporan yang kami susun ini merupakan pertanggungjawaban pengurus atas pelaksanaan program kerja masa bakti 2020-2021 yang memuat beberapa hal diantaranya:</p>
-    <ul>
-        <li>Kegiatan Ketua</li>
-        <li>Kegiatan Sekretaris</li>
-        <li>Kegiatan Bendahara</li>
-        <li>Kegiatan Seksi Bidang</li>
-    </ul>
-    
-    <h2>Kegiatan Ketua</h2>
+
+    <h2>Daftar Anggota</h2>
     <table>
         <thead>
             <tr>
                 <th>No.</th>
-                <th>Tanggal Kegiatan</th>
-                <th>Jenis Kegiatan</th>
-                <th>Keterangan</th>
+                <th>Nama anggota</th>
+                <th>Jabatan</th>
+                <th>Divisi</th>
             </tr>
         </thead>
         <tbody>
+            @foreach($organisasi->keanggotaan as $keanggotaan)
             <tr>
                 <td>1</td>
-                <td>11 Oktober 2021</td>
-                <td>Rapat Komisi OSIS 2021/2022</td>
-                <td></td>
+                <td>{{ $keanggotaan->user->name }}</td>
+                <td>{{ $keanggotaan->role->nama }}</td>
+                <td>{{ $keanggotaan->divisi->nama }}</td>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>16 Oktober 2021</td>
-                <td>Kumpulan perdana OSIS 2021/2022</td>
-                <td></td>
-            </tr>
+            @endforeach
             <!-- Tambahkan baris lainnya sesuai dengan data dari dokumen -->
         </tbody>
     </table>
     
+    
+    <h2>Daftar Program</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Nama Program</th>
+                <th>Type</th>
+                <th>Jenis</th>
+                <th>Status</th>
+                <th>Tanggal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($organisasi->programs as $program)
+            <tr>
+                <td>1</td>
+                <td>{{ $program->nama }}</td>
+                <td>{{ $program->type }}</td>
+                <td>{{ $program->jenis }}</td>
+                <td>{{ $program->status }}</td>
+                <td>{{ $program->tanggal }}</td>
+            </tr>
+            @endforeach
+            <!-- Tambahkan baris lainnya sesuai dengan data dari dokumen -->
+        </tbody>
+    </table>
+    
+    <h2>Daftar Keuangan</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Nama</th>
+                <th>Jenis</th>
+                <th>Tanggal</th>
+                <th>Keterangan</th>
+                <th>Jumlah</th>
+                <th>Sisa</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($organisasi->keuangans as $keuangan)
+            <tr>
+                <td>1</td>
+                <td>{{ $keuangan->nama }}</td>
+                <td>{{ $keuangan->jenis }}</td>
+                <td>{{ $keuangan->tanggal }}</td>
+                <td>{{ $keuangan->keterangan }}</td>
+                <td>{{ $keuangan->jumlah }}</td>
+                <td>{{ $keuangan->saldo }}</td>
+            </tr>
+            @endforeach
+            <!-- Tambahkan baris lainnya sesuai dengan data dari dokumen -->
+        </tbody>
+    </table>
+    
+    <h2>Daftar Surat</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Nomor Surat</th>
+                <th>Tanggal</th>
+                <th>Jenis</th>
+                <th>Perihal</th>
+                <th>Asal Surat</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($organisasi->surats as $surat)
+            <tr>
+                <td>1</td>
+                <td>{{ $surat->nomor_surat }}</td>
+                <td>{{ $surat->tanggal }}</td>
+                <td>{{ $surat->jenis }}</td>
+                <td>{{ $surat->perihal }}</td>
+                <td>{{ $surat->asal_surat }}</td>
+            </tr>
+            @endforeach
+            <!-- Tambahkan baris lainnya sesuai dengan data dari dokumen -->
+        </tbody>
+    </table>
+    
+    <h2>Daftar Inventaris</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Nama Barang</th>
+                <th>Sebelum</th>
+                <th>Ditambah</th>
+                <th>Digunakan</th>
+                <th>Sisa</th>
+                <th>Keterangan</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($organisasi->inventaris as $inventaris)
+            <tr>
+                <td>1</td>
+                <td>{{ $inventaris->nama }}</td>
+                <td>{{ $inventaris->sebelum }}</td>
+                <td>{{ $inventaris->ditambah }}</td>
+                <td>{{ $inventaris->digunakan }}</td>
+                <td>{{ $inventaris->sisa }}</td>
+                <td>{{ $inventaris->keterangan }}</td>
+            </tr>
+            @endforeach
+            <!-- Tambahkan baris lainnya sesuai dengan data dari dokumen -->
+        </tbody>
+    </table>
+    
+
+    <footer class="footer">
+        &copy; 2024 Ruang Organisasi. Semua hak dilindungi.
+    </footer>
 </body>
 </html>
