@@ -9,17 +9,17 @@
                             <div class="d-sm-flex align-items-center">
                                 <div>
                                     <h6 class="font-weight-semibold text-lg mb-0">Daftar Keuangan</h6>
-                                    <p class="text-sm">Melihat lebih banyak data keuangan</p>
+                                    <p class="text-sm">Berikut adalah data keuangan anda</p>
                                 </div>
                                 <div class="ms-auto d-flex">
                                     <button type="button" class="btn btn-sm btn-white me-2">
-                                        SALDO : {{ $saldo_terbaru }}
+                                        SALDO : Rp{{ number_format($saldo_terbaru, 0, ',', '.') }}
                                     </button>
                                     <button type="button" onclick="window.location.href = '{{ route('keuangan.create') }}'"
                                             class="btn btn-sm btn-dark btn-icon d-flex align-items-center me-2">
                                         <span class="btn-inner--icon">
-                                            <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="d-block me-2">
-                                                <path d="M6.25 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM3.25 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM19.75 7.5a.75.75 0 00-1.5 0v2.25H16a.75.75 0 000 1.5h2.25v2.25a.75.75 0 001.5 0v-2.25H22a.75.75 0 000-1.5h-2.25V7.5z" />
+                                            <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" class="d-block me-2">
+                                                <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
                                             </svg>
                                         </span>
                                         <span class="btn-inner--text">Tambah Keuangan</span>
@@ -42,10 +42,10 @@
                                 <table class="table align-items-center mb-0">
                                     <thead class="bg-gray-100">
                                         <tr>
-                                            <th class="text-secondary text-xs font-weight-semibold opacity-7">Transaction</th>
+                                            <th class="text-secondary text-xs font-weight-semibold opacity-7">Transaksi</th>
                                             <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Jumlah</th>
-                                            <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Tanggal</th>
-                                            <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Jenis</th>
+                                            <th class="text-center text-secondary text-xs font-weight-semibold opacity-7 ps-2">Tanggal</th>
+                                            <th class="text-center text-secondary text-xs font-weight-semibold opacity-7 ps-2">Jenis</th>
                                             <th class="text-center text-secondary text-xs font-weight-semibold opacity-7"></th>
                                         </tr>
                                     </thead>
@@ -54,41 +54,37 @@
                                         <tr data-jenis="{{ strtolower($keuangan->jenis) }}">
                                             <td>
                                                 <div class="d-flex px-2">
-                                                    <div class="avatar avatar-sm rounded-circle bg-gray-100 me-2 my-2">
-                                                        <img src="https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/small-logos/logo-spotify.svg" class="w-80" alt="spotify">
-                                                    </div>
                                                     <div class="my-auto">
                                                         <h6 class="mb-0 text-sm">{{ $keuangan->nama }}</h6>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td>
-                                                <p class="text-sm font-weight-normal mb-0">{{ $keuangan->jumlah }}</p>
+                                                <p class="text-sm font-weight-normal mb-0">Rp{{ number_format($keuangan->jumlah, 0, ',', '.') }}</p>
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 <span class="text-sm font-weight-normal">{{ $keuangan->tanggal }}</span>
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 @if($keuangan->jenis == 'pemasukan')
                                                     <span class="badge badge-sm border border-success text-success bg-success">
-                                                        <svg width="9" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" class="me-1">
-                                                            <path d="M1 4.42857L3.28571 6.71429L9 1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                        </svg> {{ ucfirst($keuangan->jenis) }} 
+                                                         {{ ucfirst($keuangan->jenis) }} 
                                                     </span>
                                                 @else
                                                     <span class="badge badge-sm border border-danger text-danger bg-danger">
-                                                        <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="me-1">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
-                                                        </svg> {{ ucfirst($keuangan->jenis) }} 
+                                                        {{ ucfirst($keuangan->jenis) }} 
                                                     </span>
                                                 @endif
                                             </td>
                                             <td class="align-middle">
-                                                <form action="{{ route('keuangan.destroy', $keuangan->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Anda yakin ingin menghapus data ini?')">Hapus</button>
-                                                </form>
+                                            <form action="{{ route('keuangan.destroy', $keuangan->id) }}" method="POST" id="delete-form-{{ $keuangan->id }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <i class="fas fa-trash-alt text-danger" style="cursor: pointer; margin-top: 10px;" 
+                                                data-bs-toggle="tooltip" data-bs-title="Hapus Data Keuangan" 
+                                                onclick="return confirm('Anda yakin ingin menghapus data ini?') && document.getElementById('delete-form-{{ $keuangan->id }}').submit();">
+                                                </i>
+                                            </form>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -110,30 +106,30 @@
         </div>
     </main>
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Ambil elemen-elemen radio button
-        var radioButtons = document.querySelectorAll('input[name="btnradiotable"]');
-        
-        // Tambahkan event listener ke setiap radio button
-        radioButtons.forEach(function(radioButton) {
-            radioButton.addEventListener('change', function() {
-                // Dapatkan nilai jenis yang dipilih
-                var selectedType = this.value;
+        document.addEventListener("DOMContentLoaded", function() {
+            // Ambil elemen-elemen radio button
+            var radioButtons = document.querySelectorAll('input[name="btnradiotable"]');
+            
+            // Tambahkan event listener ke setiap radio button
+            radioButtons.forEach(function(radioButton) {
+                radioButton.addEventListener('change', function() {
+                    // Dapatkan nilai jenis yang dipilih
+                    var selectedType = this.value;
 
-                // Dapatkan semua baris tabel
-                var rows = document.querySelectorAll('tbody tr');
-                
-                // Tampilkan atau sembunyikan baris berdasarkan jenis yang dipilih
-                rows.forEach(function(row) {
-                    var jenis = row.dataset.jenis;
-                    if (selectedType === 'Semua' || jenis === selectedType.toLowerCase()) {
-                        row.style.display = 'table-row';
-                    } else {
-                        row.style.display = 'none';
-                    }
+                    // Dapatkan semua baris tabel
+                    var rows = document.querySelectorAll('tbody tr');
+                    
+                    // Tampilkan atau sembunyikan baris berdasarkan jenis yang dipilih
+                    rows.forEach(function(row) {
+                        var jenis = row.dataset.jenis;
+                        if (selectedType === 'Semua' || jenis === selectedType.toLowerCase()) {
+                            row.style.display = 'table-row';
+                        } else {
+                            row.style.display = 'none';
+                        }
+                    });
                 });
             });
         });
-    });
     </script>
 </x-app-layout>

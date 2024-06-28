@@ -1,5 +1,5 @@
 <?php
- 
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -17,6 +17,9 @@ class DashboardController extends Controller
         // Mendapatkan data organisasi yang terkait dengan pengguna yang sedang login
         $user = Auth::user();
         $organisasi = $user->organisasi;
+
+        // Debugging the organization data
+        //dd($organisasi);
 
         // Menampilkan halaman dashboard dengan data organisasi
         return view('dashboard', ['organisasi' => $organisasi]);

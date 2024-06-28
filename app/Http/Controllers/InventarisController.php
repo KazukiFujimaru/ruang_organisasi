@@ -43,6 +43,9 @@ class InventarisController extends Controller
             'sisa' => 'required|numeric',
             'keterangan' => 'nullable|string',
             'bukti' => 'nullable|mimes:png,jpg,jpeg,pdf,docx|max:5048',
+        ], [
+            'bukti.mimes' => 'Bukti harus berupa file dengan tipe: png, jpg, jpeg, docx, atau pdf.',
+            'bukti.max' => 'Ukuran Bukti tidak boleh lebih dari 5048 kilobyte.',
         ]);
 
         $user = Auth::user();
