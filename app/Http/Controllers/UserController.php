@@ -84,7 +84,51 @@ class UserController extends Controller
         $organisasiId = $organisasi->id;
     
         $divisis = $organisasi->divisis;
+        $role = $user->role;
     
-        return view('user', compact('organisasi', 'divisis'));
+        return view('user', compact('user','organisasi', 'divisis','role'));
     }
+
+    public function update(Request $request)
+    {
+        $user = Auth::user();
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'role_name' => 'required|string',
+            'divisi_role_id' => 'nullable|exists:divisi_roles,id',
+            'foto_profil' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'logo_organisasi' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'about' => 'nullable|string',
+        ]);
+
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->divisi_role_id = $request->input('divisi_role_id');
+        $user->tentang_saya = $request->input('about');
+
+        $role = $user->role;
+        $role->nama = $request->input('role_name');
+        $role->save();
+
+        if ($request->hasFile('foto_profil')) {
+            $file = $request->file('foto_profil');
+            $path = $file->store('public/profile_pictures');
+            $user->foto_profil = $path;
+        }
+
+        if ($request->hasFile('logo_organisasi')) {
+            $file = $request->file('logo_organisasi');
+            $path = $file->store('public/organization_logos');
+            $user->organisasi->logo_organisasi = $path;
+            $user->organisasi->save();
+        }
+
+        $user->save();
+
+        return redirect()->route('user.edit')->with('success', 'Profile updated successfully');
+    }
+
+
 }

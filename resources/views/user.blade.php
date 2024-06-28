@@ -3,8 +3,13 @@
         <div class="top-0 bg-cover z-index-n1 min-height-100 max-height-200 h-25 position-absolute w-100 start-0 end-0"
             style="background-image: url('../../../assets/img/header-blue-purple.jpg'); background-position: bottom;">
         </div>
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
         <div class="px-5 py-4 container-fluid ">
-            <form action="{{ route('users.update') }}" method="POST">
+            <form action="{{ route('user.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="mt-5 mb-5 mt-lg-9 row justify-content-center">
@@ -24,7 +29,7 @@
                                 <div class="col-sm-auto col-8 my-auto">
                                     <div class="h-100">
                                         <h5 class="mb-1 font-weight-bolder">
-                                            {{ auth()->user()->name }}
+                                            {{ $user->name }}
                                         </h5>
                                         <p class="mb-0 font-weight-bold text-sm">
                                             {{ $organisasi->nama }}
@@ -64,7 +69,7 @@
                                     <div class="col-6">
                                         <label for="name">Nama Pengguna</label>
                                         <input type="text" name="name" id="name"
-                                            value="{{ old('name', auth()->user()->name) }}" class="form-control">
+                                            value="{{ old('name', $user->name) }}" class="form-control">
                                         @error('name')
                                             <span class="text-danger text-sm">{{ $message }}</span>
                                         @enderror
@@ -72,7 +77,7 @@
                                     <div class="col-6">
                                         <label for="email">Email Pengguna</label>
                                         <input type="email" name="email" id="email"
-                                            value="{{ old('email', auth()->user()->email) }}" class="form-control">
+                                            value="{{ old('email', $user->email) }}" class="form-control">
                                         @error('email')
                                             <span class="text-danger text-sm">{{ $message }}</span>
                                         @enderror
@@ -80,34 +85,34 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-6">
-                                    <label for="role">Pilih Role:</label>
-                                    <select name="role" id="role" required class="form-select mb-3">
-                                        <option value="Ketua">Ketua</option>
-                                        <option value="Wakil Ketua">Wakil Ketua</option>
-                                        <option value="Sekretaris">Sekretaris</option>
-                                        <option value="Bendahara">Bendahara</option>
-                                        <option value="Anggota">Anggota</option>
-                                    </select>
-                                        @error('location')
+                                        <label for="role">Pilih Role:</label>
+                                        <select name="role" id="role" required class="form-select mb-3">
+                                            <option value="Ketua" {{ old('role', $user->role_id) == 'Ketua' ? 'selected' : '' }}>Ketua</option>
+                                            <option value="Wakil Ketua" {{ old('role', $user->role_id) == 'Wakil Ketua' ? 'selected' : '' }}>Wakil Ketua</option>
+                                            <option value="Sekretaris" {{ old('role', $user->role_id) == 'Sekretaris' ? 'selected' : '' }}>Sekretaris</option>
+                                            <option value="Bendahara" {{ old('role', $user->role_id) == 'Bendahara' ? 'selected' : '' }}>Bendahara</option>
+                                            <option value="Anggota" {{ old('role', $user->role_id) == 'Anggota' ? 'selected' : '' }}>Anggota</option>
+                                        </select>
+                                        @error('role')
                                             <span class="text-danger text-sm">{{ $message }}</span>
                                         @enderror
                                     </div>
 
-                                    <div class="col-6" id="divisi-role-container" style="display: none;">
-                                        <label for="divisi" class="form-label">Pilih Divisi:</label>
-                                        <select name="divisi_role_id" id="divisi" class="form-select mb-3">
+                                    <div class="col-6" id="divisi-role-container" style="{{ old('role', $user->role_id) == 'Anggota' ? '' : 'display: none;' }}">
+                                        <label for="divisi_role_id" class="form-label">Pilih Divisi:</label>
+                                        <select name="divisi_role_id" id="divisi_role_id" class="form-select mb-3">
                                             @foreach ($divisis as $divisi)
-                                                <option value="{{ $divisi->id }}">{{ $divisi->nama }}</option>
+                                                <option value="{{ $divisi->id }}" {{ old('divisi_role_id', $user->divisi_role_id) == $divisi->id ? 'selected' : '' }}>{{ $divisi->nama }}</option>
                                             @endforeach
                                         </select>
-                                        @error('phone')
+                                        @error('divisi_role_id')
                                             <span class="text-danger text-sm">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="row p-2">
                                     <label for="about">Tentang Saya</label>
-                                    <textarea name="about" id="about" rows="5" class="form-control">{{ old('about', auth()->user()->about) }}</textarea>
+                                    <textarea name="about" id="about" rows="5" class="form-control">{{ old('about', $user->tentang_saya) }}</textarea>
                                     @error('about')
                                         <span class="text-danger text-sm">{{ $message }}</span>
                                     @enderror
@@ -123,8 +128,8 @@
                                     <div class="col-md-6">
                                         <label for="foto_profil" class="form-label">Foto Profil</label>
                                         <input type="file" class="form-control" id="foto_profil" name="foto_profil">
-                                        @if($organisasi->logo_organisasi)
-                                            <p>Foto Profil saat ini: <img src="{{ Storage::url($organisasi->logo_organisasi) }}" width="100" alt="Foto Profil"></p>
+                                        @if($user->foto_profil)
+                                            <p>Foto Profil saat ini: <img src="{{ Storage::url($user->foto_profil) }}" width="100" alt="Foto Profil"></p>
                                         @endif
                                     </div>
                                 </div>

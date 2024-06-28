@@ -42,7 +42,7 @@ Route::middleware('auth')->group(function () {
 
     // Route Fungsi User
     Route::get('/user', [UserController::class, 'view'])->name('user');
-
+    Route::put('/user/update', [UserController::class, 'update'])->name('user.update');
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
