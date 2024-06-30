@@ -7,9 +7,10 @@ use Illuminate\Http\Request;
 use App\Models\Organisasi;
 use App\Models\Divisi;
 use App\Models\Role;
+use App\Models\DivisiRole;
 use App\Models\Keanggotaan;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -76,59 +77,96 @@ class UserController extends Controller
 
     public function view()
     {
-        // Assuming the authenticated user is associated with an Organisasi
-        $user = auth()->user();
+        $user = Auth::user();
         $organisasi = $user->organisasi;
-    
-        // If you need to access the ID specifically
-        $organisasiId = $organisasi->id;
-    
-        $divisis = $organisasi->divisis;
-        $role = $user->role;
-    
-        return view('user', compact('user','organisasi', 'divisis','role'));
+
+        $divisis = $organisasi ? $organisasi->divisis : collect();
+
+        return view('user', compact('user', 'organisasi', 'divisis'));
     }
 
     public function update(Request $request)
     {
         $user = Auth::user();
-
+    
+        // Validasi input
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-            'role_name' => 'required|string',
+            'role' => 'required|in:Ketua,Wakil Ketua,Sekretaris,Bendahara,Anggota',
             'divisi_role_id' => 'nullable|exists:divisi_roles,id',
-            'foto_profil' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'logo_organisasi' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'about' => 'nullable|string',
+            'foto_profile' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'tentang_saya' => 'nullable|string',
         ]);
-
+    
+        // Update user attributes
         $user->name = $request->input('name');
         $user->email = $request->input('email');
-        $user->divisi_role_id = $request->input('divisi_role_id');
-        $user->tentang_saya = $request->input('about');
-
-        $role = $user->role;
-        $role->nama = $request->input('role_name');
-        $role->save();
-
-        if ($request->hasFile('foto_profil')) {
-            $file = $request->file('foto_profil');
-            $path = $file->store('public/profile_pictures');
-            $user->foto_profil = $path;
+        $user->tentang_saya = $request->input('tentang_saya');
+    
+        // Update role
+        $role = Role::where('nama', $request->role)
+                    ->where('organisasi_id', $user->organization_id)
+                    ->first();
+    
+        if (!$role) {
+            // Jika role tidak ditemukan, buat baru
+            $role = Role::create([
+                'nama' => $request->role,
+                'organisasi_id' => $user->organization_id,
+            ]);
         }
-
-        if ($request->hasFile('logo_organisasi')) {
-            $file = $request->file('logo_organisasi');
-            $path = $file->store('public/organization_logos');
-            $user->organisasi->logo_organisasi = $path;
-            $user->organisasi->save();
+    
+        $user->role_id = $role->id;
+    
+        // Update divisi role if necessary
+        if ($request->role === 'Anggota') {
+            // Validate divisi_role_id presence
+            $request->validate([
+                'divisi_id' => 'required|exists:divisis,id',
+                'divisirole' => 'required|in:ketua divisi,anggota',
+            ]);
+    
+            $divisiRole = DivisiRole::where('divisi_id', $request->divisi_id)
+                                    ->where('nama', $request->divisirole)
+                                    ->first();
+    
+            if (!$divisiRole) {
+                $divisiRole = DivisiRole::create([
+                    'divisi_id' => $request->divisi_id,
+                    'nama' => $request->divisirole,
+                ]);
+            }
+    
+            $user->divisi_role_id = $divisiRole->id;
+        } else {
+            $user->divisi_role_id = null; // Set divisi_role_id to null if role is not 'Anggota'
         }
-
+    
+        // Update profile picture
+        if ($request->hasFile('foto_profile')) {
+            $fotoProfilPath = $request->file('foto_profile')->store('public/foto_profile');
+            $user->foto_profile = $fotoProfilPath;
+        }
+    
+        \Log::info('Saving user:', $user->toArray());
         $user->save();
-
-        return redirect()->route('user.edit')->with('success', 'Profile updated successfully');
+        \Log::info('User saved successfully');
+    
+        // Update keanggotaan
+        $keanggotaan = Keanggotaan::where('user_id', $user->id)
+                                  ->where('organisasi_id', $user->organization_id)
+                                  ->first();
+    
+        if ($keanggotaan) {
+            \Log::info('Updating keanggotaan:', $keanggotaan->toArray());
+            $keanggotaan->role_id = $user->role_id;
+            $keanggotaan->divisi_role_id = $user->divisi_role_id;
+            $keanggotaan->save();
+            \Log::info('Keanggotaan updated successfully');
+        }
+    
+        return redirect()->route('user')->with('success', 'Profile updated successfully');
     }
-
-
+    
 }

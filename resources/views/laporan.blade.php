@@ -73,7 +73,7 @@
         <h1>LAPORAN PERTANGGUNG JAWABAN</h1>
         <h2>{{ $organisasi->nama }}</h2>
         <h3>PERIODE 2024</h3>
-        <img src="{{ asset('storage/' . str_replace('public/', '', $organisasi->logo_organisasi)) }}" alt="Logo Organisasi" class="logo" height="300px" width="300px">
+        <img src="{{ $logoBase64 }}" alt="Logo Organisasi" class="logo" height="300px" width="300px">
         <p class="head1">{{ $organisasi->nama_instansi }}</p>
         <p>Jl. Panawuan No. 3A Telp. (0262) 2248936 TarogongKidul – Garut</p>
     </div>
@@ -90,15 +90,17 @@
             </tr>
         </thead>
         <tbody>
+        @php
+            $counter = 1; // Inisialisasi counter
+            @endphp
             @foreach($organisasi->keanggotaan as $keanggotaan)
             <tr>
-                <td>1</td>
+                <td>{{ $counter++ }}</td>
                 <td>{{ $keanggotaan->user->name }}</td>
                 <td>{{ $keanggotaan->role->nama }}</td>
                 <td>{{ $keanggotaan->divisi }}</td>
             </tr>
             @endforeach
-            <!-- Tambahkan baris lainnya sesuai dengan data dari dokumen -->
         </tbody>
     </table>
     
@@ -116,9 +118,12 @@
             </tr>
         </thead>
         <tbody>
+        @php
+            $counter = 1; // Inisialisasi counter
+            @endphp
             @foreach($organisasi->programs as $program)
             <tr>
-                <td>1</td>
+                <td>{{ $counter++ }}</td>
                 <td>{{ $program->nama }}</td>
                 <td>{{ $program->type }}</td>
                 <td>{{ $program->jenis }}</td>
@@ -126,7 +131,6 @@
                 <td>{{ $program->tanggal }}</td>
             </tr>
             @endforeach
-            <!-- Tambahkan baris lainnya sesuai dengan data dari dokumen -->
         </tbody>
     </table>
     
@@ -144,9 +148,12 @@
             </tr>
         </thead>
         <tbody>
+            @php
+            $counter = 1; // Inisialisasi counter
+            @endphp
             @foreach($organisasi->keuangans as $keuangan)
             <tr>
-                <td>1</td>
+                <td>{{ $counter++ }}</td> <!-- Increment counter untuk setiap iterasi -->
                 <td>{{ $keuangan->nama }}</td>
                 <td>{{ $keuangan->jenis }}</td>
                 <td>{{ $keuangan->tanggal }}</td>
@@ -155,7 +162,6 @@
                 <td>{{ $keuangan->saldo }}</td>
             </tr>
             @endforeach
-            <!-- Tambahkan baris lainnya sesuai dengan data dari dokumen -->
         </tbody>
     </table>
     
@@ -172,9 +178,12 @@
             </tr>
         </thead>
         <tbody>
+        @php
+            $counter = 1; // Inisialisasi counter
+            @endphp
             @foreach($organisasi->surats as $surat)
             <tr>
-                <td>1</td>
+                <td>{{ $counter++ }}</td>
                 <td>{{ $surat->nomor_surat }}</td>
                 <td>{{ $surat->tanggal }}</td>
                 <td>{{ $surat->jenis }}</td>
@@ -182,7 +191,6 @@
                 <td>{{ $surat->asal_surat }}</td>
             </tr>
             @endforeach
-            <!-- Tambahkan baris lainnya sesuai dengan data dari dokumen -->
         </tbody>
     </table>
     
@@ -200,9 +208,12 @@
             </tr>
         </thead>
         <tbody>
+        @php
+            $counter = 1; // Inisialisasi counter
+            @endphp
             @foreach($organisasi->inventaris as $inventaris)
             <tr>
-                <td>1</td>
+                <td>{{ $counter++ }}</td>
                 <td>{{ $inventaris->nama }}</td>
                 <td>{{ $inventaris->sebelum }}</td>
                 <td>{{ $inventaris->ditambah }}</td>
@@ -211,7 +222,6 @@
                 <td>{{ $inventaris->keterangan }}</td>
             </tr>
             @endforeach
-            <!-- Tambahkan baris lainnya sesuai dengan data dari dokumen -->
         </tbody>
     </table>
     

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
 use App\Models\Organisasi;
@@ -17,56 +16,59 @@ class LaporanController extends Controller
     {
         $user = Auth::user();
         $organisasi = $user->organisasi;
-        return view('laporan.show', compact('organisasi'));
+
+        // Convert logo to base64
+        $logoPath = storage_path('app/public/' . str_replace('public/', '', $organisasi->logo_organisasi));
+        $logoData = base64_encode(file_get_contents($logoPath));
+        $logoType = pathinfo($logoPath, PATHINFO_EXTENSION);
+        $logoBase64 = 'data:image/' . $logoType . ';base64,' . $logoData;
+
+
+        return view('laporan.show', compact('organisasi', 'logoBase64'));
     }
 
     public function generatePdf()
     {
-        // Mendapatkan user yang sedang login
+        set_time_limit(0);
+    
         $user = Auth::user();
-        
-        // Mendapatkan organisasi yang terkait dengan user
         $organisasi = $user->organisasi;
-
+    
+        // Convert logo to base64
+        $logoPath = storage_path('app/public/' . str_replace('public/', '', $organisasi->logo_organisasi));
+        $logoData = base64_encode(file_get_contents($logoPath));
+        $logoType = pathinfo($logoPath, PATHINFO_EXTENSION);
+        $logoBase64 = 'data:image/' . $logoType . ';base64,' . $logoData;
+    
         $data = [
             'organisasi' => $organisasi,
+            'logoBase64' => $logoBase64,
         ];
-
-        // Menggunakan Dompdf untuk membuat PDF
+    
         $options = new Options();
         $options->set('isHtml5ParserEnabled', true);
+        $options->set('isRemoteEnabled', true);
         $dompdf = new Dompdf($options);
-        $dompdf->loadHtml(view('laporan', $data)->render());
+    
+        $html = view('laporan', $data)->render();
+        $dompdf->loadHtml($html);
         $dompdf->setPaper('A4', 'portrait');
         $dompdf->render();
-
-        // Unduh PDF
+    
         return $dompdf->stream('laporan_pertanggungjawaban.pdf');
     }
 
     public function generateDocx()
     {
+        
         try {
-            // Mendapatkan user yang sedang login
+            // Meningkatkan batas waktu eksekusi skrip
+            set_time_limit(0);
             $user = Auth::user();
-            
-            // Mendapatkan organisasi yang terkait dengan user
             $organisasi = $user->organisasi;
 
             // Render view Blade ke dalam bentuk HTML
             $html = view('laporan', compact('organisasi'))->render();
-
-            // Membuat instance dari Dompdf
-            $options = new Options();
-            $options->set('isHtml5ParserEnabled', true);
-            $dompdf = new Dompdf($options);
-            $dompdf->loadHtml($html);
-            $dompdf->setPaper('A4', 'portrait');
-            $dompdf->render();
-
-            // Simpan PDF sementara
-            $pdfPath = storage_path('app/public/temp.pdf');
-            file_put_contents($pdfPath, $dompdf->output());
 
             // Membuat instance dari PhpWord
             $phpWord = new PhpWord();
@@ -79,9 +81,6 @@ class LaporanController extends Controller
             $fileName = 'Laporan_' . $organisasi->nama . '.docx';
             $filePath = storage_path('app/public/' . $fileName);
             $phpWord->save($filePath, 'Word2007');
-
-            // Hapus file sementara PDF setelah konversi selesai
-            unlink($pdfPath);
 
             // Mengunduh file
             return response()->download($filePath)->deleteFileAfterSend(true);

@@ -21,11 +21,16 @@
                                 </select>
 
                                 <div id="divisi-role-container" style="display: none;">
-                                    <label for="divisi" class="form-label">Pilih Divisi:</label>
-                                    <select name="divisi_role_id" id="divisi" class="form-select mb-3">
+                                    <label for="divisi_role_id" class="form-label">Pilih Divisi:</label>
+                                    <select name="divisi_id" id="divisi_id" class="form-select mb-3">
                                         @foreach ($divisis as $divisi)
                                             <option value="{{ $divisi->id }}">{{ $divisi->nama }}</option>
                                         @endforeach
+                                    </select>
+                                    <label for="divisi_role">Pilih Role Divisi:</label>
+                                    <select name="divisirole" id="divisirole" required class="form-select mb-3">
+                                        <option value="Ketua Divisi">Ketua Divisi</option>
+                                        <option value="Anggota Divisi">Anggota Divisi</option>
                                     </select>
                                 </div>
                                 <div class="d-flex justify-content-between">

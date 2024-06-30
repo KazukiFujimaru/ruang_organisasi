@@ -9,8 +9,9 @@ class AddDivisiRoleIdToKeanggotaansTable extends Migration
     public function up()
     {
         Schema::table('keanggotaans', function (Blueprint $table) {
-            // Tambahkan kolom tanpa constraint terlebih dahulu
-            $table->unsignedBigInteger('divisi_role_id')->nullable()->after('role_id');
+            if (!Schema::hasColumn('keanggotaans', 'divisi_role_id')) {
+                $table->bigInteger('divisi_role_id')->unsigned()->nullable()->after('role_id');
+            }
         });
 
         // Isi nilai default atau yang sesuai di kolom baru

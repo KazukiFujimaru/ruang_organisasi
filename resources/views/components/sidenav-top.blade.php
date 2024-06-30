@@ -59,7 +59,7 @@
                 <li class="nav-item ps-2 d-flex align-items-center">
                     {{ auth()->user()->name }}
                     <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('profile-user') ? 'active' : '' }}" href="{{ route('user') }}">
-                        <img src="../assets/img/default-avatar.png" class="avatar avatar-sm" alt="avatar" />
+                        <img src="{{ Storage::url(auth()->user()->foto_profile) }}" class="avatar avatar-sm" alt="avatar" />
                     </a>
                 </li>
                 </a>

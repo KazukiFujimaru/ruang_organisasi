@@ -13,6 +13,7 @@ class CreateKeanggotaansTable extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('organisasi_id')->constrained()->onDelete('cascade');
             $table->foreignId('role_id')->constrained()->onDelete('cascade');
+            $table->foreignId('divisi_role_id')->constrained()->onDelete('cascade');
             $table->timestamp('joined_at')->nullable();
             $table->timestamps();
         });

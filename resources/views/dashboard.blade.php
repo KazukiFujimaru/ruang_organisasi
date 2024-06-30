@@ -6,9 +6,9 @@
             <div class="col-md-12">
                     <div class="d-md-flex align-items-center mb-3 mx-2">
                         <div class="mb-md-0 mb-3">
-                            <h3 class="font-weight-bold mb-0">Hello, {{ $organisasi->nama }}</h3>
-                            <h3 class="font-weight-bold mb-0">Hello, {{ $organisasi->nama_instansi }}</h3>
-                            <p class="mb-0">Apps you might like!</p>
+                            <h3 class="font-weight-bold mb-0">Organisasi {{ $organisasi->nama }}</h3>
+                            <h3 class="font-weight-bold mb-0">Instansi {{ $organisasi->nama_instansi }}</h3>
+                            <p class="mb-0">Jumlah data dalam organisasi</p>
                         </div>
                     </div>
                 </div>
@@ -38,13 +38,7 @@
                                 <div class="col-12">
                                     <div class="w-100">
                                         <p class="text-sm text-secondary mb-1">Jumlah anggota</p>
-                                        <h4 class="mb-2 font-weight-bold">$99,118.5</h4>
-                                        <div class="d-flex align-items-center">
-                                            <span class="text-sm text-success font-weight-bolder">
-                                                <i class="fa fa-chevron-up text-xs me-1"></i>10.5%
-                                            </span>
-                                            <span class="text-sm ms-1">from $89,740.00</span>
-                                        </div>
+                                        <h4 class="mb-2 font-weight-bold">{{$jumlahKeanggotaan}}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -68,14 +62,8 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="w-100">
-                                        <p class="text-sm text-secondary mb-1">Transactions</p>
-                                        <h4 class="mb-2 font-weight-bold">376</h4>
-                                        <div class="d-flex align-items-center">
-                                            <span class="text-sm text-success font-weight-bolder">
-                                                <i class="fa fa-chevron-up text-xs me-1"></i>55%
-                                            </span>
-                                            <span class="text-sm ms-1">from 243</span>
-                                        </div>
+                                        <p class="text-sm text-secondary mb-1">Jumlah Program Kerja</p>
+                                        <h4 class="mb-2 font-weight-bold">{{$jumlahProgram}}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -97,14 +85,8 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="w-100">
-                                        <p class="text-sm text-secondary mb-1">Avg. Transaction</p>
-                                        <h4 class="mb-2 font-weight-bold">$450.53</h4>
-                                        <div class="d-flex align-items-center">
-                                            <span class="text-sm text-success font-weight-bolder">
-                                                <i class="fa fa-chevron-up text-xs me-1"></i>22%
-                                            </span>
-                                            <span class="text-sm ms-1">from $369.30</span>
-                                        </div>
+                                        <p class="text-sm text-secondary mb-1">Jumlah Transaksi Keuangan</p>
+                                        <h4 class="mb-2 font-weight-bold">{{$jumlahKeuangan}}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -126,14 +108,8 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="w-100">
-                                        <p class="text-sm text-secondary mb-1">Coupon Sales</p>
-                                        <h4 class="mb-2 font-weight-bold">$23,364.55</h4>
-                                        <div class="d-flex align-items-center">
-                                            <span class="text-sm text-success font-weight-bolder">
-                                                <i class="fa fa-chevron-up text-xs me-1"></i>18%
-                                            </span>
-                                            <span class="text-sm ms-1">from $19,800.40</span>
-                                        </div>
+                                        <p class="text-sm text-secondary mb-1">Jumlah Inventaris</p>
+                                        <h4 class="mb-2 font-weight-bold">{{$jumlahInventaris}}</h4>
                                     </div>
                                 </div>
                             </div>
